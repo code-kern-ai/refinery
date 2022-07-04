@@ -14,19 +14,30 @@
     <a href="https://github.com/code-kern-ai/refinery/projects/1"><img src="https://img.shields.io/badge/Roadmap-yellow.svg" alt="Roadmap"></a>
     <a href="https://app.kern.ai/"><img src="https://img.shields.io/badge/Cloud-Kern AI-75EA8E.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAABNChwpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALDSURBVHgBvVfBjRUxDLWzf+GCxJeQkLhNJ2wLFIC02wFIcNgG4IBAdMCBBrYD6IS5oYXLcoAL/Bg7iRM7Mx+ElMHSTDxOxn52nMRBKPR4vvwAQA8BELOE+EGQD8QAIYkRgjzMiwyl5WGh8NKXZFD6y1jpP0Jz15ONYzGNRSQtUZYrNBKBPPqn4RDRaSVYEuV/pwYgeEVUYyAtHVW0ZqgoT+5Y4JYUZAMQdSBWr1GVkgGnfegVQZWRjxomScWOHZyw9IKqB8WdPK/FG3lZUOkLdUqsHKrraIKg0RSd8s+uByAIyQSbzV8R4k1KwJIhWKOQEw+InxDq/wlpKJoEOdKeRWcs2WefGoid9x2hm+n5/fTiEQyg59ev37H6817upgBN+7eE+1ciaMmi4e8A+NC7zBlAbJS679S6HOgzFGF7Citcs45jIeCKvt2Tzy8nYb79/M4Zm5dcjJGzPt7wPM0wkGTe7RJPq+D05PYn+bgXbhmEePXq/tMLGEhsOKm3URAwwaLZksISUNlH/hOl4HfhXwBzW/BoKkd2b89vRGuoRmLoABydggjbkEbYroZdP2B0YkilxX5P1z++7k8C6hH98e7pnYsKgOqRm0M0MgJinJuJWOuv2OqEtw8uZ+lPzubDATajXBXh6iFXp2DLbaBURQZOo7BYerTNKqh7LAbnarBns44cvQpaeaaVdMOwy6j6+NP5sy9vUuLIT3w4Mcdtqgdj0iGyxAPkN+XRkQ5JdogHMbNnftIyrSt1GwBnuqwIZs4gKWyzljMYa6EqvC3ZiWIto0OJbL1okJb5fspdDuQ1Wopzbf2rITGHmivbiy0yhfiftvjQ1/VaFVHRa0vwasR/Y7vM1TtFKompFPE26D2U1XtBVmwuIOhimMfRcmHZ61muQn122aC1CADOsEK0YBC05FeACzLXjxbHPu/FapiV/Q23LD/8UGO+6AAAAABJRU5ErkJggg==" alt="Kern AI"></a>
     <a href="https://docs.kern.ai/docs"><img src="https://img.shields.io/badge/Docs-blue.svg" alt="Docs"></a>
+    <a href="https://www.kern.ai/"><img src="https://img.shields.io/badge/Website-white.svg" alt="Website"></a>
 </p>
 
 Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision, a technique to integrate heuristics for automated data labeling. The workflow enables you to manually label reference data efficiently, such that you can focus on what matters most.
 
-refinery consists of multiple microservices to enable a scalable and optimized workload balance. Services like the creation of embeddings are written to natively support **GPU acceleration**.
+![](https://uploads-ssl.webflow.com/61e47fafb12bd56b40022a49/62c305d6b1aa5da5154ff7b7_sample-screenshot.png)
 
-It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks.
+refinery consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository which you can use to orchestrate the system.
+
+It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks. Our microservices natively support GPU acceleration.
+
+## 🧑‍💻 Built for developers
+There are already many other labeling tools out there, so why did we decide to build *yet another one*? Easy: we believe that there is a lack of *open-source, developer-oriented* tools for data-centric NLP. In other terms: developers and scientists should be able to participate in the refinement of raw data to training data, but with the programmatic tools they have at hand.
+
+Our goal is to make labeling feel more like a programmatic and enjoyable task, instead of something tedious and repetitive. *refinery* is the contribution to this goal.
+
+If you like what we're working on, please leave a ⭐! 
 
 # Table of contents
   - [🪛 Installation](#🪛-installation)
   - [📘 Documentation](#📘-documentation)
   - [🪢 Community and contact](#🪢-community-and-contact)
   - [🗺️ Roadmap](#🗺️-roadmap)
+  - [🙌 Contributing](#🙌-contributing)
   - [🐍 Python SDK](#🐍-python-sdk)
   - [📃 License](#📃-license)
 
@@ -52,6 +63,11 @@ Please join our community spaces [Discord](https://discord.gg/qf4rGCEphW) and [o
 To reach out via email, please contact [info@kern.ai](mailto:info@kern.ai).
 
 ## 🗺️ Roadmap
+
+## 🙌 Contributing
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion for features, please create a ticket in [our forum](https://discuss.kern.ai/). If you find a bug, please open an [issue](https://github.com/code-kern-ai/refinery/issues) and choose the tag "bug".
 
 ## 🐍 Python SDK
 You can extend your projects by using our [Python SDK](https://github.com/code-kern-ai/kern-python). With it, you can easily export data of your current project both programmatically and via CLI (`kern pull`).
