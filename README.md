@@ -31,17 +31,28 @@ Our goal is to make labeling feel more like a programmatic and enjoyable task, i
 If you like what we're working on, please leave a ⭐! 
 
 ## 🐳 Installation via Docker
-*refinery* consists of multiple services that need to be run together. To do so, we've set up a `docker-compose` file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `docker-compose up -d`. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser.
+
+**TL;DR:**
+```
+$ git clone https://github.com/code-kern-ai/refinery.git
+$ cd refinery
+$ docker-compose up -d
+# Now visit http://localhost:4455
+```
+
+*refinery* consists of multiple services that need to be run together. To do so, we've set up a `docker-compose` file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `docker-compose up -d` in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser.
 
 ## 📘 Documentation and sample projects
-The best way to start with refinery is our [quick start](https://docs.kern.ai/v1.0/docs/quickstart).
+The best way to start with refinery is our [**quick start**](https://docs.kern.ai/v1.0/docs/quickstart).
 
-You can find extensive guides in our [README docs](https://docs.kern.ai/docs), and some [tutorials](https://www.youtube.com/channel/UCru-6X24b76TRsL6KWMFEFg/videos) on our YouTube channel.
-
-We've also prepared some projects which you can download and import to your local application. Go to our [sample projects repository](https://github.com/code-kern-ai/sample-projects), where you can select from multiple projects.
+You can find extensive guides in our [README docs](https://docs.kern.ai/docs) and [tutorials](https://www.youtube.com/channel/UCru-6X24b76TRsL6KWMFEFg/videos) on our YouTube channel. We've also prepared projects which you can download and import to your local application. To do so, go to our [sample projects repository](https://github.com/code-kern-ai/sample-projects), where you can select from multiple projects.
 
 ## 🪢 Community and contact
-Please join our community spaces [Discord](https://discord.gg/qf4rGCEphW) and [our forum](https://discuss.kern.ai/), and/or follow us on [Twitter](https://twitter.com/MeetKern) and [LinkedIn](https://www.linkedin.com/company/kern-ai).
+Feel free to join our community spaces:
+- [Discord](https://discord.gg/qf4rGCEphW)
+- [Our forum](https://discuss.kern.ai/)
+
+We send out a (mostly) weekly newsletter about recent findings in data-centric AI, product highlights in development and more. You can subscribe to the newsletter [here](https://www.kern.ai/resources/newsletter). Also, you can follow us on [Twitter](https://twitter.com/MeetKern) and [LinkedIn](https://www.linkedin.com/company/kern-ai).
 
 To reach out via email, please contact [info@kern.ai](mailto:info@kern.ai).
 
