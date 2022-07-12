@@ -33,13 +33,13 @@ Our goal is to make labeling feel more like a programmatic and enjoyable task, i
 If you like what we're working on, please leave a ⭐! 
 
 # Table of contents
-  - [🪛 Installation](#🪛-installation)
-  - [📘 Documentation](#📘-documentation)
-  - [🪢 Community and contact](#🪢-community-and-contact)
-  - [🗺️ Roadmap](#🗺️-roadmap)
-  - [🙌 Contributing](#🙌-contributing)
-  - [🐍 Python SDK](#🐍-python-sdk)
-  - [📃 License](#📃-license)
+  - [🪛 Installation](#-installation)
+  - [📘 Documentation](#-documentation)
+  - [🪢 Community and contact](#-community-and-contact)
+  - [🗺️ Roadmap](#-roadmap)
+  - [🙌 Contributing](#-contributing)
+  - [🐍 Python SDK](#-python-sdk)
+  - [📃 License](#-license)
 
 ## 🪛 Installation
 
