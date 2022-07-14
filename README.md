@@ -123,9 +123,6 @@ Our goal is to provide you with an easy-to-use, yet powerful open-source tool, w
 
 You can find our short- to midterm feature plans in the [public roadmap](https://github.com/code-kern-ai/refinery/projects/1)
 
-## 🏠 Architecture 
-
-
 ## ❓ FAQ
 
 ### Concept questions
