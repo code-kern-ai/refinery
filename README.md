@@ -23,7 +23,7 @@ _refinery_ doesn't get rid of manual labeling, but it makes sure that your valua
 
 ![Showcase GIF of _refinery_](refinery.gif)
 
-_refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks. Our microservices natively support GPU acceleration.
+_refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks, as well as [qdrant](https://github.com/qdrant/qdrant) for neural search. Our microservices natively support GPU acceleration.
 
 ## 🧑‍💻 Why _refinery_? Built for developers with collaboration in mind
 There are already many other labeling tools out there, so why did we decide to build *yet another one*? 
@@ -127,38 +127,38 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 
 ### Concept questions
 <details>
-    <summary>What is a heuristic?</summary>
+    <summary><b>What is a heuristic?</b></summary>
     Heuristics are the ingredients for scaling your data labeling. They don't have to be 100% accurate, heuristics can be e.g. simple Python functions expressing some domain knowledge. When you add and run several of these heuristics, you create what is called a noisy label matrix, that is matched against the reference data that you manually labeled. This allows us to analyze correlations, conflicts, overlaps, the number of hits for a data set, and the accuracy of each heuristic.
 </details>
 
 <details>
-    <summary>How can I build an active learning model?</summary>
+    <summary><b>How can I build an active learning model?</b></summary>
     We use pre-trained models to create embeddings in the first place. Once this is done, the embeddings are available in the application (both for building active learning heuristics and neural search). In our active learning IDE, you can then build a simple classification or extraction head on top of the embedding, and we'll manage then execution in a containerized environment.
 </details>
 
 <details>
-    <summary>How do I know whether my heuristic is good?</summary>
+    <summary><b>How do I know whether my heuristic is good?</b></summary>
     A heuristic can be “good” with respect to both coverage and precision. For coverage there basically is no limitation at all, for precision we generally recommend some value above 70%, depending on how many heuristics you have. The more heuristics you have, the more overlaps and conflicts will be given, the better weak supervision can work.
 </details>
 
 <details>
-    <summary>If I can automate the labeling, why should I train a model at all?</summary>
+    <summary><b>If I can automate the labeling, why should I train a model at all?</b></summary>
     Technically, you could use our _refinery_ for inference. However, best results are achieved if a supervised learning model is trained on the generated labels, as these models improve generalization. It’s just a best practice. If you want to use the model for inference, check out our open-source library <a href="https://github.com/code-kern-ai/weak-nlp">weak-nlp</a>.
 </details>
 
 <details>
-    <summary>I have less than 1,000 records - Do I need this?</summary>
+    <summary><b>I have less than 1,000 records - Do I need this?</b></summary>
     You can definitely use the system for smaller datasets, too! It now only shines via programmatic labeling, but also has a simple and beautiful UI. Go for it 😁
 </details>
 
 ### Technical questions
 <details>
-    <summary>How can I upload data?</summary>
+    <summary><b>How can I upload data?</b></summary>
     We use <a href="https://github.com/pandas-dev/pandas">pandas</a> internally for matching your data to our JSON-based data model. You can upload the data via our UI, or via our <a href="https://github.com/code-kern-ai/refinery-python">Python SDK</a>.
 </details>
 
 <details>
-    <summary>How can I download data, and what format does it have?</summary>
+    <summary><b>How can I download data, and what format does it have?</b></summary>
     You can download your data in our UI or via the <a href="https://github.com/code-kern-ai/refinery-python">Python SDK</a>, where we also provide e.g. adapters to <a href="https://github.com/RasaHQ/rasa">Rasa</a>. The export looks something like this:
 
     [
@@ -182,17 +182,17 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 
 ### Service and hosting questions
 <details>
-    <summary>Are there options for an enterprise on-prem solution?</summary>
+    <summary><b>Are there options for an enterprise on-prem solution?</b></summary>
     If you're interested in running the multi-user version on your premises, please [reach out to us](https://www.kern.ai/contact). We can help you to set up the deployment and prepare your project(s) e.g. with workshops.
 </details>
 
 <details>
-    <summary>I don't want to label myself. What are my options?</summary>
+    <summary><b>I don't want to label myself. What are my options?</b></summary>
     Do you want to outsource your labeling, and let your engineers use _refinery_ as a mission control for your training data? [Reach out to us](https://www.kern.ai/contact), so we can discuss how we can help you with your use case.
 </details>
 
 <details>
-    <summary>How can I reach support?</summary>
+    <summary><b>How can I reach support?</b></summary>
     In our open-source solution, you can reach out to us via <a href="https://discord.gg/qf4rGCEphW">Discord</a>. For our managed version, you have an in-app chat to directly contact our support team.
 </details>
 
