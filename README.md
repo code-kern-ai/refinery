@@ -1,7 +1,7 @@
 ![](https://uploads-ssl.webflow.com/61e47fafb12bd56b40022a49/62c2f30f935f4d37dc864eeb_Kern%20refinery.png)
 
 <p align="center">
-    <b>Open-source data-centric IDE for NLP. Combining programmatic/manual labeling, extensive data management and neural search capabilities.</b>
+    <b>Open-source data-centric IDE for NLP. Combining (semi-)automated labeling, extensive data management and neural search capabilities.</b>
 </p>
 
 <p align=center>
@@ -17,16 +17,18 @@
     <a href="https://www.kern.ai/"><img src="https://img.shields.io/badge/Website-white.svg" alt="Website"></a>
 </p>
 
-Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision, a technique to integrate heuristics for automated data labeling. The workflow enables you to manually and programmatically label data efficiently, such that you can focus on what matters most.
+Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision as well as extensive data management, neural search and monitoring to ensure that the quality of your training data is as good as possible.
+
+_refinery_ doesn't get rid of manual labeling, but it makes sure that your valuable time is spent well.
 
 ![](https://uploads-ssl.webflow.com/61e47fafb12bd56b40022a49/62c305d6b1aa5da5154ff7b7_sample-screenshot.png)
 
-refinery consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks. Our microservices natively support GPU acceleration.
+_refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks. Our microservices natively support GPU acceleration.
 
 ## 🧑‍💻 Built for developers
 There are already many other labeling tools out there, so why did we decide to build *yet another one*? Easy: we believe that there is a lack of *open-source, developer-oriented* tools for data-centric NLP. In other terms: developers and scientists should be able to participate in the refinement of raw data to training data, but with the programmatic approach they love. **The benefits**: you gain better insights into the data labeling workflow, receive an implicit documentation for your training data, and can ultimately build better models in shorter time.
 
-Our goal is to make labeling feel more like a programmatic and enjoyable task, instead of something tedious and repetitive. *refinery* is our contribution to this goal. And we're constantly aiming to improve this contribution.
+Our goal is to make labeling feel more like a programmatic and enjoyable task, instead of something tedious and repetitive. _refinery_ is our contribution to this goal. And we're constantly aiming to improve this contribution.
 
 If you like what we're working on, please leave a ⭐! 
 
@@ -40,10 +42,10 @@ $ docker-compose up -d
 # Now visit http://localhost:4455
 ```
 
-*refinery* consists of multiple services that need to be run together. To do so, we've set up a `docker-compose` file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `docker-compose up -d` in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser.
+_refinery_ consists of multiple services that need to be run together. To do so, we've set up a `docker-compose` file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `docker-compose up -d` in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser.
 
 ## 📘 Documentation and sample projects
-The best way to start with refinery is our [**quick start**](https://docs.kern.ai/v1.0/docs/quickstart).
+The best way to start with _refinery_ is our [**quick start**](https://docs.kern.ai/v1.0/docs/quickstart).
 
 You can find extensive guides in our [README docs](https://docs.kern.ai/docs) and [tutorials](https://www.youtube.com/channel/UCru-6X24b76TRsL6KWMFEFg/videos) on our YouTube channel. We've also prepared projects which you can download and import to your local application. To do so, go to our [sample projects repository](https://github.com/code-kern-ai/sample-projects), where you can select from multiple projects.
 
@@ -62,7 +64,7 @@ Our goal is to provide you with an easy-to-use, yet powerful open-source tool, w
 - [ ] Extensive user-, label- and data-management capabilities
 - [ ] Improving the developer experience continuously
 - [ ] Continuously making the whole system more efficient to provide you with realtime insights
-- [ ] Providing you with great content to learn more about data-centric AI and how to implement it in *refinery*
+- [ ] Providing you with great content to learn more about data-centric AI and how to implement it in _refinery_
 - [ ] Integrations to your favorite ML frameworks and applications
 
 You can find our short- to midterm feature plans in the [public roadmap](https://github.com/code-kern-ai/refinery/projects/1)
@@ -75,5 +77,7 @@ If you have a suggestion for features, please [create a ticket in our forum](htt
 ## 🐍 Python SDK
 You can extend your projects by using our [Python SDK](https://github.com/code-kern-ai/kern-python). With it, you can easily export labeled data of your current project and import new files both programmatically and via CLI (`kern pull` and `kern push <file_name>`). It also comes with adapters, e.g. to [Rasa](https://github.com/RasaHQ/rasa).
 
+## Glossary
+
 ## 📃 License
-Kern AI refinery is licensed under the Apache License, Version 2.0. View a copy of the [License file](LICENSE).
+_refinery_ is licensed under the Apache License, Version 2.0. View a copy of the [License file](LICENSE).
