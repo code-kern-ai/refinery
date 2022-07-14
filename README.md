@@ -17,7 +17,7 @@
     <a href="https://www.kern.ai/"><img src="https://img.shields.io/badge/Website-white.svg" alt="Website"></a>
 </p>
 
-Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision as well as extensive data management, neural search and monitoring to ensure that the quality of your training data is as good as possible (see our [glossary](#🏫-glossary) for more information on the named technologies).
+Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision as well as extensive data management, neural search and monitoring to ensure that the quality of your training data is as good as possible.
 
 _refinery_ doesn't get rid of manual labeling, but it makes sure that your valuable time is spent well.
 
@@ -105,12 +105,12 @@ We send out a (mostly) weekly newsletter about recent findings in data-centric A
 
 Also, you can follow us on [Twitter](https://twitter.com/MeetKern) and [LinkedIn](https://www.linkedin.com/company/kern-ai).
 
-To reach out via email, please contact [info@kern.ai](mailto:info@kern.ai).
+To reach out to us, please use our [contact formula](https://www.kern.ai/contact).
 
 ## 🙌 Contributing
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. You can do so by providing feedback about [desired features](https://discuss.kern.ai/c/enhancements/6) and [bugs](https://github.com/code-kern-ai/refinery/issues) you might detect.
 
-If you actively want to participate in extending the code base, [reach out to us](mailto:info@kern.ai). We'll explain you how the architecture is set up, so you can customize the application as you desire.
+If you actively want to participate in extending the code base, [reach out to us]([mailto:info@kern.ai](https://www.kern.ai/contact)). We'll explain you how the architecture is set up, so you can customize the application as you desire.
 
 ## 🗺️ Roadmap
 Our goal is to provide you with an easy-to-use, yet powerful open-source tool, which helps you to build the best training data for your model. We'll focus on the following high-level tasks:
@@ -128,14 +128,41 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 
 ## ❓ FAQ
 
+### Concept questions
 <details>
-    <summary>How can I upload data?</summary>
-    We use [pandas](https://github.com/pandas-dev/pandas) internally for matching your data to our JSON-based data model. You can upload the data via our UI, or via our [Python SDK](https://github.com/code-kern-ai/refinery-python).
+    <summary>What is a heuristic?</summary>
+    Heuristics are the ingredients for scaling your data labeling. They don't have to be 100% accurate, heuristics can be e.g. simple Python functions expressing some domain knowledge. When you add and run several of these heuristics, you create what is called a noisy label matrix, that is matched against the reference data that you manually labeled. This allows us to analyze correlations, conflicts, overlaps, the number of hits for a data set, and the accuracy of each heuristic.
 </details>
 
 <details>
-    <summary>How can I download data?</summary>
-    You can download your data in our UI or via the [Python SDK](https://github.com/code-kern-ai/refinery-python). The export looks something like this:
+    <summary>How can I build an active learning model?</summary>
+    We use pre-trained models to create embeddings in the first place. Once this is done, the embeddings are available in the application (both for building active learning heuristics and neural search). In our active learning IDE, you can then build a simple classification or extraction head on top of the embedding, and we'll manage then execution in a containerized environment.
+</details>
+
+<details>
+    <summary>How do I know whether my heuristic is good?</summary>
+    A heuristic can be “good” with respect to both coverage and precision. For coverage there basically is no limitation at all, for precision we generally recommend some value above 70%, depending on how many heuristics you have. The more heuristics you have, the more overlaps and conflicts will be given, the better weak supervision can work.
+</details>
+
+<details>
+    <summary>If I can automate the labeling, why should I train a model at all?</summary>
+    Technically, you could use our _refinery_ for inference. However, best results are achieved if a supervised learning model is trained on the generated labels, as these models improve generalization. It’s just a best practice. If you want to use the model for inference, check out our open-source library <a href="https://github.com/code-kern-ai/weak-nlp">weak-nlp</a>.
+</details>
+
+<details>
+    <summary>I have less than 1,000 records - Do I need this?</summary>
+    You can definitely use _refinery_ for smaller datasets, too! It now only shines via programmatic labeling, but also has a simple and beautiful UI. Go for it 😁
+</details>
+
+### Technical questions
+<details>
+    <summary>How can I upload data?</summary>
+    We use <a href="https://github.com/pandas-dev/pandas">pandas</a> internally for matching your data to our JSON-based data model. You can upload the data via our UI, or via our <a href="https://github.com/code-kern-ai/refinery-python">Python SDK</a>.
+</details>
+
+<details>
+    <summary>How can I download data, and what format does it have?</summary>
+    You can download your data in our UI or via the <a href="https://github.com/code-kern-ai/refinery-python">Python SDK</a>, where we also provide e.g. adapters to <a href="https://github.com/RasaHQ/rasa">Rasa</a>. The export looks something like this:
 
     [
         {
@@ -154,22 +181,22 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
             ]
         }
     ]
-    
+</details>
+
+### Service and hosting questions
+<details>
+    <summary>Are there options for an enterprise on-prem solution?</summary>
+    If you're interested in running the multi-user version on your premises, please [reach out to us](https://www.kern.ai/contact). We can help you to set up the deployment and prepare your project(s) e.g. with workshops.
 </details>
 
 <details>
-    <summary>What is a heuristic?</summary>
-    Heuristics are the ingredients for scaling your data labeling. They don't have to be 100% accurate, heuristics can be e.g. simple Python functions expressing some domain knowledge. When you add and run several of these heuristics, you create what is called a noisy label matrix, that is matched against the reference data that you manually labeled. This allows us to analyze correlations, conflicts, overlaps, the number of hits for a data set, and the accuracy of each heuristic.
+    <summary>I don't want to label myself. What are my options?</summary>
+    Do you want to outsource your labeling, and let your engineers use _refinery_ as a mission control for your training data? [Reach out to us](https://www.kern.ai/contact), so we can discuss how we can help you with your use case.
 </details>
 
 <details>
-    <summary>How do I know whether my heuristic is good?</summary>
-    A heuristic can be “good” with respect to both coverage and precision. For coverage there basically is no limitation at all, for precision we generally recommend some value above 70%, depending on how many heuristics you have. The more heuristics you have, the more overlaps and conflicts will be given, the better weak supervision can work.
-</details>
-
-<details>
-    <summary>If I can automate the labeling, why should I train a model at all?</summary>
-    Technically, you could use our _refinery_ for inference. However, best results are achieved if a supervised learning model is trained on the generated labels, as these models improve generalization. It’s just a best practice. If you want to use the model for inference, check out our open-source library [`weak-nlp`](https://github.com/code-kern-ai/weak-nlp)
+    <summary>How can I reach support?</summary>
+    In our open-source solution, you can reach out to us via <a href="https://discord.gg/qf4rGCEphW">Discord</a>. For our managed version, you have an in-app chat to directly contact our support team.
 </details>
 
 ## 🐍 Python SDK
