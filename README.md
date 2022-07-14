@@ -136,20 +136,25 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 <details>
     <summary>How can I download data?</summary>
     You can download your data in our UI or via the [Python SDK](https://github.com/code-kern-ai/refinery-python). The export looks something like this:
-    <div class="tip" markdown="1">
-    ```json
+
     [
-  {
-    "running_id": "0",
-    "Headline": "T. Rowe Price (TROW) Dips More Than Broader Markets",
-    "Date": "Jun-30-22 06:00PM\u00a0\u00a0",
-    "Headline__Sentiment Label__MANUAL": null,
-    "Headline__Sentiment Label__WEAK_SUPERVISION": "Negative",
-    "Headline__Sentiment Label__WEAK_SUPERVISION__confidence": "0.6220"
-  }
-]
-    ```
-    </div>
+        {
+            "running_id": "0",
+            "headline": "T. Rowe Price (TROW) Dips More Than Broader Markets",
+            "date": "Jun-30-22 06:00PM\u00a0\u00a0",
+            "headline__sentiment__MANUAL": null,
+            "headline__sentiment__WEAK_SUPERVISION": "NEGATIVE",
+            "headline__sentiment__WEAK_SUPERVISION__confidence": 0.62,
+            "headline__entities__MANUAL": null,
+            "headline__entities__WEAK_SUPERVISION": [
+                "STOCK", "STOCK", "STOCK", "STOCK", "STOCK", "STOCK", "O", "O", "O", "O", "O"
+            ],
+            "headline__entities__WEAK_SUPERVISION__confidence": [
+                0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 0.00, 0.00, 0.00, 0.00, 0.00
+            ]
+        }
+    ]
+    
 </details>
 
 <details>
