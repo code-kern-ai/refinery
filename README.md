@@ -148,7 +148,7 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 
 <details>
     <summary>I have less than 1,000 records - Do I need this?</summary>
-    You can definitely use _refinery_ for smaller datasets, too! It now only shines via programmatic labeling, but also has a simple and beautiful UI. Go for it 😁
+    You can definitely use the system for smaller datasets, too! It now only shines via programmatic labeling, but also has a simple and beautiful UI. Go for it 😁
 </details>
 
 ### Technical questions
