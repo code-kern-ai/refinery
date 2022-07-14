@@ -21,7 +21,7 @@ Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your fav
 
 _refinery_ doesn't get rid of manual labeling, but it makes sure that your valuable time is spent well.
 
-![](https://uploads-ssl.webflow.com/61e47fafb12bd56b40022a49/62c305d6b1aa5da5154ff7b7_sample-screenshot.png)
+![Showcase GIF of _refinery_](refinery.gif)
 
 _refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks. Our microservices natively support GPU acceleration.
 
