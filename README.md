@@ -80,6 +80,8 @@ $ docker-compose up -d
 
 _refinery_ consists of multiple services that need to be run together. To do so, we've set up a `docker-compose` file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `docker-compose up -d` in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser.
 
+**You're ready to start! 🙌 🎉**
+
 If you run into any issues during installation, please don't hesitate to reach out to us (see community section below).
 
 ## 📘 Documentation and tutorials
@@ -120,6 +122,50 @@ Our goal is to provide you with an easy-to-use, yet powerful open-source tool, w
 - [ ] Integrations to your favorite ML frameworks and applications
 
 You can find our short- to midterm feature plans in the [public roadmap](https://github.com/code-kern-ai/refinery/projects/1)
+
+## 🏠 Architecture 
+
+
+## ❓ FAQ
+
+<details>
+    <summary>How can I upload data?</summary>
+    We use [pandas](https://github.com/pandas-dev/pandas) internally for matching your data to our JSON-based data model. You can upload the data via our UI, or via our [Python SDK](https://github.com/code-kern-ai/refinery-python).
+</details>
+
+<details>
+    <summary>How can I download data?</summary>
+    You can download your data in our UI or via the [Python SDK](https://github.com/code-kern-ai/refinery-python). The export looks something like this:
+    <div class="tip" markdown="1">
+    ```json
+    [
+  {
+    "running_id": "0",
+    "Headline": "T. Rowe Price (TROW) Dips More Than Broader Markets",
+    "Date": "Jun-30-22 06:00PM\u00a0\u00a0",
+    "Headline__Sentiment Label__MANUAL": null,
+    "Headline__Sentiment Label__WEAK_SUPERVISION": "Negative",
+    "Headline__Sentiment Label__WEAK_SUPERVISION__confidence": "0.6220"
+  }
+]
+    ```
+    </div>
+</details>
+
+<details>
+    <summary>What is a heuristic?</summary>
+    Heuristics are the ingredients for scaling your data labeling. They don't have to be 100% accurate, heuristics can be e.g. simple Python functions expressing some domain knowledge. When you add and run several of these heuristics, you create what is called a noisy label matrix, that is matched against the reference data that you manually labeled. This allows us to analyze correlations, conflicts, overlaps, the number of hits for a data set, and the accuracy of each heuristic.
+</details>
+
+<details>
+    <summary>How do I know whether my heuristic is good?</summary>
+    A heuristic can be “good” with respect to both coverage and precision. For coverage there basically is no limitation at all, for precision we generally recommend some value above 70%, depending on how many heuristics you have. The more heuristics you have, the more overlaps and conflicts will be given, the better weak supervision can work.
+</details>
+
+<details>
+    <summary>If I can automate the labeling, why should I train a model at all?</summary>
+    Technically, you could use our _refinery_ for inference. However, best results are achieved if a supervised learning model is trained on the generated labels, as these models improve generalization. It’s just a best practice. If you want to use the model for inference, check out our open-source library [`weak-nlp`](https://github.com/code-kern-ai/weak-nlp)
+</details>
 
 ## 🐍 Python SDK
 You can extend your projects by using our [Python SDK](https://github.com/code-kern-ai/refinery-python). With it, you can easily export labeled data of your current project and import new files both programmatically and via CLI (`refinery pull` and `refinery push <file_name>`). It also comes with adapters, e.g. to [Rasa](https://github.com/RasaHQ/rasa).
