@@ -17,7 +17,7 @@
     <a href="https://www.kern.ai/"><img src="https://img.shields.io/badge/Website-white.svg" alt="Website"></a>
 </p>
 
-Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision as well as extensive data management, neural search and monitoring to ensure that the quality of your training data is as good as possible.
+Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision as well as extensive data management, neural search and monitoring to ensure that the quality of your training data is as good as possible (see our [glossary](#🏫-glossary) for more information on the named technologies).
 
 _refinery_ doesn't get rid of manual labeling, but it makes sure that your valuable time is spent well.
 
@@ -25,12 +25,48 @@ _refinery_ doesn't get rid of manual labeling, but it makes sure that your valua
 
 _refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks. Our microservices natively support GPU acceleration.
 
-## 🧑‍💻 Built for developers
-There are already many other labeling tools out there, so why did we decide to build *yet another one*? Easy: we believe that there is a lack of *open-source, developer-oriented* tools for data-centric NLP. In other terms: developers and scientists should be able to participate in the refinement of raw data to training data, but with the programmatic approach they love. **The benefits**: you gain better insights into the data labeling workflow, receive an implicit documentation for your training data, and can ultimately build better models in shorter time.
+## 🧑‍💻 Why _refinery_? Built for developers with collaboration in mind
+There are already many other labeling tools out there, so why did we decide to build *yet another one*? 
+
+### Open-source and developer-oriented
+We believe that there is a lack of *open-source, developer-oriented* tools for data-centric NLP. In other terms: developers and scientists should be able to participate in the refinement of raw data to training data, but with the programmatic approach they love. That's why we made sure that integrations to tools like [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) are as easy as possible.
+
+
+### For automation or quality control
+The labeling workflow in _refinery_ is designed to integrate heuristics like labeling functions or active learning modules, which are combined via weak supervision. This way, you can either prototype the training data for your model from scratch, or improve existing training data continuously. We designed our workflow and data management such that you can do exactly that, and find the spots in your data that need to be re-visited.
+
+### Improving collaboration with subject matter experts
+While doing so, we aim to improve the collaboration between engineers and subject matter experts (SMEs). In the past, we've seen how our application was being used in meetings to discuss label patterns in form of labeling functions and distant supervisors. We believe that data-centric AI is the best way to leverage collaboration.
+
+### Integrations
+Lastly, _refinery_ supports [SDK actions](https://github.com/code-kern-ai/refinery-python) like pulling and pushing data. Data-centric AI redefines labeling to be more than a one-time job by giving it an iterative workflow, so we aim to give you more power every day by providing end-to-end capabilities, growing the large-scale availability of high-quality training data. Use our SDK to program integrations with your existing landscapes. By the way, tell us which integrations you'd like to have [here](https://discuss.kern.ai/c/enhancements/6).
+
+
+### Your benefits
+You gain better insights into the data labeling workflow, receive an implicit documentation for your training data (which you can use to discuss findings), and can ultimately build better models in shorter time.
 
 Our goal is to make labeling feel more like a programmatic and enjoyable task, instead of something tedious and repetitive. _refinery_ is our contribution to this goal. And we're constantly aiming to improve this contribution.
 
 If you like what we're working on, please leave a ⭐! 
+
+## 🤓 Features
+### (Semi-)automated labeling workflow for NLP tasks
+- Both manual and programmatic for classifications and span-labeling
+- Integration with state-of-the-art libraries and frameworks
+- Creation and management of lookup lists/knowledge bases to support during labeling
+- Neural search-based retrieval of similar records and outliers
+- Sliceable labeling sessions to drill-down on specific subsets
+- Multiple labeling tasks possible per project
+
+### Extensive data management and monitoring
+- Integration with [🤗 Hugging Face](https://www.huggingface.co) to automatically create document- and token-level embeddings
+- JSON-based data model for up- and downloads
+- Overview of project metrics like label distributions and confusion matrix
+- Data accessible and extendable via our [Python SDK](https://github.com/code-kern-ai/refinery-python)
+
+### Team workspaces in the [managed version](https://kern.ai/pricing)
+- Allow multiple users to label your data
+- Automated calculation of inter-annotator agreements
 
 ## 🐳 Installation via Docker
 
@@ -44,19 +80,35 @@ $ docker-compose up -d
 
 _refinery_ consists of multiple services that need to be run together. To do so, we've set up a `docker-compose` file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `docker-compose up -d` in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser.
 
-## 📘 Documentation and sample projects
-The best way to start with _refinery_ is our [**quick start**](https://docs.kern.ai/v1.0/docs/quickstart).
+If you run into any issues during installation, please don't hesitate to reach out to us (see community section below).
 
-You can find extensive guides in our [README docs](https://docs.kern.ai/docs) and [tutorials](https://www.youtube.com/channel/UCru-6X24b76TRsL6KWMFEFg/videos) on our YouTube channel. We've also prepared projects which you can download and import to your local application. To do so, go to our [sample projects repository](https://github.com/code-kern-ai/sample-projects), where you can select from multiple projects.
+## 📘 Documentation and tutorials
+The best way to start with _refinery_ is our [**quick start**](https://docs.kern.ai/docs/quickstart).
+
+You can find extensive guides in our [README docs](https://docs.kern.ai/docs) and [tutorials](https://www.youtube.com/channel/UCru-6X24b76TRsL6KWMFEFg/videos) on our YouTube channel. We've also prepared a [repository with sample projects](https://github.com/code-kern-ai/sample-projects) which you can clone.
+
+You can find our changelog [here](https://docs.kern.ai/changelog).
+
+## 😵‍💫 Need help?
+No worries, we've got you:
+- If you run into issues during installation or have other technical questions, please [open a ticket](https://discuss.kern.ai/c/technical-help/9) in the "technical help" category of our forum.
+- If you're not sure how to apply heuristics or have general questions about the workflow of _refinery_, please [open a ticket](https://discuss.kern.ai/c/questions/5) in our "_refinery_ help" category of our forum.
 
 ## 🪢 Community and contact
-Feel free to join our community spaces:
+Feel free to join our community spaces, where we'll discuss about recent findings in data-centric AI:
 - [Discord](https://discord.gg/qf4rGCEphW)
 - [Our forum](https://discuss.kern.ai/)
 
-We send out a (mostly) weekly newsletter about recent findings in data-centric AI, product highlights in development and more. You can subscribe to the newsletter [here](https://www.kern.ai/resources/newsletter). Also, you can follow us on [Twitter](https://twitter.com/MeetKern) and [LinkedIn](https://www.linkedin.com/company/kern-ai).
+We send out a (mostly) weekly newsletter about recent findings in data-centric AI, product highlights in development and more. You can subscribe to the newsletter [here](https://www.kern.ai/resources/newsletter). 
+
+Also, you can follow us on [Twitter](https://twitter.com/MeetKern) and [LinkedIn](https://www.linkedin.com/company/kern-ai).
 
 To reach out via email, please contact [info@kern.ai](mailto:info@kern.ai).
+
+## 🙌 Contributing
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. You can do so by providing feedback about [desired features](https://discuss.kern.ai/c/enhancements/6) and [bugs](https://github.com/code-kern-ai/refinery/issues) you might detect.
+
+If you actively want to participate in extending the code base, [reach out to us](mailto:info@kern.ai). We'll explain you how the architecture is set up, so you can customize the application as you desire.
 
 ## 🗺️ Roadmap
 Our goal is to provide you with an easy-to-use, yet powerful open-source tool, which helps you to build the best training data for your model. We'll focus on the following high-level tasks:
@@ -69,15 +121,152 @@ Our goal is to provide you with an easy-to-use, yet powerful open-source tool, w
 
 You can find our short- to midterm feature plans in the [public roadmap](https://github.com/code-kern-ai/refinery/projects/1)
 
-## 🙌 Contributing
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. You can do so by providing feedback about bugs or generally technical issues you might detect. If you actively want to participate in extending the code base, reacht out to us. We'll explain you how the architecture is set up, so you can customize the application as you desire.
-
-If you have a suggestion for features, please [create a ticket in our forum](https://discuss.kern.ai/c/enhancements/6). If you find a bug, please open an [issue](https://github.com/code-kern-ai/refinery/issues) and choose the tag "bug".
-
 ## 🐍 Python SDK
-You can extend your projects by using our [Python SDK](https://github.com/code-kern-ai/kern-python). With it, you can easily export labeled data of your current project and import new files both programmatically and via CLI (`kern pull` and `kern push <file_name>`). It also comes with adapters, e.g. to [Rasa](https://github.com/RasaHQ/rasa).
+You can extend your projects by using our [Python SDK](https://github.com/code-kern-ai/refinery-python). With it, you can easily export labeled data of your current project and import new files both programmatically and via CLI (`refinery pull` and `refinery push <file_name>`). It also comes with adapters, e.g. to [Rasa](https://github.com/RasaHQ/rasa).
 
-## Glossary
+## 🏫 Glossary
+| Term  	| Meaning  	|
+|---	|---	|
+| Weak supervision  	| Technique/methodology to integrate different kinds of noisy and imperfect heuristics like labeling functions. It can be used not only to automate data labeling, but generally as an approach to improve your existing label quality. 	|
+| Neural search  	| Embedding-based approach to retrieve information; instead of telling a machine a set of constraints, neural search analyzes the vector space of data (encoded via e.g. pre-trained neural networks). Can be used e.g. to find nearest neighbors.  	|
+| Active learning  	| As data is labeled manually, a model is trained continuously to support the annotator. Can be used e.g. stand-alone, or as a heuristic for weak supervision.  	|
+| Vector encoding (embedding)  	| Using pre-trained models such as transformers from [🤗 Hugging Face](https://www.huggingface.co), texts can be transformed into vector space. This is both helpful for neural search and active learning (in the latter case, simple classifiers can be applied on top of the embedding, which enables fast re-training on the vector representations). 	|
+
+Missing anything in the glossary? [Add the term](https://github.com/code-kern-ai/refinery/issues) in an issue with the tag "enhancement".
+
+<!-- |   	|   	| -->
+
+## Team and contributors
+
+
+
+<table>
+  <tr>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/henrikwenck/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/61f465fb5b23739972c34498_Rectangle%20542.jpg" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Henrik Wenck</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/johanneshötter">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/61f4663f60ecc168136e5863_Rectangle%20545.jpg" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Johannes Hötter</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/anton-pullem-b028291ab/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/61f465ee28293abb09cfb4f4_Rectangle%20547.jpg" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Anton Pullem</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/lina-lumburovska-4b5250173/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/625eef007630e2379d85d12f_Lina.jpeg" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Lina Lumburovska</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/moritz-feuerpfeil/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/61f4660e28293a7cf7cfb563_Rectangle%20544.jpg" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Moritz Feuerpfeil</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/leonard-p%C3%BCttmann-4648231a9/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/629210dbfa42ae1cfa062b2e_Bild%20Leo.jpg" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Leo Püttmann</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/simon-degraf-8aba731b5/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/61f466235b237362fec344ec_Rectangle%20546.jpg" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Simon Degraf</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/felix-kirsch/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/62cd22cd378c5d0f47944cf9_Felix.JPG" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Felix Kirsch</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/jens-wittmeyer-9934a2231/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/6204e65e7187e9a2ffa03777_Jens.jpg" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Jens Wittmeyer</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/mikhailkochikov/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/6207c49264911697b5f58939_Mikhail.png" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Mikhail Kochikov</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/simon-witzke/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/61f465e2831178b0b000731a_Rectangle%20543.jpg" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Simon Witzke</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/shamanth-shetty-276a8415a/">
+            <img src="https://uploads-ssl.webflow.com/61f321fd2dc7db10189dabdb/624b013ae420cd98e9e38761_shamanth.png" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Shamanth Shetty</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+  </tr>
+</table>
+
 
 ## 📃 License
 _refinery_ is licensed under the Apache License, Version 2.0. View a copy of the [License file](LICENSE).
