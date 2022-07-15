@@ -12,7 +12,7 @@ cp refinery/template/docker-compose.yml refinery/docker-compose.yml
 
 sed -i.bak -e "s|{MINIO_ENDPOINT}|$MINIO_ENDPOINT|g" refinery/docker-compose.yml
 
-rm docker/*.bak
+rm refinery/*.bak
 
 #pull newest images
 docker pull kernai/refinery-lf-exec-env:latest
