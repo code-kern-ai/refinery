@@ -114,7 +114,7 @@ $ start.bat
 ```
 Now visit `http://localhost:4455`.
 
-_refinery_ consists of multiple services that need to be run together. To do so, we've set up a `docker-compose` file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `docker-compose up -d` in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser.
+_refinery_ consists of multiple services that need to be run together. To do so, we've set up a `start` file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `./start` (Mac/Linux) or `start.bat` (Windows) in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser.
 
 **You're ready to start! 🙌 🎉**
 
