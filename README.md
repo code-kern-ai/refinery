@@ -202,6 +202,58 @@ You can extend your projects by using our [Python SDK](https://github.com/code-k
 ## 🏠 Architecture
 ![Architecture _refinery_](architecture.svg)
 
+**Service overview (maintained by Kern AI)**
+| Service  	| Description  	|
+|---	|---	|
+| [ml-exec-env](https://github.com/code-kern-ai/refinery-ml-exec-env) 	| Execution environment for the active learning module in refinery. Containerized function as a service to build active learning models using scikit-learn and sequence-learn.  	|
+| [embedder](https://github.com/code-kern-ai/refinery-embedder)  	| Embedder for refinery. Manages the creation of document- and token-level embeddings using the embedders library.  	|
+| [weak-supervisor](https://github.com/code-kern-ai/refinery-weak-supervisor)  	| Weak supervision for refinery. Manages the integration of heuristics such as labeling functions, active learners or zero-shot classifiers. Uses the weak-nlp library for the actual integration logic and algorithms.  	|
+| [record-ide-env](https://github.com/code-kern-ai/refinery-record-ide-env)  	| Execution environment for the record IDE in refinery. Containerized function as a service to build record-specific "quick-and-dirty" code snippets for exploration and debugging. |
+| [config](https://github.com/code-kern-ai/refinery-config)  	| Configuration of refinery. Manages amongst others endpoints and available language models for spaCy.  	|
+| [tokenizer](https://github.com/code-kern-ai/refinery-tokenizer)  	| Tokenizer for refinery. Manages the creation and storage of spaCy tokens for text-based record attributes and supports multiple language models. It is used by the gateway. 	|
+| [gateway](https://github.com/code-kern-ai/refinery-gateway)  	| Gateway for refinery. Manages incoming requests and holds the workflow logic. To interact with the gateway, the UI or Python SDK can be used.  	|
+| [authorizer](https://github.com/code-kern-ai/refinery-authorizer)  	| Evaluates whether a user has access to certain resources.  	|
+| [websocket](https://github.com/code-kern-ai/refinery-websocket)  	| Websocket module for refinery. Enables asynchronous notifications inside the application.  	|
+| [lf-exec-env](https://github.com/code-kern-ai/refinery-lf-exec-env)  	| Execution environment for labeling functions in refinery. Containerized function as a service to execute user-defined Python scripts.  	|
+| [updater](https://github.com/code-kern-ai/refinery-updater)  	| Updater for refinery. Manages migration logic to new versions if required.  	|
+| [neural-search](https://github.com/code-kern-ai/refinery-neural-search)  	| Neural search for refinery. Manages similarity search powered by Qdrant and outlier detection, both based on vector representations of the project records.  	|
+| [zero-shot](https://github.com/code-kern-ai/refinery-zero-shot)  	| Zero-shot module for refinery. Enables the integration of 🤗 Hugging Face zero-shot classifiers as an off-the-shelf no-code heuristic.  	|
+| [entry](https://github.com/code-kern-ai/refinery-entry)  	| Login and registration screen for refinery. Implemented via Ory Kratos.  	|
+| [ui](https://github.com/code-kern-ai/refinery-ui)  	| UI for refinery. Used to interact with the whole system; to find out how to best work with the UI, check out our docs.  	|
+| [doc-ock](https://github.com/code-kern-ai/refinery-doc-ock) 	| Usage statistics collection for refinery. If users allow it, this collects product insight data used to optimize the user experience.  	|
+| [gateway-proxy](https://github.com/code-kern-ai/refinery-gateway-proxy)  	| Gateway proxy for refinery. Manages incoming requests and forwards them to the gateway. Used by the Python SDK.  	|
+
+**Service overview (open-source 3rd party)**
+| Service  	| Description  	|
+|---	|---	|
+| [qdrant/qdrant](https://github.com/qdrant/qdrant)  	| Qdrant - Vector Search Engine for the next generation of AI applications  	|
+| [postgres/postgres](https://github.com/postgres/postgres)  	| PostgreSQL: The World's Most Advanced Open Source Relational Database  	|
+| [minio/minio](https://github.com/minio/minio)  	| Multi-Cloud ☁️ Object Storage  	|
+| [mailhog/MailHog](https://github.com/mailhog/MailHog)  	| Web and API based SMTP testing  	|
+| [ory/kratos](https://github.com/ory/kratos)  	| Next-gen identity server (think Auth0, Okta, Firebase) with Ory-hardened authentication, MFA, FIDO2, TOTP, WebAuthn, profile management, identity schemas, social sign in, registration, account recovery, passwordless. Golang, headless, API-only - without templating or theming headaches. Available as a cloud service.  	|
+| [ory/oathkeeper](https://github.com/ory/oathkeeper)  	| A cloud native Identity & Access Proxy / API (IAP) and Access Control Decision API that authenticates, authorizes, and mutates incoming HTTP(s) requests. Inspired by the BeyondCorp / Zero Trust white paper. Written in Go.  	|
+
+**Integrations overview (maintained by Kern AI)**
+| Integration  	| Description  	|
+|---	|---	|
+| [refinery-python](https://github.com/code-kern-ai/refinery-python)  	| Official Python SDK for Kern AI refinery.  	|
+| [sequence-learn](https://github.com/code-kern-ai/sequence-learn)  	| With sequence-learn, you can build models for named entity recognition as quickly as if you were building a sklearn classifier.  	|
+| [embedders](https://github.com/code-kern-ai/embedders)  	| With embedders, you can easily convert your texts into sentence- or token-level embeddings within a few lines of code. Use cases for this include similarity search between texts, information extraction such as named entity recognition, or basic text classification.  	|
+| [weak-nlp](https://github.com/code-kern-ai/weak-nlp)  	| Intelligent information integration based on weak supervision.  	|
+
+**Integrations overview (open-source 3rd party)**
+| Integration  	| Description  	|
+|---	|---	|
+| [huggingface/transformers](https://github.com/huggingface/transformers)  	| 🤗 Transformers: State-of-the-art Machine Learning for Pytorch, TensorFlow, and JAX.  	|
+| [scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn)  	| scikit-learn: machine learning in Python  	|
+| [explosion/spaCy](https://github.com/explosion/spaCy)  	| 💫 Industrial-strength Natural Language Processing (NLP) in Python	|
+
+**Submodules overview**
+Not listed in the architecture, but for internal code management, we apply git submodules.
+| Submodule  	| Description  	|
+|---	|---	|
+| [submodule-model](https://github.com/code-kern-ai/refinery-submodule-model)  	| Data model for refinery. Manages entities and their access for multiple services, e.g. the gateway.  	|
+| [submodule-s3](https://github.com/code-kern-ai/refinery-submodule-s3)  	| S3 related AWS and Minio logic.  	|
 
 ## 🏫 Glossary
 | Term  	| Meaning  	|
