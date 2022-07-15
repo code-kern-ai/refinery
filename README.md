@@ -275,8 +275,8 @@ The color of the edges have no implicit meaning, and are only used for better re
 | [embedder](https://github.com/code-kern-ai/refinery-embedder)  	| Embedder for refinery. Manages the creation of document- and token-level embeddings using the embedders library.  	|
 | [weak-supervisor](https://github.com/code-kern-ai/refinery-weak-supervisor)  	| Weak supervision for refinery. Manages the integration of heuristics such as labeling functions, active learners or zero-shot classifiers. Uses the weak-nlp library for the actual integration logic and algorithms.  	|
 | [record-ide-env](https://github.com/code-kern-ai/refinery-record-ide-env)  	| Execution environment for the record IDE. Containerized function as a service to build record-specific "quick-and-dirty" code snippets for exploration and debugging. |
-| [config](https://github.com/code-kern-ai/refinery-config)  	| Configuration of refinery. Manages amongst others endpoints and available language models for spaCy.  	|
-| [tokenizer](https://github.com/code-kern-ai/refinery-tokenizer)  	| Tokenizer for refinery. Manages the creation and storage of spaCy tokens for text-based record attributes and supports multiple language models. It is used by the gateway. 	|
+| [config](https://github.com/code-kern-ai/refinery-config)  	| Configuration of refinery. Amongst others, this manages endpoints and available language models for spaCy.  	|
+| [tokenizer](https://github.com/code-kern-ai/refinery-tokenizer)  	| Tokenizer for refinery. Manages the creation and storage of spaCy tokens for text-based record attributes and supports multiple language models. 	|
 | [gateway](https://github.com/code-kern-ai/refinery-gateway)  	| Gateway for refinery. Manages incoming requests and holds the workflow logic. To interact with the gateway, the UI or Python SDK can be used.  	|
 | [authorizer](https://github.com/code-kern-ai/refinery-authorizer)  	| Evaluates whether a user has access to certain resources.  	|
 | [websocket](https://github.com/code-kern-ai/refinery-websocket)  	| Websocket module for refinery. Enables asynchronous notifications inside the application.  	|
