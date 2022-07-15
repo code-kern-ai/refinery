@@ -1,0 +1,216 @@
+-
+  id: "ory:kratos:public"
+  upstream:
+    preserve_host: true
+    url: "http://kratos:4433"
+    strip_path: /.ory/kratos/public
+  match:
+    url: "http://localhost:4455/.ory/kratos/public/<**>"
+    methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - PATCH
+  authenticators:
+    -
+      handler: noop
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: noop
+
+-
+  id: "ory:kratos:protected"
+  upstream:
+    preserve_host: true
+    url: "http://kratos:4434"
+    strip_path: /admin/api
+  match:
+    url: "http://localhost:4455/admin/api/<**>"
+    methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - PATCH
+  authenticators:
+    -
+      handler: noop
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: noop
+
+-
+  id: "kernai:refinery-entry:anonymous"
+  upstream:
+    preserve_host: true
+    url: "http://refinery-entry:80"
+    strip_path: /auth/
+  match:
+    url: "http://localhost:4455/auth/<{,**}>"
+    methods:
+      - GET
+  authenticators:
+    -
+      handler: anonymous
+  authorizer:
+    handler: allow
+  mutators:
+    -
+      handler: noop
+
+-
+  id: "kernai:refinery-ui:protected"
+  upstream:
+    preserve_host: true
+    url: "http://refinery-ui:80"
+    strip_path: /app/
+  match:
+    url: "http://localhost:4455<{,/*,/app,/app/**,/sockjs-node/**}>"
+    methods:
+      - GET
+  authenticators:
+    -
+      handler: cookie_session
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: id_token
+  errors:
+    - handler: redirect
+      config:
+        to: http://localhost:4455/auth/login
+        return_to_query_param: 'return_to'
+
+-
+  id: "kernai:refinery-gateway:protected"
+  upstream:
+    preserve_host: true
+    url: "http://refinery-gateway:80"
+  match:
+    url: "http://localhost:4455/<{graphql/,graphql/**}>"
+    methods:
+      - GET
+      - POST
+  authenticators:
+    -
+      handler: cookie_session
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: id_token
+  errors:
+    - handler: redirect
+      config:
+        to: http://localhost:4455/auth/login
+
+# -
+#   id: "kernai:graphql-gateway:labelfunction_register"
+#   upstream:
+#     preserve_host: true
+#     url: "http://graphql-gateway:80"
+#   match:
+#     url: "http://localhost:4455/labelfunction"
+#     methods:
+#       - POST
+#   authenticators:
+#     - handler: bearer_token
+#   authorizer:
+#     handler: allow
+#   mutators:
+#     - handler: id_token
+#   errors:
+#     - handler: redirect
+#       config:
+#         to: http://localhost:4455/auth/login
+
+-
+  id: "kernai:object-storage:upload"
+  upstream:
+    preserve_host: false
+    url: "http://object-storage:9000"
+    strip_path: /api/upload/
+  match:
+    url: "http://localhost:4455/api/upload/<{**}>"
+    methods:
+      - PUT
+  authenticators:
+    - handler: cookie_session
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: header
+      config:
+        headers:
+          Host: object-storage:9000
+  errors:
+    - handler: redirect
+      config:
+        to: http://localhost:4455/auth/login
+
+-
+  id: "kernai:refinery-config"
+  upstream:
+    preserve_host: false
+    url: "http://refinery-config:80"
+    strip_path: /config/
+  match:
+    url: "http://localhost:4455/config/<{,**}>"
+    methods:
+      - GET
+  authenticators:
+    - handler: cookie_session
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: id_token
+  errors:
+    - handler: redirect
+      config:
+        to: http://localhost:4455/auth/login
+
+-
+  id: "kernai:refinery-gateway-proxy"
+  upstream:
+    preserve_host: true
+    url: "http://refinery-gateway-proxy:80"
+    strip_path: /api/
+  match:
+    url: "http://localhost:4455/api/<{,**}>"
+    methods:
+      - GET
+      - POST
+  authenticators:
+    - handler: cookie_session
+    - handler: bearer_token
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: id_token
+  errors:
+    - handler: redirect
+      config:
+        to: http://localhost:4455/auth/login
+
+-
+  id: "kernai:refinery-websocket"
+  upstream:
+    preserve_host: true
+    url: "http://refinery-websocket:8080"
+    strip_path: /notify/
+  match:
+    url: "http://localhost:4455/notify/ws"
+    methods:
+      - GET
+  authenticators:
+    - handler: cookie_session
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: id_token
+  errors:
+    - handler: redirect
+      config:
+        to: http://localhost:4455/auth/login
