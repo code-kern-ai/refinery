@@ -5,6 +5,7 @@
 </p>
 
 <p align=center>
+    <a href="https://pypi.org/project/kern-refinery/1.0.0/"><img src="https://img.shields.io/badge/pypi-1.0.0-yellow.svg" alt="pypi 1.0.0"></a>
     <a href="https://github.com/code-kern-ai/refinery/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success" alt="Apache 2.0 License"></a>
     <a href="https://discuss.kern.ai/"><img src="https://img.shields.io/badge/Forum-F5D14E.svg?logo=discourse" alt="Discourse"></a>
     <a href="https://discord.gg/qf4rGCEphW"><img src="https://img.shields.io/badge/Discord-gray.svg?logo=discord" alt="Discord"></a>
