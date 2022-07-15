@@ -125,7 +125,7 @@ If you're on Windows:
 $ start.bat
 ```
 
-To stop, type `./stop` (Mac/Linux) or `start.bat`.
+To stop, type `./stop` (Mac/Linux) or `stop.bat`.
 
 _refinery_ consists of multiple services that need to be run together. To do so, we've set up a setup file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `./start` (Mac/Linux) or `start.bat` (Windows) in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser. To stop the server, run `./stop` (Mac/Linux) or `./stop.bat` (Windows).
 
