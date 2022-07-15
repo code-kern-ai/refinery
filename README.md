@@ -25,8 +25,33 @@ _refinery_ doesn't get rid of manual labeling, but it makes sure that your valua
 
 _refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks, as well as [qdrant](https://github.com/qdrant/qdrant) for neural search. Our microservices natively support GPU acceleration.
 
-# Table of contents
+## Table of contents
+- [Table of contents](#table-of-contents)
 - [🧑‍💻 Why _refinery_? Built for developers with collaboration in mind](#-why-refinery-built-for-developers-with-collaboration-in-mind)
+  - [Open-source and developer-oriented](#open-source-and-developer-oriented)
+  - [For automation or quality control](#for-automation-or-quality-control)
+  - [Improving collaboration with subject matter experts](#improving-collaboration-with-subject-matter-experts)
+  - [Integrations](#integrations)
+  - [Your benefits](#your-benefits)
+- [🤓 Features](#-features)
+  - [(Semi-)automated labeling workflow for NLP tasks](#semi-automated-labeling-workflow-for-nlp-tasks)
+  - [Extensive data management and monitoring](#extensive-data-management-and-monitoring)
+  - [Team workspaces in the managed version](#team-workspaces-in-the-managed-version)
+- [🐳 Installation via Docker](#-installation-via-docker)
+- [📘 Documentation and tutorials](#-documentation-and-tutorials)
+- [😵‍💫 Need help?](#-need-help)
+- [🪢 Community and contact](#-community-and-contact)
+- [🙌 Contributing](#-contributing)
+- [🗺️ Roadmap](#️-roadmap)
+- [❓ FAQ](#-faq)
+  - [Concept questions](#concept-questions)
+  - [Technical questions](#technical-questions)
+  - [Service and hosting questions](#service-and-hosting-questions)
+- [🐍 Python SDK](#-python-sdk)
+- [🏠 Architecture](#-architecture)
+- [🏫 Glossary](#-glossary)
+- [👩‍💻👨‍💻 Team and contributors](#-team-and-contributors)
+- [📃 License](#-license)
 
 
 ## 🧑‍💻 Why _refinery_? Built for developers with collaboration in mind
@@ -283,9 +308,7 @@ Missing anything in the glossary? [Add the term](https://github.com/code-kern-ai
 
 <!-- |   	|   	| -->
 
-## Team and contributors
-
-
+## 👩‍💻👨‍💻 Team and contributors
 
 <table>
   <tr>
