@@ -5,7 +5,7 @@
     url: "http://kratos:4433"
     strip_path: /.ory/kratos/public
   match:
-    url: "{HOST}/.ory/kratos/public/<**>"
+    url: "http://localhost:4455/.ory/kratos/public/<**>"
     methods:
       - GET
       - POST
@@ -27,7 +27,7 @@
     url: "http://kratos:4434"
     strip_path: /admin/api
   match:
-    url: "{HOST}/admin/api/<**>"
+    url: "http://localhost:4455/admin/api/<**>"
     methods:
       - GET
       - POST
@@ -49,7 +49,7 @@
     url: "http://refinery-entry:80"
     strip_path: /auth/
   match:
-    url: "{HOST}/auth/<{,**}>"
+    url: "http://localhost:4455/auth/<{,**}>"
     methods:
       - GET
   authenticators:
@@ -68,7 +68,7 @@
     url: "http://refinery-ui:80"
     strip_path: /app/
   match:
-    url: "{HOST}<{,/*,/app,/app/**,/sockjs-node/**}>"
+    url: "http://localhost:4455<{,/*,/app,/app/**,/sockjs-node/**}>"
     methods:
       - GET
   authenticators:
@@ -81,7 +81,7 @@
   errors:
     - handler: redirect
       config:
-        to: {HOST}/auth/login
+        to: http://localhost:4455/auth/login
         return_to_query_param: 'return_to'
 
 -
@@ -90,7 +90,7 @@
     preserve_host: true
     url: "http://refinery-gateway:80"
   match:
-    url: "{HOST}/<{graphql/,graphql/**}>"
+    url: "http://localhost:4455/<{graphql/,graphql/**}>"
     methods:
       - GET
       - POST
@@ -104,27 +104,7 @@
   errors:
     - handler: redirect
       config:
-        to: {HOST}/auth/login
-
-# -
-#   id: "kernai:graphql-gateway:labelfunction_register"
-#   upstream:
-#     preserve_host: true
-#     url: "http://graphql-gateway:80"
-#   match:
-#     url: "{HOST}/labelfunction"
-#     methods:
-#       - POST
-#   authenticators:
-#     - handler: bearer_token
-#   authorizer:
-#     handler: allow
-#   mutators:
-#     - handler: id_token
-#   errors:
-#     - handler: redirect
-#       config:
-#         to: {HOST}/auth/login
+        to: http://localhost:4455/auth/login
 
 -
   id: "kernai:object-storage:upload"
@@ -133,7 +113,7 @@
     url: "http://object-storage:9000"
     strip_path: /api/upload/
   match:
-    url: "{HOST}/api/upload/<{**}>"
+    url: "http://localhost:4455/api/upload/<{**}>"
     methods:
       - PUT
   authenticators:
@@ -148,7 +128,7 @@
   errors:
     - handler: redirect
       config:
-        to: {HOST}/auth/login
+        to: http://localhost:4455/auth/login
 
 -
   id: "kernai:refinery-config"
@@ -157,7 +137,7 @@
     url: "http://refinery-config:80"
     strip_path: /config/
   match:
-    url: "{HOST}/config/<{,**}>"
+    url: "http://localhost:4455/config/<{,**}>"
     methods:
       - GET
   authenticators:
@@ -169,7 +149,7 @@
   errors:
     - handler: redirect
       config:
-        to: {HOST}/auth/login
+        to: http://localhost:4455/auth/login
 
 -
   id: "kernai:refinery-gateway-proxy"
@@ -178,7 +158,7 @@
     url: "http://refinery-gateway-proxy:80"
     strip_path: /api/
   match:
-    url: "{HOST}/api/<{,**}>"
+    url: "http://localhost:4455/api/<{,**}>"
     methods:
       - GET
       - POST
@@ -192,7 +172,7 @@
   errors:
     - handler: redirect
       config:
-        to: {HOST}/auth/login
+        to: http://localhost:4455/auth/login
 
 -
   id: "kernai:refinery-websocket"
@@ -201,7 +181,7 @@
     url: "http://refinery-websocket:8080"
     strip_path: /notify/
   match:
-    url: "{HOST}/notify/ws"
+    url: "http://localhost:4455/notify/ws"
     methods:
       - GET
   authenticators:
@@ -213,4 +193,4 @@
   errors:
     - handler: redirect
       config:
-        to: {HOST}/auth/login
+        to: http://localhost:4455/auth/login

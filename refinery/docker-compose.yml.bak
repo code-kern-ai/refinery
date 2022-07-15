@@ -26,7 +26,7 @@ services:
     environment:
       - DSN=sqlite:///var/lib/sqlite/db.sqlite?_fk=true
       - LOG_LEVEL=trace
-      - SERVE_PUBLIC_BASE_URL={HOST}/.ory/kratos/public/
+      - SERVE_PUBLIC_BASE_URL=http://localhost:4455/.ory/kratos/public/
     command: serve -c /etc/config/kratos/kratos.yml --dev --watch-courier
     volumes:
       - ./kratos:/etc/config/kratos:Z
@@ -125,7 +125,7 @@ services:
       - S3_ENDPOINT={MINIO_ENDPOINT}
       - S3_ENDPOINT_LOCAL=object-storage:9000
       - S3_ACCESS_KEY=onetask
-      - S3_SECRET_KEY=r6ywtR33!DMlaL*SUUdy
+      - S3_SECRET_KEY=JRZtI0SLsEDb3imTy03R
       - SQLITE=/sqlite/db.sqlite
       # - TYPESENSE_SEARCH=http://typesense-api:80
     networks:
@@ -181,7 +181,7 @@ services:
       - 9000
     environment:
       - MINIO_ROOT_USER=onetask
-      - MINIO_ROOT_PASSWORD=r6ywtR33!DMlaL*SUUdy
+      - MINIO_ROOT_PASSWORD=JRZtI0SLsEDb3imTy03R
       - MINIO_NOTIFY_WEBHOOK_ENABLE=on
       - MINIO_NOTIFY_WEBHOOK_ENDPOINT=http://refinery-gateway:80/notify
     command: server /data --address :9000 --console-address ":9001"
@@ -210,7 +210,7 @@ services:
       - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
       - S3_ENDPOINT_LOCAL=object-storage:9000
       - S3_ACCESS_KEY=onetask
-      - S3_SECRET_KEY=r6ywtR33!DMlaL*SUUdy
+      - S3_SECRET_KEY=JRZtI0SLsEDb3imTy03R
       - DOC_OCK=http://refinery-doc-ock:80
       - WS_NOTIFY_ENDPOINT=http://refinery-websocket:8080
       - NEURAL_SEARCH=http://refinery-neural-search:80
@@ -265,7 +265,7 @@ services:
       - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
       - S3_ENDPOINT_LOCAL=object-storage:9000
       - S3_ACCESS_KEY=onetask
-      - S3_SECRET_KEY=r6ywtR33!DMlaL*SUUdy
+      - S3_SECRET_KEY=JRZtI0SLsEDb3imTy03R
       - DOC_OCK=http://refinery-doc-ock:80
       - WS_NOTIFY_ENDPOINT=http://refinery-websocket:8080
     expose:
@@ -282,7 +282,7 @@ services:
       - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
       - S3_ENDPOINT_LOCAL=object-storage:9000
       - S3_ACCESS_KEY=onetask
-      - S3_SECRET_KEY=r6ywtR33!DMlaL*SUUdy
+      - S3_SECRET_KEY=JRZtI0SLsEDb3imTy03R
     expose:
       - 80
     networks:
