@@ -125,6 +125,8 @@ The best way to start with _refinery_ is our [**quick start**](https://docs.kern
 
 You can find extensive guides in our [README docs](https://docs.kern.ai/docs) and [tutorials](https://www.youtube.com/channel/UCru-6X24b76TRsL6KWMFEFg/videos) on our YouTube channel. We've also prepared a [repository with sample projects](https://github.com/code-kern-ai/sample-projects) which you can clone.
 
+If you need help writing your first labeling functions, look into our [template functions repository](https://github.com/code-kern-ai/refinery-template-functions).
+
 You can find our changelog [here](https://docs.kern.ai/changelog).
 
 ## 😵‍💫 Need help?
