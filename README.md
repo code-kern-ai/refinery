@@ -25,6 +25,35 @@ _refinery_ doesn't get rid of manual labeling, but it makes sure that your valua
 
 _refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks, as well as [qdrant](https://github.com/qdrant/qdrant) for neural search. Our microservices natively support GPU acceleration.
 
+## Table of contents
+- [Table of contents](#table-of-contents)
+- [🧑‍💻 Why _refinery_? Built for developers with collaboration in mind](#-why-refinery-built-for-developers-with-collaboration-in-mind)
+  - [Open-source and developer-oriented](#open-source-and-developer-oriented)
+  - [For automation or quality control](#for-automation-or-quality-control)
+  - [Improving collaboration with subject matter experts](#improving-collaboration-with-subject-matter-experts)
+  - [Integrations](#integrations)
+  - [Your benefits](#your-benefits)
+- [🤓 Features](#-features)
+  - [(Semi-)automated labeling workflow for NLP tasks](#semi-automated-labeling-workflow-for-nlp-tasks)
+  - [Extensive data management and monitoring](#extensive-data-management-and-monitoring)
+  - [Team workspaces in the managed version](#team-workspaces-in-the-managed-version)
+- [🐳 Installation via Docker](#-installation-via-docker)
+- [📘 Documentation and tutorials](#-documentation-and-tutorials)
+- [😵‍💫 Need help?](#-need-help)
+- [🪢 Community and contact](#-community-and-contact)
+- [🙌 Contributing](#-contributing)
+- [🗺️ Roadmap](#️-roadmap)
+- [❓ FAQ](#-faq)
+  - [Concept questions](#concept-questions)
+  - [Technical questions](#technical-questions)
+  - [Service and hosting questions](#service-and-hosting-questions)
+- [🐍 Python SDK](#-python-sdk)
+- [🏠 Architecture](#-architecture)
+- [🏫 Glossary](#-glossary)
+- [👩‍💻👨‍💻 Team and contributors](#-team-and-contributors)
+- [📃 License](#-license)
+
+
 ## 🧑‍💻 Why _refinery_? Built for developers with collaboration in mind
 There are already many other labeling tools out there, so why did we decide to build *yet another one*? 
 
@@ -199,6 +228,75 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 ## 🐍 Python SDK
 You can extend your projects by using our [Python SDK](https://github.com/code-kern-ai/refinery-python). With it, you can easily export labeled data of your current project and import new files both programmatically and via CLI (`refinery pull` and `refinery push <file_name>`). It also comes with adapters, e.g. to [Rasa](https://github.com/RasaHQ/rasa).
 
+## 🏠 Architecture
+Our architecture follows some main patterns:
+- Shared service database to efficiently transfer large data loads; to avoid redundant code in the services, we use submodules to share the data model
+- Containerized function execution for labeling functions, active learning and the record ide
+- Machine learning logic is implemented in stand-alone libraries (e.g. [sequence-learn](https://github.com/code-kern-ai/sequence-learn))
+
+</br>
+
+![Architecture _refinery_](architecture.svg)
+<p align=center><i>Some edges are not displayed for simplicity's sake. 
+</br>
+The color of the edges have no implicit meaning, and are only used for better readability.</i></p>
+
+</br>
+
+**Service overview (maintained by Kern AI)**
+| Service  	| Description  	|
+|---	|---	|
+| [ml-exec-env](https://github.com/code-kern-ai/refinery-ml-exec-env) 	| Execution environment for the active learning module in refinery. Containerized function as a service to build active learning models using scikit-learn and sequence-learn.  	|
+| [embedder](https://github.com/code-kern-ai/refinery-embedder)  	| Embedder for refinery. Manages the creation of document- and token-level embeddings using the embedders library.  	|
+| [weak-supervisor](https://github.com/code-kern-ai/refinery-weak-supervisor)  	| Weak supervision for refinery. Manages the integration of heuristics such as labeling functions, active learners or zero-shot classifiers. Uses the weak-nlp library for the actual integration logic and algorithms.  	|
+| [record-ide-env](https://github.com/code-kern-ai/refinery-record-ide-env)  	| Execution environment for the record IDE in refinery. Containerized function as a service to build record-specific "quick-and-dirty" code snippets for exploration and debugging. |
+| [config](https://github.com/code-kern-ai/refinery-config)  	| Configuration of refinery. Manages amongst others endpoints and available language models for spaCy.  	|
+| [tokenizer](https://github.com/code-kern-ai/refinery-tokenizer)  	| Tokenizer for refinery. Manages the creation and storage of spaCy tokens for text-based record attributes and supports multiple language models. It is used by the gateway. 	|
+| [gateway](https://github.com/code-kern-ai/refinery-gateway)  	| Gateway for refinery. Manages incoming requests and holds the workflow logic. To interact with the gateway, the UI or Python SDK can be used.  	|
+| [authorizer](https://github.com/code-kern-ai/refinery-authorizer)  	| Evaluates whether a user has access to certain resources.  	|
+| [websocket](https://github.com/code-kern-ai/refinery-websocket)  	| Websocket module for refinery. Enables asynchronous notifications inside the application.  	|
+| [lf-exec-env](https://github.com/code-kern-ai/refinery-lf-exec-env)  	| Execution environment for labeling functions in refinery. Containerized function as a service to execute user-defined Python scripts.  	|
+| [updater](https://github.com/code-kern-ai/refinery-updater)  	| Updater for refinery. Manages migration logic to new versions if required.  	|
+| [neural-search](https://github.com/code-kern-ai/refinery-neural-search)  	| Neural search for refinery. Manages similarity search powered by Qdrant and outlier detection, both based on vector representations of the project records.  	|
+| [zero-shot](https://github.com/code-kern-ai/refinery-zero-shot)  	| Zero-shot module for refinery. Enables the integration of 🤗 Hugging Face zero-shot classifiers as an off-the-shelf no-code heuristic.  	|
+| [entry](https://github.com/code-kern-ai/refinery-entry)  	| Login and registration screen for refinery. Implemented via Ory Kratos.  	|
+| [ui](https://github.com/code-kern-ai/refinery-ui)  	| UI for refinery. Used to interact with the whole system; to find out how to best work with the UI, check out our docs.  	|
+| [doc-ock](https://github.com/code-kern-ai/refinery-doc-ock) 	| Usage statistics collection for refinery. If users allow it, this collects product insight data used to optimize the user experience.  	|
+| [gateway-proxy](https://github.com/code-kern-ai/refinery-gateway-proxy)  	| Gateway proxy for refinery. Manages incoming requests and forwards them to the gateway. Used by the Python SDK.  	|
+
+**Service overview (open-source 3rd party)**
+| Service  	| Description  	|
+|---	|---	|
+| [qdrant/qdrant](https://github.com/qdrant/qdrant)  	| Qdrant - Vector Search Engine for the next generation of AI applications  	|
+| [postgres/postgres](https://github.com/postgres/postgres)  	| PostgreSQL: The World's Most Advanced Open Source Relational Database  	|
+| [minio/minio](https://github.com/minio/minio)  	| Multi-Cloud ☁️ Object Storage  	|
+| [mailhog/MailHog](https://github.com/mailhog/MailHog)  	| Web and API based SMTP testing  	|
+| [ory/kratos](https://github.com/ory/kratos)  	| Next-gen identity server (think Auth0, Okta, Firebase) with Ory-hardened authentication, MFA, FIDO2, TOTP, WebAuthn, profile management, identity schemas, social sign in, registration, account recovery, passwordless. Golang, headless, API-only - without templating or theming headaches. Available as a cloud service.  	|
+| [ory/oathkeeper](https://github.com/ory/oathkeeper)  	| A cloud native Identity & Access Proxy / API (IAP) and Access Control Decision API that authenticates, authorizes, and mutates incoming HTTP(s) requests. Inspired by the BeyondCorp / Zero Trust white paper. Written in Go.  	|
+
+**Integrations overview (maintained by Kern AI)**
+| Integration  	| Description  	|
+|---	|---	|
+| [refinery-python](https://github.com/code-kern-ai/refinery-python)  	| Official Python SDK for Kern AI refinery.  	|
+| [sequence-learn](https://github.com/code-kern-ai/sequence-learn)  	| With sequence-learn, you can build models for named entity recognition as quickly as if you were building a sklearn classifier.  	|
+| [embedders](https://github.com/code-kern-ai/embedders)  	| With embedders, you can easily convert your texts into sentence- or token-level embeddings within a few lines of code. Use cases for this include similarity search between texts, information extraction such as named entity recognition, or basic text classification.  	|
+| [weak-nlp](https://github.com/code-kern-ai/weak-nlp)  	| Intelligent information integration based on weak supervision.  	|
+
+**Integrations overview (open-source 3rd party)**
+| Integration  	| Description  	|
+|---	|---	|
+| [huggingface/transformers](https://github.com/huggingface/transformers)  	| 🤗 Transformers: State-of-the-art Machine Learning for Pytorch, TensorFlow, and JAX.  	|
+| [scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn)  	| scikit-learn: machine learning in Python  	|
+| [explosion/spaCy](https://github.com/explosion/spaCy)  	| 💫 Industrial-strength Natural Language Processing (NLP) in Python	|
+
+**Submodules overview**
+
+Not listed in the architecture, but for internal code management, we apply git submodules.
+| Submodule  	| Description  	|
+|---	|---	|
+| [submodule-model](https://github.com/code-kern-ai/refinery-submodule-model)  	| Data model for refinery. Manages entities and their access for multiple services, e.g. the gateway.  	|
+| [submodule-s3](https://github.com/code-kern-ai/refinery-submodule-s3)  	| S3 related AWS and Minio logic.  	|
+
 ## 🏫 Glossary
 | Term  	| Meaning  	|
 |---	|---	|
@@ -211,9 +309,7 @@ Missing anything in the glossary? [Add the term](https://github.com/code-kern-ai
 
 <!-- |   	|   	| -->
 
-## Team and contributors
-
-
+## 👩‍💻👨‍💻 Team and contributors
 
 <table>
   <tr>
