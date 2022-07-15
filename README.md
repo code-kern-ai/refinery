@@ -38,7 +38,9 @@ _refinery_ consists of multiple microservices to enable a scalable and optimized
   - [(Semi-)automated labeling workflow for NLP tasks](#semi-automated-labeling-workflow-for-nlp-tasks)
   - [Extensive data management and monitoring](#extensive-data-management-and-monitoring)
   - [Team workspaces in the managed version](#team-workspaces-in-the-managed-version)
-- [🐳 Installation via Docker](#-installation-via-docker)
+- [☕ Installation](#-installation)
+  - [From pip](#from-pip)
+  - [From repository](#from-repository)
 - [📘 Documentation and tutorials](#-documentation-and-tutorials)
 - [😵‍💫 Need help?](#-need-help)
 - [🪢 Community and contact](#-community-and-contact)
@@ -98,17 +100,33 @@ If you like what we're working on, please leave a ⭐!
 - Allow multiple users to label your data
 - Automated calculation of inter-annotator agreements
 
-## 🐳 Installation via Docker
+## ☕ Installation
+
+### From pip
+```
+pip install kern-refinery
+```
+Once the library is installed, go to the directory where you want to store the data and run `refinery start`. To stop the server, run `refinery stop`.
+
+### From repository
 
 **TL;DR:**
 ```
 $ git clone https://github.com/code-kern-ai/refinery.git
 $ cd refinery
-$ docker-compose up -d
-# Now visit http://localhost:4455
+```
+If you're on Mac/Linux:
+```
+$ ./start
+```
+If you're on Windows:
+```
+$ start.bat
 ```
 
-_refinery_ consists of multiple services that need to be run together. To do so, we've set up a `docker-compose` file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `docker-compose up -d` in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser.
+To stop, type `./stop` (Mac/Linux) or `start.bat`.
+
+_refinery_ consists of multiple services that need to be run together. To do so, we've set up a setup file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `./start` (Mac/Linux) or `start.bat` (Windows) in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser. To stop the server, run `./stop` (Mac/Linux) or `./stop.bat` (Windows).
 
 **You're ready to start! 🙌 🎉**
 
