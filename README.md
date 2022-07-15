@@ -108,7 +108,7 @@ For Mac/Linux:
 ```
 $ ./start
 ```
-For windows
+For Windows
 ```
 $ start.bat
 ```
