@@ -199,6 +199,10 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 ## 🐍 Python SDK
 You can extend your projects by using our [Python SDK](https://github.com/code-kern-ai/refinery-python). With it, you can easily export labeled data of your current project and import new files both programmatically and via CLI (`refinery pull` and `refinery push <file_name>`). It also comes with adapters, e.g. to [Rasa](https://github.com/RasaHQ/rasa).
 
+## 🏠 Architecture
+![Architecture _refinery_](architecture.svg)
+
+
 ## 🏫 Glossary
 | Term  	| Meaning  	|
 |---	|---	|
