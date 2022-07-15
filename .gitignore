@@ -4,6 +4,7 @@
 refinery/docker-compose.yml
 refinery/docker-compose.yml.bak
 refinery/oathkeeper/jwks.json
+refinery/postgres-data
 
 
 .DS_Store

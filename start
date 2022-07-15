@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LOCAL_VOLUME=./postgres-data
+
 unameOut="$(uname -s)"
 case "${unameOut}" in
     Linux*)     HOST_IP=$(ip a | grep "inet " | grep -v 127.0.0.1 | head -1 | grep -o -E "[0-9]+.[0-9]+.[0-9]+.[0-9]+" | head -1);;
@@ -11,6 +13,7 @@ MINIO_ENDPOINT="http://$HOST_IP:7053"
 cp refinery/template/docker-compose.yml refinery/docker-compose.yml
 
 sed -i.bak -e "s|{MINIO_ENDPOINT}|$MINIO_ENDPOINT|g" refinery/docker-compose.yml
+sed -i.bak -e "s|{VOLUME}|$LOCAL_VOLUME|g" refinery/docker-compose.yml
 
 rm refinery/*.bak
 

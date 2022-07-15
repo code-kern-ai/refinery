@@ -143,7 +143,9 @@ services:
       - 5432
     networks:
       - default
-
+    volumes:
+      - {VOLUME}:/var/lib/postgresql/data
+      
   qdrant:
     image: qdrant/qdrant:v0.7.0
     restart: always
