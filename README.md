@@ -207,6 +207,10 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 
 ### Technical questions
 <details>
+    <summary><b>Help!! I forgot my password!</b></summary>
+    No worries, you can send a reset link even on your local machine. However, the link isn't sent to your email, but to the mailhog. Access it via `http://localhost:4436`.
+</details>
+<details>
     <summary><b>How can I upload data?</b></summary>
     We use <a href="https://github.com/pandas-dev/pandas">pandas</a> internally for matching your data to our JSON-based data model. You can upload the data via our UI, or via our <a href="https://github.com/code-kern-ai/refinery-python">Python SDK</a>.
 </details>
@@ -285,7 +289,7 @@ The color of the edges have no implicit meaning, and are only used for better re
 | [neural-search](https://github.com/code-kern-ai/refinery-neural-search)  	| Neural search for refinery. Manages similarity search powered by Qdrant and outlier detection, both based on vector representations of the project records.  	|
 | [zero-shot](https://github.com/code-kern-ai/refinery-zero-shot)  	| Zero-shot module for refinery. Enables the integration of 🤗 Hugging Face zero-shot classifiers as an off-the-shelf no-code heuristic.  	|
 | [entry](https://github.com/code-kern-ai/refinery-entry)  	| Login and registration screen for refinery. Implemented via Ory Kratos.  	|
-| [ui](https://github.com/code-kern-ai/refinery-ui)  	| UI for refinery. Used to interact with the whole system; to find out how to best work with the UI, check out our docs.  	|
+| [ui](https://github.com/code-kern-ai/refinery-ui)  	| UI for refinery. Used to interact with the whole system; to find out how to best work with the system, check out our docs.  	|
 | [doc-ock](https://github.com/code-kern-ai/refinery-doc-ock) 	| Usage statistics collection for refinery. If users allow it, this collects product insight data used to optimize the user experience.  	|
 | [gateway-proxy](https://github.com/code-kern-ai/refinery-gateway-proxy)  	| Gateway proxy for refinery. Manages incoming requests and forwards them to the gateway. Used by the Python SDK.  	|
 
@@ -304,8 +308,8 @@ The color of the edges have no implicit meaning, and are only used for better re
 |---	|---	|
 | [refinery-python](https://github.com/code-kern-ai/refinery-python)  	| Official Python SDK for Kern AI refinery.  	|
 | [sequence-learn](https://github.com/code-kern-ai/sequence-learn)  	| With sequence-learn, you can build models for named entity recognition as quickly as if you were building a sklearn classifier.  	|
-| [embedders](https://github.com/code-kern-ai/embedders)  	| With embedders, you can easily convert your texts into sentence- or token-level embeddings within a few lines of code. Use cases for this include similarity search between texts, information extraction such as named entity recognition, or basic text classification.  	|
-| [weak-nlp](https://github.com/code-kern-ai/weak-nlp)  	| Intelligent information integration based on weak supervision.  	|
+| [embedders](https://github.com/code-kern-ai/embedders)  	| With embedders, you can easily convert your texts into sentence- or token-level embeddings within a few lines of code. Use cases for this include similarity search between texts, information extraction such as named entity recognition, or basic text classification. Integrates 🤗 Hugging Face transformer models	|
+| [weak-nlp](https://github.com/code-kern-ai/weak-nlp)  	| With weak-nlp, you can integrate heuristics like labeling functions and active learners based on weak supervision. Automate data labeling and improve label quality.  	|
 
 **Integrations overview (open-source 3rd party)**
 | Integration  	| Description  	|
