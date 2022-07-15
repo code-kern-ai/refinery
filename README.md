@@ -290,6 +290,7 @@ The color of the edges have no implicit meaning, and are only used for better re
 | [explosion/spaCy](https://github.com/explosion/spaCy)  	| 💫 Industrial-strength Natural Language Processing (NLP) in Python	|
 
 **Submodules overview**
+
 Not listed in the architecture, but for internal code management, we apply git submodules.
 | Submodule  	| Description  	|
 |---	|---	|
