@@ -25,6 +25,10 @@ _refinery_ doesn't get rid of manual labeling, but it makes sure that your valua
 
 _refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks, as well as [qdrant](https://github.com/qdrant/qdrant) for neural search. Our microservices natively support GPU acceleration.
 
+# Table of contents
+- [🧑‍💻 Why _refinery_? Built for developers with collaboration in mind](#🧑‍💻-why-refinery-built-for-developers-with-collaboration-in-mind)
+
+
 ## 🧑‍💻 Why _refinery_? Built for developers with collaboration in mind
 There are already many other labeling tools out there, so why did we decide to build *yet another one*? 
 
