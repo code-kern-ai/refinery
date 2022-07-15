@@ -1,0 +1,57 @@
+#!/bin/bash
+
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     HOST_IP=$(ip a | grep "inet " | grep -v 127.0.0.1 | head -1 | grep -o -E "[0-9]+.[0-9]+.[0-9]+.[0-9]+" | head -1);;
+    Darwin*)    HOST_IP=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | head -1 | grep -o -E "[0-9]+.[0-9]+.[0-9]+.[0-9]+" | head -1);;
+esac
+
+HOST="http://localhost:4455"
+MINIO_ENDPOINT="http://$HOST_IP:7053"
+QDRANT_STORAGE="$(pwd)/qdrant_storage:/qdrant/storage"
+
+cp template/docker-compose.yml .
+
+sed -i.bak -e "s|{HOST}|$HOST|g" docker-compose.yml
+sed -i.bak -e "s|{MINIO_ENDPOINT}|$MINIO_ENDPOINT|g" docker-compose.yml
+sed -i.bak -e "s|{QDRANT_STORAGE}|$QDRANT_STORAGE|g" docker-compose.yml
+
+mkdir -p kratos
+[ -e kratos/kratos.yml ] && rm kratos/kratos.yml
+cp template/kratos.yml kratos/kratos.yml
+sed -i.bak "s|{HOST}|$HOST|g" kratos/kratos.yml
+
+mkdir -p oathkeeper
+[ -e oathkeeper/oathkeeper.yml ] && rm oathkeeper/oathkeeper.yml
+cp template/oathkeeper.yml oathkeeper/oathkeeper.yml
+sed -i.bak "s|{HOST}|$HOST|g" oathkeeper/oathkeeper.yml
+
+[ -e oathkeeper/access-rules.yml ] && rm oathkeeper/access-rules.yml
+cp template/access-rules.yml oathkeeper/access-rules.yml
+sed -i.bak "s|{HOST}|$HOST|g" oathkeeper/access-rules.yml
+
+rm *.bak
+rm kratos/*.bak
+rm oathkeeper/*.bak
+
+docker pull kernai/refinery-lf-exec-env:latest
+
+awk '$1=="image:" {print $2}' docker-compose.yml | xargs -n1 docker pull;
+awk '/LF_EXEC_ENV_IMAGE=/ {print $2}' docker-compose.yml | awk -F "=" '{print $2}' | xargs -n1 docker pull
+
+docker pull kernai/refinery-ml-exec-env:latest
+awk '/ML_EXEC_ENV_IMAGE=/ {print $2}' docker-compose.yml | awk -F "=" '{print $2}' | xargs -n1 docker pull
+
+docker pull kernai/refinery-record-ide-env:latest
+awk '/RECORD_IDE_IMAGE=/ {print $2}' docker-compose.yml | awk -F "=" '{print $2}' | xargs -n1 docker pull
+
+if [ ! -f "./oathkeeper/jwks.json" ]; then
+    docker run --rm docker.io/oryd/oathkeeper:v0.38 credentials generate --alg RS256 > oathkeeper/jwks.json
+fi
+
+docker-compose up -d
+
+echo "UI:           $HOST/app/"
+echo "GraphQL:      $HOST/graphql/"
+echo "Minio:        $MINIO_ENDPOINT"
+echo "Mailslurper:  http://localhost:4436/"
