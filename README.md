@@ -103,9 +103,16 @@ If you like what we're working on, please leave a ⭐!
 ```
 $ git clone https://github.com/code-kern-ai/refinery.git
 $ cd refinery
-$ docker-compose up -d
-# Now visit http://localhost:4455
 ```
+For Mac/Linux:
+```
+$ ./start
+```
+For windows
+```
+$ start.bat
+```
+Now visit `http://localhost:4455`.
 
 _refinery_ consists of multiple services that need to be run together. To do so, we've set up a `docker-compose` file, which will automatically pull and connect the respective services for you. The file is part of this repository, so you can just clone it and run `docker-compose up -d` in the repository. After some minutes (now is a good time to grab a coffee ☕), the setup is done and you can access `http://localhost:4455` in your browser.
 
