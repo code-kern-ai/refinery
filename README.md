@@ -200,11 +200,17 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 You can extend your projects by using our [Python SDK](https://github.com/code-kern-ai/refinery-python). With it, you can easily export labeled data of your current project and import new files both programmatically and via CLI (`refinery pull` and `refinery push <file_name>`). It also comes with adapters, e.g. to [Rasa](https://github.com/RasaHQ/rasa).
 
 ## 🏠 Architecture
-The color of the edges have no implicit meaning, and are only used for better readability.
+Our architecture follows some main patterns:
+- Shared service database to efficiently transfer large data loads; to avoid redundant code in the services, we use submodules to share the data model
+- Containerized function execution for labeling functions, active learning and the record ide
+- Machine learning logic is implemented in stand-alone libraries (e.g. [sequence-learn](https://github.com/code-kern-ai/sequence-learn))
 
 </br>
 
 ![Architecture _refinery_](architecture.svg)
+<p align=center><i>Some edges are not displayed for simplicity's sake. 
+</br>
+The color of the edges have no implicit meaning, and are only used for better readability.</i></p>
 
 </br>
 
