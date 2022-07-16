@@ -208,12 +208,12 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 ### Technical questions
 <details>
     <summary><b>Help!! I forgot my password!</b></summary>
-    No worries, you can send a reset link even on your local machine. However, the link isn't sent to your email, but to the mailhog. Access it via `http://localhost:4436`.
+    No worries, you can send a reset link even on your local machine. However, the link isn't sent to your email, but to the mailhog. Access it via <a href="http://localhost:4436">http://localhost:4436</a>.
 </details>
 
 <details>
     <summary><b>I want to install a library for my labeling function</b></summary>
-    For this, we need to change the `requirements.txt` of the [lf-exec-env](https://github.com/code-kern-ai/refinery-lf-exec-env), the containerized execution environment for your labeling functions. Please just [open a ticket](https://discuss.kern.ai/c/enhancements/6) in our forum, and we'll integrate your library as soon as possible.
+    For this, we need to change the requirements.txt of the <a href="https://github.com/code-kern-ai/refinery-lf-exec-env">lf-exec-env</a>, the containerized execution environment for your labeling functions. Please just <a href="https://discuss.kern.ai/c/enhancements/6">open a ticket</a> in our forum, and we'll integrate your library as soon as possible.
 </details>
 
 <details>
@@ -252,12 +252,12 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 ### Service and hosting questions
 <details>
     <summary><b>Are there options for an enterprise on-prem solution?</b></summary>
-    If you're interested in running the multi-user version on your premises, please [reach out to us](https://www.kern.ai/contact). We can help you to set up the deployment and prepare your project(s) e.g. with workshops.
+    If you're interested in running the multi-user version on your premises, please <a href="https://www.kern.ai/contact">reach out to us</a>. We can help you to set up the deployment and prepare your project(s) e.g. with workshops.
 </details>
 
 <details>
     <summary><b>I don't want to label myself. What are my options?</b></summary>
-    Do you want to outsource your labeling, and let your engineers use _refinery_ as a mission control for your training data? [Reach out to us](https://www.kern.ai/contact), so we can discuss how we can help you with your use case.
+    Do you want to outsource your labeling, and let your engineers use _refinery_ as a mission control for your training data? <a href="https://www.kern.ai/contact">Reach out to us</a>, so we can discuss how we can help you with your use case.
 </details>
 
 <details>
