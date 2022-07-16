@@ -210,10 +210,17 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
     <summary><b>Help!! I forgot my password!</b></summary>
     No worries, you can send a reset link even on your local machine. However, the link isn't sent to your email, but to the mailhog. Access it via `http://localhost:4436`.
 </details>
+
 <details>
     <summary><b>I want to install a library for my labeling function</b></summary>
     For this, we need to change the `requirements.txt` of the [lf-exec-env](https://github.com/code-kern-ai/refinery-lf-exec-env), the containerized execution environment for your labeling functions. Please just [open a ticket](https://discuss.kern.ai/c/enhancements/6) in our forum, and we'll integrate your library as soon as possible.
 </details>
+
+<details>
+    <summary><b>Which data formats are supported?</b></summary>
+    We’ve structured our data formats around JSON, so you can upload most file types natively. This includes spreadsheets, text files, CSV data, generic JSON and many more.
+</details>
+
 <details>
     <summary><b>How can I upload data?</b></summary>
     We use <a href="https://github.com/pandas-dev/pandas">pandas</a> internally for matching your data to our JSON-based data model. You can upload the data via our UI, or via our <a href="https://github.com/code-kern-ai/refinery-python">Python SDK</a>.
