@@ -5,7 +5,7 @@ import os
 from setuptools import setup, find_packages
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(this_directory, "README.md")) as file:
+with open(os.path.join(this_directory, "README.md"), encoding="utf8") as file:
     long_description = file.read()
 
 setup(
@@ -18,13 +18,13 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/code-kern-ai/refinery",
     keywords=[
-        "Kern AI", 
-        "refinery", 
-        "machine-learning", 
-        "supervised-learning", 
-        "data-centric-ai", 
-        "data-annotation", 
-        "python"
+        "Kern AI",
+        "refinery",
+        "machine-learning",
+        "supervised-learning",
+        "data-centric-ai",
+        "data-annotation",
+        "python",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
