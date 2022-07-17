@@ -96,7 +96,7 @@ If you like what we're working on, please leave a ⭐!
 - Overview of project metrics like label distributions and confusion matrix
 - Data accessible and extendable via our [Python SDK](https://github.com/code-kern-ai/refinery-python)
 
-### Team workspaces in the [managed version](https://kern.ai/pricing)
+### Team workspaces in the [managed version](https://www.kern.ai/pricing/options)
 - Allow multiple users to label your data
 - Automated calculation of inter-annotator agreements
 
