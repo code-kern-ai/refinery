@@ -107,7 +107,7 @@ If you like what we're working on, please leave a ⭐!
 ```
 pip install kern-refinery
 ```
-Once the library is installed, go to the directory where you want to store the data and run `refinery start`. To stop the server, run `refinery stop`.
+Once the library is installed, go to the directory where you want to store the data and run `refinery start`. This will automatically `git clone` this repository first if you haven't done so yet. To stop the server, run `refinery stop`.
 
 ### From repository
 
