@@ -10,7 +10,7 @@ with open(os.path.join(this_directory, "README.md"), encoding="utf8") as file:
 
 setup(
     name="kern-refinery",
-    version="1.0.1",
+    version="1.0.2",
     author="jhoetter",
     author_email="johannes.hoetter@kern.ai",
     description="The open-source data-centric IDE for NLP.",
@@ -40,7 +40,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "refinery=cli:main",
+            "refinery=refinery.cli:main",
         ],
     },
 )
