@@ -58,6 +58,17 @@ def stop(cur_dir: str):
         msg.fail(f"Could not find repository {REFINERY_FOLDER}.")
 
 
+def restart(cur_dir: str):
+    """Restarts the refinery server.
+
+    Args:
+        cur_dir (str): The current directory.
+    """
+
+    stop(cur_dir)
+    start(cur_dir)
+
+
 def main():
     cli_args = sys.argv[1:]
     if len(cli_args) == 0:
@@ -69,6 +80,8 @@ def main():
         start(cur_dir)
     elif command == "stop":
         stop(cur_dir)
+    elif command == "restart":
+        restart(cur_dir)
     else:
         msg.fail(
             f"Could not understand command `{command}`. Type `refinery help` for some instructions."
