@@ -36,6 +36,7 @@ setup(
     install_requires=[
         "requests",
         "wasabi",
+        "GitPython",
     ],
     entry_points={
         "console_scripts": [
