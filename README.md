@@ -5,7 +5,7 @@
 </p>
 
 <p align=center>
-    <a href="https://pypi.org/project/kern-refinery/1.0.0/"><img src="https://img.shields.io/badge/pypi-1.0.0-yellow.svg" alt="pypi 1.0.0"></a>
+    <a href="https://pypi.org/project/kern-refinery/1.0.1/"><img src="https://img.shields.io/badge/pypi-1.0.1-yellow.svg" alt="pypi 1.0.1"></a>
     <a href="https://github.com/code-kern-ai/refinery/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success" alt="Apache 2.0 License"></a>
     <a href="https://discuss.kern.ai/"><img src="https://img.shields.io/badge/Forum-F5D14E.svg?logo=discourse" alt="Discourse"></a>
     <a href="https://discord.gg/qf4rGCEphW"><img src="https://img.shields.io/badge/Discord-gray.svg?logo=discord" alt="Discord"></a>
@@ -27,7 +27,6 @@ _refinery_ doesn't get rid of manual labeling, but it makes sure that your valua
 _refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks, as well as [qdrant](https://github.com/qdrant/qdrant) for neural search. Our microservices natively support GPU acceleration.
 
 ## Table of contents
-- [Table of contents](#table-of-contents)
 - [🧑‍💻 Why _refinery_? Built for developers with collaboration in mind](#-why-refinery-built-for-developers-with-collaboration-in-mind)
   - [Open-source and developer-oriented](#open-source-and-developer-oriented)
   - [For automation or quality control](#for-automation-or-quality-control)
