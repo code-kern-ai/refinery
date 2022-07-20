@@ -54,6 +54,7 @@ _refinery_ consists of multiple microservices to enable a scalable and optimized
 - [🏠 Architecture](#-architecture)
 - [🏫 Glossary](#-glossary)
 - [👩‍💻👨‍💻 Team and contributors](#-team-and-contributors)
+- [🌟 Star History](#-star-history)
 - [📃 License](#-license)
 
 
@@ -477,6 +478,8 @@ Missing anything in the glossary? [Add the term](https://github.com/code-kern-ai
   </tr>
 </table>
 
+## 🌟 Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=code-kern-ai/refinery&type=Date)](https://star-history.com/#code-kern-ai/refinery&Date)
 
 ## 📃 License
 _refinery_ is licensed under the Apache License, Version 2.0. View a copy of the [License file](LICENSE).
