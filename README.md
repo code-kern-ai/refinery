@@ -54,6 +54,7 @@ _refinery_ consists of multiple microservices to enable a scalable and optimized
 - [🏠 Architecture](#-architecture)
 - [🏫 Glossary](#-glossary)
 - [👩‍💻👨‍💻 Team and contributors](#-team-and-contributors)
+- [⭐️ Star History](#-star-history)
 - [📃 License](#-license)
 
 
