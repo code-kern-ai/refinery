@@ -5,6 +5,8 @@ refinery/docker-compose.yml
 refinery/docker-compose.yml.bak
 refinery/oathkeeper/jwks.json
 refinery/postgres-data
+refinery/minio-data
+refinery/qdrant-data
 
 
 .DS_Store
