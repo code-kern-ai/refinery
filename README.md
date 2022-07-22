@@ -18,7 +18,7 @@
     <a href="https://www.kern.ai/"><img src="https://img.shields.io/badge/Web-white.svg" alt="Website"></a>
 </p>
 
-Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision as well as extensive data management, neural search and monitoring to ensure that the quality of your training data is as good as possible.
+Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision as well as extensive data management, neural search, and monitoring to ensure that the quality of your training data is as good as possible.
 
 _refinery_ doesn't get rid of manual labeling, but it makes sure that your valuable time is spent well.
 
