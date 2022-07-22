@@ -1,7 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set LOCAL_VOLUME=".\postgres-data"
+set LOCAL_VOLUME_POSTGRES=".\postgres-data"
+set LOCAL_VOLUME_MINIO=".\minio-data"
+set LOCAL_VOLUME_QDRANT=".\qdrant-data"
 
 rem grab MINIO_ENDPOINT from ipconfig
 set ip_address_string="IPv4 Address"
@@ -18,7 +20,9 @@ copy "refinery\template\docker-compose.yml" "refinery\docker-compose.yml" >NUL
 
 rem replace values in file
 powershell -Command "(gc refinery\docker-compose.yml) -replace '{MINIO_ENDPOINT}', '%MINIO_ENDPOINT%' | Out-File -encoding ASCII refinery\docker-compose.yml"
-powershell -Command "(gc refinery\docker-compose.yml) -replace '{VOLUME}', '%LOCAL_VOLUME%' | Out-File -encoding ASCII refinery\docker-compose.yml"
+powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_POSTGRES}', '%LOCAL_VOLUME_POSTGRES%' | Out-File -encoding ASCII refinery\docker-compose.yml"
+powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_MINIO}', '%LOCAL_VOLUME_MINIO%' | Out-File -encoding ASCII refinery\docker-compose.yml"
+powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_QDRANT}', '%LOCAL_VOLUME_QDRANT%' | Out-File -encoding ASCII refinery\docker-compose.yml"
 
 docker pull kernai/refinery-lf-exec-env:latest
 docker pull kernai/refinery-ml-exec-env:latest

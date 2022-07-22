@@ -144,7 +144,7 @@ services:
     networks:
       - default
     volumes:
-      - {VOLUME}:/var/lib/postgresql/data
+      - {LOCAL_VOLUME_POSTGRES}:/var/lib/postgresql/data
       
   qdrant:
     image: qdrant/qdrant:v0.7.0
@@ -155,6 +155,8 @@ services:
       - 6333
     networks:
       - default
+    volumes:
+      - {LOCAL_VOLUME_QDRANT}:/qdrant/storage
 
   refinery-gateway-proxy:
     depends_on:
@@ -189,6 +191,8 @@ services:
     command: server /data --address :9000 --console-address ":9001"
     networks:
       - default
+    volumes:
+      - {LOCAL_VOLUME_MINIO}:/data
 
   refinery-weak-supervisor:
     image: kernai/refinery-weak-supervisor:latest
