@@ -32,13 +32,16 @@ def start(cur_dir: str):
             sha_remote = re.split(r"\t+", stdout.decode("ascii"))[0]
 
             if sha_local != sha_remote:
-                user_input = input(
+                msg.info(
                     "A new version of refinery is available. Should this be pulled? (y/n)"
                 )
+                user_input = input("> ")
                 if user_input == "y":
                     repo_origin = repo.remotes.origin
                     repo_origin.pull()
-                    msg.good("refinery has been updated.")
+                    msg.good(f"refinery has been updated to commit {sha_remote}.")
+                else:
+                    msg.info(f"Staying on commit {sha_local}.")
 
         if platform.system() == "Windows":
             subprocess.run(["start.bat"])
