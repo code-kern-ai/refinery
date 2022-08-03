@@ -1,12 +1,15 @@
 import os
-from contextlib import contextmanager
 import sys
 import platform
 import subprocess
+import re
 from git import Repo
 from wasabi import msg
 
+REFINERY_REPO = "https://github.com/code-kern-ai/refinery"
 REFINERY_FOLDER = "refinery"
+REMOTE_REPO = "code-kern-ai/refinery.git"
+MAIN_BRANCH = "main"
 
 
 def start(cur_dir: str):
@@ -16,7 +19,37 @@ def start(cur_dir: str):
         cur_dir (str): The current directory.
     """
 
-    def _start_server():
+    def _start_server(check_for_update: bool):
+
+        if check_for_update:
+            repo = Repo(search_parent_directories=True)
+            repo_origin = repo.remotes.origin
+
+            active_branch = str(repo.active_branch)
+            repo_identifier_remote = repo_origin.url.split(":")[-1]
+
+            if active_branch == MAIN_BRANCH and repo_identifier_remote == REMOTE_REPO:
+                sha_local = repo.head.object.hexsha
+
+                # https://stackoverflow.com/questions/62525382/how-to-get-the-latest-commit-hash-on-remote-using-gitpython
+                repo_url = f"{REFINERY_REPO}.git"
+                process = subprocess.Popen(
+                    ["git", "ls-remote", repo_url], stdout=subprocess.PIPE
+                )
+                stdout, stderr = process.communicate()
+                sha_remote = re.split(r"\t+", stdout.decode("ascii"))[0]
+
+                if sha_local != sha_remote:
+                    msg.info(
+                        "A new version of refinery is available. Should this be pulled? (y/n)"
+                    )
+                    user_input = input("> ")
+                    if user_input == "y":
+                        repo_origin.pull()
+                        msg.good(f"refinery has been updated to commit {sha_remote}.")
+                    else:
+                        msg.info(f"Staying on commit {sha_local}.")
+
         if platform.system() == "Windows":
             subprocess.run(["start.bat"])
         else:
@@ -26,14 +59,14 @@ def start(cur_dir: str):
         msg.info(
             f"Cloning from code-kern-ai/refinery into repository {REFINERY_FOLDER}"
         )
-        Repo.clone_from("https://github.com/code-kern-ai/refinery", REFINERY_FOLDER)
+        Repo.clone_from(REFINERY_REPO, REFINERY_FOLDER)
         with cd(REFINERY_FOLDER):
-            _start_server()
+            _start_server(check_for_update=False)
     elif cur_dir == REFINERY_FOLDER:
-        _start_server()
+        _start_server(check_for_update=True)
     else:
         with cd(REFINERY_FOLDER):
-            _start_server()
+            _start_server(check_for_update=True)
 
 
 def stop(cur_dir: str):
