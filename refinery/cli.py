@@ -8,6 +8,8 @@ from wasabi import msg
 
 REFINERY_REPO = "https://github.com/code-kern-ai/refinery"
 REFINERY_FOLDER = "refinery"
+REMOTE_REPO = "code-kern-ai/refinery.git"
+MAIN_BRANCH = "main"
 
 
 def start(cur_dir: str):
@@ -21,27 +23,32 @@ def start(cur_dir: str):
 
         if check_for_update:
             repo = Repo(search_parent_directories=True)
-            sha_local = repo.head.object.hexsha
+            repo_origin = repo.remotes.origin
 
-            # https://stackoverflow.com/questions/62525382/how-to-get-the-latest-commit-hash-on-remote-using-gitpython
-            repo_url = f"{REFINERY_REPO}.git"
-            process = subprocess.Popen(
-                ["git", "ls-remote", repo_url], stdout=subprocess.PIPE
-            )
-            stdout, stderr = process.communicate()
-            sha_remote = re.split(r"\t+", stdout.decode("ascii"))[0]
+            active_branch = str(repo.active_branch)
+            repo_identifier_remote = repo_origin.url.split(":")[-1]
 
-            if sha_local != sha_remote:
-                msg.info(
-                    "A new version of refinery is available. Should this be pulled? (y/n)"
+            if active_branch == MAIN_BRANCH and repo_identifier_remote == REMOTE_REPO:
+                sha_local = repo.head.object.hexsha
+
+                # https://stackoverflow.com/questions/62525382/how-to-get-the-latest-commit-hash-on-remote-using-gitpython
+                repo_url = f"{REFINERY_REPO}.git"
+                process = subprocess.Popen(
+                    ["git", "ls-remote", repo_url], stdout=subprocess.PIPE
                 )
-                user_input = input("> ")
-                if user_input == "y":
-                    repo_origin = repo.remotes.origin
-                    repo_origin.pull()
-                    msg.good(f"refinery has been updated to commit {sha_remote}.")
-                else:
-                    msg.info(f"Staying on commit {sha_local}.")
+                stdout, stderr = process.communicate()
+                sha_remote = re.split(r"\t+", stdout.decode("ascii"))[0]
+
+                if sha_local != sha_remote:
+                    msg.info(
+                        "A new version of refinery is available. Should this be pulled? (y/n)"
+                    )
+                    user_input = input("> ")
+                    if user_input == "y":
+                        repo_origin.pull()
+                        msg.good(f"refinery has been updated to commit {sha_remote}.")
+                    else:
+                        msg.info(f"Staying on commit {sha_local}.")
 
         if platform.system() == "Windows":
             subprocess.run(["start.bat"])
