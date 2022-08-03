@@ -1,6 +1,9 @@
 #!/bin/bash
 
-LOCAL_VOLUME=./postgres-data
+LOCAL_VOLUME_POSTGRES=./postgres-data
+LOCAL_VOLUME_MINIO=./minio-data
+LOCAL_VOLUME_QDRANT=./qdrant-data
+
 
 unameOut="$(uname -s)"
 case "${unameOut}" in
@@ -17,7 +20,9 @@ cp refinery/template/docker-compose.yml refinery/docker-compose.yml
 
 sed -i.bak -e "s|{MINIO_ENDPOINT}|$MINIO_ENDPOINT|g" refinery/docker-compose.yml
 sed -i.bak -e "s|{CRED_ENDPOINT}|$CRED_ENDPOINT|g" refinery/docker-compose.yml
-sed -i.bak -e "s|{VOLUME}|$LOCAL_VOLUME|g" refinery/docker-compose.yml
+sed -i.bak -e "s|{LOCAL_VOLUME_POSTGRES}|$LOCAL_VOLUME_POSTGRES|g" refinery/docker-compose.yml
+sed -i.bak -e "s|{LOCAL_VOLUME_MINIO}|$LOCAL_VOLUME_MINIO|g" refinery/docker-compose.yml
+sed -i.bak -e "s|{LOCAL_VOLUME_QDRANT}|$LOCAL_VOLUME_QDRANT|g" refinery/docker-compose.yml
 
 rm refinery/*.bak
 
