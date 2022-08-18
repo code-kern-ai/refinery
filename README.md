@@ -5,9 +5,9 @@
 </p>
 
 <p align=center>
-    <a href="https://pypi.org/project/kern-refinery/1.0.0/"><img src="https://img.shields.io/badge/pypi-1.0.0-yellow.svg" alt="pypi 1.0.0"></a>
+    <a href="https://pypi.org/project/kern-refinery/1.0.3/"><img src="https://img.shields.io/badge/pypi-1.0.3-yellow.svg" alt="pypi 1.0.3"></a>
     <a href="https://github.com/code-kern-ai/refinery/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success" alt="Apache 2.0 License"></a>
-    <a href="https://discuss.kern.ai/"><img src="https://img.shields.io/badge/Forum-F5D14E.svg?logo=discourse" alt="Discourse"></a>
+    <a href="https://github.com/code-kern-ai/refinery/discussions"><img src="https://img.shields.io/badge/Discussions-gray.svg?logo=github" alt="GitHub Discussions"></a>
     <a href="https://discord.gg/qf4rGCEphW"><img src="https://img.shields.io/badge/Discord-gray.svg?logo=discord" alt="Discord"></a>
     <a href="https://twitter.com/MeetKern"><img src="https://img.shields.io/badge/Twitter-white.svg?logo=twitter" alt="Twitter"></a>
     <a href="https://www.linkedin.com/company/kern-ai"><img src="https://img.shields.io/badge/LinkedIn-0A66C2.svg?logo=linkedin" alt="LinkedIn"></a>
@@ -18,7 +18,7 @@
     <a href="https://www.kern.ai/"><img src="https://img.shields.io/badge/Web-white.svg" alt="Website"></a>
 </p>
 
-Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision as well as extensive data management, neural search and monitoring to ensure that the quality of your training data is as good as possible.
+Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision as well as extensive data management, neural search, and monitoring to ensure that the quality of your training data is as good as possible.
 
 _refinery_ doesn't get rid of manual labeling, but it makes sure that your valuable time is spent well.
 
@@ -27,7 +27,6 @@ _refinery_ doesn't get rid of manual labeling, but it makes sure that your valua
 _refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks, as well as [qdrant](https://github.com/qdrant/qdrant) for neural search. Our microservices natively support GPU acceleration.
 
 ## Table of contents
-- [Table of contents](#table-of-contents)
 - [🧑‍💻 Why _refinery_? Built for developers with collaboration in mind](#-why-refinery-built-for-developers-with-collaboration-in-mind)
   - [Open-source and developer-oriented](#open-source-and-developer-oriented)
   - [For automation or quality control](#for-automation-or-quality-control)
@@ -55,6 +54,7 @@ _refinery_ consists of multiple microservices to enable a scalable and optimized
 - [🏠 Architecture](#-architecture)
 - [🏫 Glossary](#-glossary)
 - [👩‍💻👨‍💻 Team and contributors](#-team-and-contributors)
+- [🌟 Star History](#-star-history)
 - [📃 License](#-license)
 
 
@@ -72,7 +72,7 @@ The labeling workflow in _refinery_ is designed to integrate heuristics like lab
 While doing so, we aim to improve the collaboration between engineers and subject matter experts (SMEs). In the past, we've seen how our application was being used in meetings to discuss label patterns in form of labeling functions and distant supervisors. We believe that data-centric AI is the best way to leverage collaboration.
 
 ### Integrations
-Lastly, _refinery_ supports [SDK actions](https://github.com/code-kern-ai/refinery-python) like pulling and pushing data. Data-centric AI redefines labeling to be more than a one-time job by giving it an iterative workflow, so we aim to give you more power every day by providing end-to-end capabilities, growing the large-scale availability of high-quality training data. Use our SDK to program integrations with your existing landscapes. By the way, tell us which integrations you'd like to have [here](https://discuss.kern.ai/c/enhancements/6).
+Lastly, _refinery_ supports [SDK actions](https://github.com/code-kern-ai/refinery-python) like pulling and pushing data. Data-centric AI redefines labeling to be more than a one-time job by giving it an iterative workflow, so we aim to give you more power every day by providing end-to-end capabilities, growing the large-scale availability of high-quality training data. Use our SDK to program integrations with your existing landscapes.
 
 
 ### Your benefits
@@ -97,7 +97,7 @@ If you like what we're working on, please leave a ⭐!
 - Overview of project metrics like label distributions and confusion matrix
 - Data accessible and extendable via our [Python SDK](https://github.com/code-kern-ai/refinery-python)
 
-### Team workspaces in the [managed version](https://kern.ai/pricing)
+### Team workspaces in the [managed version](https://www.kern.ai/pricing/options)
 - Allow multiple users to label your data
 - Automated calculation of inter-annotator agreements
 
@@ -107,7 +107,7 @@ If you like what we're working on, please leave a ⭐!
 ```
 pip install kern-refinery
 ```
-Once the library is installed, go to the directory where you want to store the data and run `refinery start`. To stop the server, run `refinery stop`.
+Once the library is installed, go to the directory where you want to store the data and run `refinery start`. This will automatically `git clone` this repository first if you haven't done so yet. To stop the server, run `refinery stop`.
 
 ### From repository
 
@@ -146,14 +146,10 @@ If you need help writing your first labeling functions, look into our [template 
 You can find our changelog [here](https://docs.kern.ai/changelog).
 
 ## 😵‍💫 Need help?
-No worries, we've got you:
-- If you run into issues during installation or have other technical questions, please [open a ticket](https://discuss.kern.ai/c/technical-help/9) in the "technical help" category of our forum.
-- If you're not sure how to apply heuristics or have general questions about the workflow of _refinery_, please [open a ticket](https://discuss.kern.ai/c/questions/5) in our "_refinery_ help" category of our forum.
+No worries, we've got you. If you have questions, please [open a ticket](https://github.com/code-kern-ai/refinery/discussions/categories/q-a) in the "q&a" category of our forum.
 
 ## 🪢 Community and contact
-Feel free to join our community spaces, where we'll discuss about recent findings in data-centric AI:
-- [Discord](https://discord.gg/qf4rGCEphW)
-- [Our forum](https://discuss.kern.ai/)
+Feel free to join our [Discord](https://discord.gg/qf4rGCEphW), where we'll discuss about recent findings in data-centric AI:
 
 We send out a (mostly) weekly newsletter about recent findings in data-centric AI, product highlights in development and more. You can subscribe to the newsletter [here](https://www.kern.ai/resources/newsletter). 
 
@@ -162,7 +158,7 @@ Also, you can follow us on [Twitter](https://twitter.com/MeetKern) and [LinkedIn
 To reach out to us, please use our [contact formula](https://www.kern.ai/contact).
 
 ## 🙌 Contributing
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. You can do so by providing feedback about [desired features](https://discuss.kern.ai/c/enhancements/6) and [bugs](https://github.com/code-kern-ai/refinery/issues) you might detect.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. You can do so by providing feedback about [desired features and bugs](https://github.com/code-kern-ai/refinery/issues) you might detect.
 
 If you actively want to participate in extending the code base, [reach out to us]([mailto:info@kern.ai](https://www.kern.ai/contact)). We'll explain you how the architecture is set up, so you can customize the application as you desire.
 
@@ -213,7 +209,7 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 
 <details>
     <summary><b>I want to install a library for my labeling function</b></summary>
-    For this, we need to change the requirements.txt of the <a href="https://github.com/code-kern-ai/refinery-lf-exec-env">lf-exec-env</a>, the containerized execution environment for your labeling functions. Please just <a href="https://discuss.kern.ai/c/enhancements/6">open a ticket</a> in our forum, and we'll integrate your library as soon as possible.
+    For this, we need to change the requirements.txt of the <a href="https://github.com/code-kern-ai/refinery-lf-exec-env">lf-exec-env</a>, the containerized execution environment for your labeling functions. Please just <a href="https://github.com/code-kern-ai/refinery/issues">open an issue</a>, and we'll integrate your library as soon as possible.
 </details>
 
 <details>
@@ -478,6 +474,8 @@ Missing anything in the glossary? [Add the term](https://github.com/code-kern-ai
   </tr>
 </table>
 
+## 🌟 Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=code-kern-ai/refinery&type=Date)](https://star-history.com/#code-kern-ai/refinery&Date)
 
 ## 📃 License
 _refinery_ is licensed under the Apache License, Version 2.0. View a copy of the [License file](LICENSE).

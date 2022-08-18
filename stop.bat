@@ -1,2 +1,4 @@
-docker-compose -f refinery/docker-compose.yml down --remove-orphans 
+@echo off
+
+docker-compose -f refinery\docker-compose.yml down --remove-orphans 
 pause
