@@ -91,6 +91,35 @@ def stop(cur_dir: str):
         msg.fail(f"Could not find repository {REFINERY_FOLDER}.")
 
 
+def update(cur_dir: str):
+    """Updates the refinery repository.
+
+    Args:
+        cur_dir (str): The current directory.
+    """
+
+    def _update():
+        if platform.system() == "Windows":
+            subprocess.run(["update.bat"])
+        else:
+            subprocess.run(["./update"])
+
+    if cur_dir == REFINERY_FOLDER:
+        _update()
+    elif os.path.exists(REFINERY_FOLDER):
+        with cd(REFINERY_FOLDER):
+            _update()
+    else:
+        msg.fail(f"Could not find repository {REFINERY_FOLDER}.")
+
+
+def help():
+    msg.info("Available commands:")
+    msg.info(" - `refinery start` to start the server")
+    msg.info(" - `refinery stop` to end it")
+    msg.info(" - `refinery update` to update the repository")
+
+
 def main():
     cli_args = sys.argv[1:]
     if len(cli_args) == 0:
@@ -102,6 +131,10 @@ def main():
         start(cur_dir)
     elif command == "stop":
         stop(cur_dir)
+    elif command == "update":
+        update(cur_dir)
+    elif command == "help":
+        help()
     else:
         msg.fail(
             f"Could not understand command `{command}`. Type `refinery help` for some instructions."
