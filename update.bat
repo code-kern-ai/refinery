@@ -1,5 +1,14 @@
 @echo off
 
+echo Checking for updates...
+for /f "delims=" %%a in ('powershell -Command "Invoke-WebRequest -URI http://localhost:7062/has_updates?as_html_response=true"') do set HAS_UPDATES=%%a
+if "%HAS_UPDATES%"=="True" (
+    echo Updates found, updating...
+) else (
+    echo No updates found, exiting...
+    exit
+)
+
 echo Stopping running containers...
 call stop.bat
 
@@ -22,7 +31,7 @@ echo Starting refinery containers...
 call start.bat
 
 echo Triggering refinery-updater...
-powershell -Command "Invoke-WebRequest -URI http://localhost:7062/update_to_latest"
+powershell -Command "Invoke-WebRequest -URI http://localhost:7062/update_to_newest"
 
 echo Refinery has been updated to the latest version and is running on:
 echo UI:           http://localhost:4455/app/

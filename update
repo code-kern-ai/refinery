@@ -1,5 +1,14 @@
 #!/bin/bash
 
+echo "Checking for updates..."
+HAS_UPDATES=$(curl -X GET 'http://localhost:7062/has_updates?as_html_response=true')
+if [ "$HAS_UPDATES" = "True" ]; then
+    echo "Updates found, updating..."
+else
+    echo "No updates found"
+    exit 0
+fi
+
 echo "Stopping running containers..."
 source stop
 
@@ -22,7 +31,7 @@ echo "Starting refinery containers..."
 source start
 
 echo "Triggering refinery-updater..."
-curl -X POST http://localhost:7062/update_to_latest
+curl -X POST http://localhost:7062/update_to_newest
 
 echo "Refinery has been updated to the latest version and is running on:"
 echo "UI:           http://localhost:4455/app/"
