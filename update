@@ -4,9 +4,19 @@ echo "Checking for updates..."
 HAS_UPDATES=$(curl -X GET 'http://localhost:7062/has_updates?as_html_response=true')
 if [ "$HAS_UPDATES" = "True" ]; then
     echo "Updates found, updating..."
-else
-    echo "No updates found"
+elif [ "$HAS_UPDATES" = "False" ]; then
+    echo "No updates available. You are up to date."
     exit 0
+else 
+    echo "Refinery doesn't seem to run. It cannot be checked if any updates are available."
+    echo "Do you want to try to update anyway? (y/n)"
+    read -r UPDATE_ANYWAY
+    if [ "$UPDATE_ANYWAY" == "y" ]; then
+        echo "Updating..."
+    else
+        echo "Exiting..."
+        exit 0
+    fi
 fi
 
 echo "Stopping running containers..."

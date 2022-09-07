@@ -4,9 +4,19 @@ echo Checking for updates...
 for /f "delims=" %%a in ('powershell -Command "Invoke-WebRequest -URI http://localhost:7062/has_updates?as_html_response=true"') do set HAS_UPDATES=%%a
 if "%HAS_UPDATES%"=="True" (
     echo Updates found, updating...
-) else (
-    echo No updates found, exiting...
+) elif "%HAS_UPDATES%"=="False" (
+    echo No updates available. You are up to date.
     exit
+) else (
+    echo Refinery doesn't seem to run. It cannot be checked if any updates are available.
+    echo Do you want to try to update anyway? (y/n)
+    set /p UPDATE_ANYWAY=
+    if "%UPDATE_ANYWAY%"=="y" (
+        echo Updating...
+    ) else (
+        echo Exiting...
+        exit
+    )
 )
 
 echo Stopping running containers...
