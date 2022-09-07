@@ -1,7 +1,7 @@
 @echo off
 
 echo Checking for updates...
-for /f "delims=" %%a in ('powershell -Command "Invoke-WebRequest -URI http://localhost:7062/has_updates?as_html_response=true"') do set HAS_UPDATES=%%a
+for /f "tokens=*" %%a in ('powershell -Command "Invoke-WebRequest -URI http://localhost:7062/has_updates?as_html_response=true"') do (set HAS_UPDATES=%%a)
 if "%HAS_UPDATES%"=="True" (
     echo Updates found, updating...
 ) elif "%HAS_UPDATES%"=="False" (
@@ -27,6 +27,7 @@ git checkout release
 git pull
 
 echo Updating kern-refinery python package...
+:: TODO: check if kern-refinery is installed, update if so
 pip install -U kern-refinery
 
 echo Pulling newest images of exec envs...
@@ -37,8 +38,10 @@ docker pull kernai/refinery-record-ide-env:latest
 echo Pulling newest images of refinery...
 docker-compose -f refinery\docker-compose.yml pull
 
+
 echo Starting refinery containers...
 call start.bat
+::TODO add sleep
 
 echo Triggering refinery-updater...
 powershell -Command "Invoke-WebRequest -URI http://localhost:7062/update_to_newest"
