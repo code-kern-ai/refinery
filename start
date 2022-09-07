@@ -26,10 +26,16 @@ sed -i.bak -e "s|{LOCAL_VOLUME_QDRANT}|$LOCAL_VOLUME_QDRANT|g" refinery/docker-c
 
 rm refinery/*.bak
 
-#pull newest images
-docker pull kernai/refinery-lf-exec-env:latest
-docker pull kernai/refinery-ml-exec-env:latest
-docker pull kernai/refinery-record-ide-env:latest
+#pull exec envs if not existent
+if [[ "$(docker images -q kernai/refinery-lf-exec-env:latest 2> /dev/null)" == "" ]]; then
+    docker pull kernai/refinery-lf-exec-env:latest
+fi
+if [[ "$(docker images -q kernai/refinery-ml-exec-env:latest 2> /dev/null)" == "" ]]; then
+    docker pull kernai/refinery-ml-exec-env:latest
+fi
+if [[ "$(docker images -q kernai/refinery-record-ide-env:latest 2> /dev/null)" == "" ]]; then
+    docker pull kernai/refinery-record-ide-env:latest
+fi
 
 if [ ! -f "./refinery/oathkeeper/jwks.json" ]; then
     docker run --rm docker.io/oryd/oathkeeper:v0.38 credentials generate --alg RS256 > refinery/oathkeeper/jwks.json

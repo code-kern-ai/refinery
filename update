@@ -2,9 +2,9 @@
 
 echo "Checking for updates..."
 HAS_UPDATES=$(curl -X GET 'http://localhost:7062/has_updates?as_html_response=true')
-if [ "$HAS_UPDATES" = "True" ]; then
+if [ "$HAS_UPDATES" == "True" ]; then
     echo "Updates found, updating..."
-elif [ "$HAS_UPDATES" = "False" ]; then
+elif [ "$HAS_UPDATES" == "False" ]; then
     echo "No updates available. You are up to date."
     exit 0
 else 
@@ -26,8 +26,14 @@ echo "Pulling repository from github..."
 git checkout release
 git pull
 
-echo "Updating kern-refinery python package..."
-pip install -U kern-refinery
+echo "Checking if kern-refinery is installed..."
+python3 -c "kern-refinery" > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "kern-refinery is installed. Updating..."
+    pip3 install --upgrade kern-refinery
+else
+    echo "kern-refinery is not installed. Skipping update..."
+fi
 
 echo "Pulling newest images of exec envs..."
 docker pull kernai/refinery-lf-exec-env:latest
@@ -39,6 +45,7 @@ docker-compose -f refinery/docker-compose.yml pull
 
 echo "Starting refinery containers..."
 source start
+sleep 2
 
 echo "Triggering refinery-updater..."
 curl -X POST http://localhost:7062/update_to_newest
