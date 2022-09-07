@@ -116,7 +116,7 @@ Once the library is installed, go to the directory where you want to store the d
 
 **TL;DR:**
 ```
-$ git clone -b release https://github.com/code-kern-ai/refinery.git
+$ git clone https://github.com/code-kern-ai/refinery.git
 $ cd refinery
 ```
 If you're on Mac/Linux:
