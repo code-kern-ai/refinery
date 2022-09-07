@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 set LOCAL_VOLUME_POSTGRES=".\postgres-data"
 set LOCAL_VOLUME_MINIO=".\minio-data"
-set LOCAL_VOLUME_QDRANT=".\qdrant-data"
+set LOCAL_VOLUME_QDRANT=".\qdrant-storage"
 
 rem grab MINIO_ENDPOINT from ipconfig
 set ip_address_string="IPv4"
@@ -42,9 +42,9 @@ powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_PO
 powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_MINIO}', '%LOCAL_VOLUME_MINIO%' | Out-File -encoding ASCII refinery\docker-compose.yml"
 powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_QDRANT}', '%LOCAL_VOLUME_QDRANT%' | Out-File -encoding ASCII refinery\docker-compose.yml"
 
-docker pull kernai/refinery-lf-exec-env:latest
-docker pull kernai/refinery-ml-exec-env:latest
-docker pull kernai/refinery-record-ide-env:latest
+    docker pull kernai/refinery-lf-exec-env:latest
+    docker pull kernai/refinery-ml-exec-env:latest
+    docker pull kernai/refinery-record-ide-env:latest
 
 IF NOT EXIST .\refinery\oathkeeper\jwks.json (
     docker run --rm docker.io/oryd/oathkeeper:v0.38 credentials generate --alg RS256 > refinery\oathkeeper\jwks.json
