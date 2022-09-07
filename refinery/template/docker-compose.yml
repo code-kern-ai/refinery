@@ -121,6 +121,7 @@ services:
       - NEURAL_SEARCH=http://refinery-neural-search:80
       - KRATOS_ADMIN_URL=http://kratos:4434
       - WS_NOTIFY_ENDPOINT=http://refinery-websocket:8080
+      - UPDATER=http://refinery-updater:80
       - S3_URI=object-storage:9000 # remove as soon as multipart upload is merged
       - S3_ENDPOINT={CRED_ENDPOINT}
       - S3_ENDPOINT_LOCAL=object-storage:9000
