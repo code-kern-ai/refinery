@@ -27,7 +27,7 @@ git checkout release
 git pull
 
 echo "Checking if kern-refinery is installed..."
-python3 -c "kern-refinery" > /dev/null 2>&1
+pip3 freeze | grep -q "kern-refinery"
 if [ $? -eq 0 ]; then
     echo "kern-refinery is installed. Updating..."
     pip3 install --upgrade kern-refinery
