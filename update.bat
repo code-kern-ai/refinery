@@ -23,7 +23,7 @@ if "%HAS_UPDATES%" == "True" (
     pause
     goto :eof
 ) else (
-    echo Refinery doesn't seem to run or in a version < 1.2.0. It cannot be checked if any updates are available.
+    echo "Refinery doesn't seem to run or in a version < 1.2.0. It cannot be checked if any updates are available."
     set /p UPDATE_ANYWAY="Do you want to try to update anyway? (y/n) "
     if "!UPDATE_ANYWAY!" == "y" (
     echo Updating...
