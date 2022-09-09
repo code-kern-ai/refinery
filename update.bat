@@ -11,8 +11,8 @@ if exist "%~dp0\refinery\docker-compose.yml" (
 )
 
 echo Checking for updates...
-for /f "tokens=1" %%a in (
-    'powershell -Command ("Invoke-WebRequest -URI http://localhost:7062/has_updates?as_html_response=true).Content"'
+for /f %%a in (
+    'curl "http://localhost:7062/has_updates?as_html_response=true"'
 ) do (
     set HAS_UPDATES=%%a
 )
@@ -85,7 +85,7 @@ echo Starting refinery containers...
 call start.bat update
 
 echo Triggering refinery-updater...
-powershell -Command "Invoke-WebRequest -URI http://localhost:7062/update_to_newest -Method POST"
+curl -X "POST" "http://localhost:7062/update_to_newest"
 
 echo Refinery has been updated to the latest version and is running on:
 echo UI:           http://localhost:4455/app/
