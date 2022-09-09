@@ -12,7 +12,7 @@ if exist "%~dp0\refinery\docker-compose.yml" (
 
 echo Checking for updates...
 for /f %%a in (
-    'curl -X "GET" "http://localhost:7062/has_updates?as_html_response=true"'
+    'curl -X "GET" -s "http://localhost:7062/has_updates?as_html_response=true"'
 ) do (
     set HAS_UPDATES=%%a
 )
