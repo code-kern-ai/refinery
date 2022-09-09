@@ -98,7 +98,8 @@ services:
   refinery-gateway:
     depends_on:
       - refinery-config
-    image: kernai/refinery-gateway:latest
+    #image: kernai/refinery-gateway:latest
+    image: registry.dev.onetask.ai/code-kern-ai/refinery-gateway:dev
     restart: always
     ports:
       - 7051:80
@@ -281,7 +282,8 @@ services:
       - default
 
   refinery-updater:
-    image: kernai/refinery-updater:latest
+    # image: kernai/refinery-updater:latest
+    image: registry.dev.onetask.ai/code-kern-ai/refinery-updater:dev
     restart: unless-stopped
     ports:
       - 7062:80
