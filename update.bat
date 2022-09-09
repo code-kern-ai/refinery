@@ -12,7 +12,7 @@ if exist "%~dp0\refinery\docker-compose.yml" (
 
 echo Checking for updates...
 for /f %%a in (
-    'curl "http://localhost:7062/has_updates?as_html_response=true"'
+    'curl -X "GET" "http://localhost:7062/has_updates?as_html_response=true"'
 ) do (
     set HAS_UPDATES=%%a
 )
@@ -87,7 +87,6 @@ call start.bat update
 echo Triggering refinery-updater to update database...
 curl -X "POST" "http://localhost:7062/update_to_newest" > nul
 
-echo
 echo Refinery has been updated to the latest version!
 
 pause
