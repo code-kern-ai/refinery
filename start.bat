@@ -62,11 +62,11 @@ IF NOT EXIST .\refinery\oathkeeper\jwks.json (
 
 docker-compose -f refinery\docker-compose.yml up -d
 
-if "%1" neq "update" (
-   echo UI:           http://localhost:4455/app/
-   echo Minio:        %MINIO_ENDPOINT%
-   echo MailHog:      http://localhost:4436/
-)
+
+echo UI:           http://localhost:4455/app/
+echo Minio:        %MINIO_ENDPOINT%
+echo MailHog:      http://localhost:4436/
+
 
 if "%1" neq "update" pause
 goto :eof

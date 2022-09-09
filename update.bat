@@ -7,7 +7,7 @@ if exist "%~dp0\refinery\docker-compose.yml" (
 ) else (
     echo Refinery is not installed. Run start.bat to install the latest version.
     pause
-    exit
+    goto :eof
 )
 
 echo Checking for updates...
@@ -21,16 +21,16 @@ if "%HAS_UPDATES%" == "True" (
 ) else if "%HAS_UPDATES%" == "False" (
     echo No updates available. You are up to date.
     pause
-    exit
+    goto :eof
 ) else (
-    echo "Refinery doesn't seem to run or in a version < 1.2.0. It cannot be checked if any updates are available."
+    echo Refinery doesn't seem to run or in a version < 1.2.0. It cannot be checked if any updates are available.
     set /p UPDATE_ANYWAY="Do you want to try to update anyway? (y/n) "
     if "!UPDATE_ANYWAY!" == "y" (
     echo Updating...
 ) else (
     echo Exiting...
     pause
-    exit
+    goto :eof
 )
 )
 
@@ -58,7 +58,7 @@ if !ERRORLEVEL! == 0 (
             echo Stopping the update...
             echo Exiting...
             pause
-            exit
+            goto :eof
         )
     )
 )
@@ -84,12 +84,10 @@ docker-compose -f refinery\docker-compose.yml pull
 echo Starting refinery containers...
 call start.bat update
 
-echo Triggering refinery-updater...
-curl -X "POST" "http://localhost:7062/update_to_newest"
+echo Triggering refinery-updater to update database...
+curl -X "POST" "http://localhost:7062/update_to_newest" > nul
 
-echo Refinery has been updated to the latest version and is running on:
-echo UI:           http://localhost:4455/app/
-echo Minio:        %MINIO_ENDPOINT%
-echo MailHog:      http://localhost:4436/
+echo
+echo Refinery has been updated to the latest version!
 
 pause
