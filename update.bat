@@ -23,7 +23,7 @@ if "%HAS_UPDATES%" == "True" (
     pause
     goto :eof
 ) else (
-    echo Refinery doesn't seem to run or in a version < 1.2.0. It cannot be checked whether any updates are available.
+    echo Refinery doesn't seem to run or in a version ^< 1.2.0. It cannot be checked if any updates are available.
     set /p UPDATE_ANYWAY="Do you want to try to update anyway? (y/n) "
     if "!UPDATE_ANYWAY!" == "y" (
     echo Updating...
@@ -83,6 +83,7 @@ docker-compose -f refinery\docker-compose.yml pull
 
 echo Starting refinery containers...
 call start.bat update
+timeout /t 10 /nobreak > nul
 
 echo Triggering refinery-updater to update database...
 curl -X "POST" "http://localhost:7062/update_to_newest" > nul
