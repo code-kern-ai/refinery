@@ -75,6 +75,7 @@ docker-compose -f refinery/docker-compose.yml pull
 
 echo "Starting refinery containers..."
 source start
+sleep 10
 
 echo "Triggering refinery-updater to update database..."
 curl -X POST http://localhost:7062/update_to_newest > /dev/null 2>&1
