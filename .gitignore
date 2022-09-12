@@ -7,6 +7,7 @@ refinery/oathkeeper/jwks.json
 refinery/postgres-data
 refinery/minio-data
 refinery/qdrant-data
+refinery/qdrant-storage
 
 
 .DS_Store
