@@ -73,6 +73,7 @@ if !ERRORLEVEL! == 0 (
 )
 
 echo Pulling newest images of exec envs...
+docker pull kernai/refinery-ac-exec-env:latest
 docker pull kernai/refinery-lf-exec-env:latest
 docker pull kernai/refinery-ml-exec-env:latest
 docker pull kernai/refinery-record-ide-env:latest
