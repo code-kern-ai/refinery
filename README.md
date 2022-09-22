@@ -295,6 +295,7 @@ The color of the edges have no implicit meaning, and are only used for better re
 | [authorizer](https://github.com/code-kern-ai/refinery-authorizer)  	| Evaluates whether a user has access to certain resources.  	|
 | [websocket](https://github.com/code-kern-ai/refinery-websocket)  	| Websocket module for refinery. Enables asynchronous notifications inside the application.  	|
 | [lf-exec-env](https://github.com/code-kern-ai/refinery-lf-exec-env)  	| Execution environment for labeling functions. Containerized function as a service to execute user-defined Python scripts.  	|
+| [ac-exec-env](https://github.com/code-kern-ai/refinery-ac-exec-env)  	| Execution environment for attribute calulaction. Containerized function as a service to generate new attributes using Python scripts.  	|
 | [updater](https://github.com/code-kern-ai/refinery-updater)  	| Updater for refinery. Manages migration logic to new versions if required.  	|
 | [neural-search](https://github.com/code-kern-ai/refinery-neural-search)  	| Neural search for refinery. Manages similarity search powered by Qdrant and outlier detection, both based on vector representations of the project records.  	|
 | [zero-shot](https://github.com/code-kern-ai/refinery-zero-shot)  	| Zero-shot module for refinery. Enables the integration of 🤗 Hugging Face zero-shot classifiers as an off-the-shelf no-code heuristic.  	|

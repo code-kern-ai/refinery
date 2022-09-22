@@ -42,6 +42,10 @@ powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_PO
 powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_MINIO}', '%LOCAL_VOLUME_MINIO%' | Out-File -encoding ASCII refinery\docker-compose.yml"
 powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_QDRANT}', '%LOCAL_VOLUME_QDRANT%' | Out-File -encoding ASCII refinery\docker-compose.yml"
 
+for /f "tokens=1" %%i in ('docker images kernai/refinery-ac-exec-env:latest') do (set image=%%i)
+if "%image%" neq "kernai/refinery-ac-exec-env" (
+   docker pull kernai/refinery-ac-exec-env:latest
+)
 for /f "tokens=1" %%i in ('docker images kernai/refinery-lf-exec-env:latest') do (set image=%%i)
 if "%image%" neq "kernai/refinery-lf-exec-env" (
    docker pull kernai/refinery-lf-exec-env:latest
