@@ -1,0 +1,29 @@
+echo -ne 'migrating db...\n'
+if [ -n "$(docker ps -q -f name=refinery-graphql-postgres-1)" ]
+then
+    docker exec refinery-graphql-postgres-1 pg_isready > /dev/null 2>&1
+    while [ $? -ne 0 ]
+    do
+        docker exec refinery-graphql-postgres-1 pg_isready > /dev/null 2>&1
+    done
+    docker run --rm \
+    --name refinery-gateway-migration \
+    -e POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432 \
+    --network refinery_default \
+    --entrypoint /usr/local/bin/alembic \
+    kernai/refinery-gateway upgrade head
+elif [ -n "$(docker ps -q -f name=refinery_graphql-postgres_1)" ]
+then
+    docker exec refinery_graphql-postgres_1 pg_isready > /dev/null 2>&1
+    while [ $? -ne 0 ]
+    do
+        docker exec refinery_graphql-postgres_1 pg_isready > /dev/null 2>&1
+    done
+    docker run --rm \
+    --name refinery-gateway-migration \
+    -e POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432 \
+    --network refinery_default \
+    --entrypoint /usr/local/bin/alembic \
+    kernai/refinery-gateway upgrade head
+fi
+echo -ne 'migration done\n'

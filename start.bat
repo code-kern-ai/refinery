@@ -66,6 +66,7 @@ IF NOT EXIST .\refinery\oathkeeper\jwks.json (
 
 docker-compose -f refinery\docker-compose.yml up -d
 
+call db_migration.bat
 
 echo UI:           http://localhost:4455/app/
 echo Minio:        %MINIO_ENDPOINT%
