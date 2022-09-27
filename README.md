@@ -5,7 +5,7 @@
 </p>
 
 <p align=center>
-    <a href="https://pypi.org/project/kern-refinery/1.2.0/"><img src="https://img.shields.io/badge/pypi-1.2.0-yellow.svg" alt="pypi 1.2.0"></a>
+    <a href="https://pypi.org/project/kern-refinery/1.3.0/"><img src="https://img.shields.io/badge/pypi-1.3.0-yellow.svg" alt="pypi 1.3.0"></a>
     <a href="https://github.com/code-kern-ai/refinery/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-success" alt="Apache 2.0 License"></a>
     <a href="https://github.com/code-kern-ai/refinery/discussions"><img src="https://img.shields.io/badge/Discussions-gray.svg?logo=github" alt="GitHub Discussions"></a>
     <a href="https://discord.gg/qf4rGCEphW"><img src="https://img.shields.io/badge/Discord-gray.svg?logo=discord" alt="Discord"></a>
@@ -295,6 +295,7 @@ The color of the edges have no implicit meaning, and are only used for better re
 | [authorizer](https://github.com/code-kern-ai/refinery-authorizer)  	| Evaluates whether a user has access to certain resources.  	|
 | [websocket](https://github.com/code-kern-ai/refinery-websocket)  	| Websocket module for refinery. Enables asynchronous notifications inside the application.  	|
 | [lf-exec-env](https://github.com/code-kern-ai/refinery-lf-exec-env)  	| Execution environment for labeling functions. Containerized function as a service to execute user-defined Python scripts.  	|
+| [ac-exec-env](https://github.com/code-kern-ai/refinery-ac-exec-env)  	| Execution environment for attribute calulaction. Containerized function as a service to generate new attributes using Python scripts.  	|
 | [updater](https://github.com/code-kern-ai/refinery-updater)  	| Updater for refinery. Manages migration logic to new versions if required.  	|
 | [neural-search](https://github.com/code-kern-ai/refinery-neural-search)  	| Neural search for refinery. Manages similarity search powered by Qdrant and outlier detection, both based on vector representations of the project records.  	|
 | [zero-shot](https://github.com/code-kern-ai/refinery-zero-shot)  	| Zero-shot module for refinery. Enables the integration of 🤗 Hugging Face zero-shot classifiers as an off-the-shelf no-code heuristic.  	|

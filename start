@@ -27,6 +27,9 @@ sed -i.bak -e "s|{LOCAL_VOLUME_QDRANT}|$LOCAL_VOLUME_QDRANT|g" refinery/docker-c
 rm refinery/*.bak
 
 #pull exec envs if not existent
+if [[ "$(docker images -q kernai/refinery-ac-exec-env:latest 2> /dev/null)" == "" ]]; then
+    docker pull kernai/refinery-ac-exec-env:latest
+fi
 if [[ "$(docker images -q kernai/refinery-lf-exec-env:latest 2> /dev/null)" == "" ]]; then
     docker pull kernai/refinery-lf-exec-env:latest
 fi

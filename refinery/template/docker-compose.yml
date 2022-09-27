@@ -108,6 +108,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:Z
       - graphql-sqlite:/sqlite
     environment:
+      - AC_EXEC_ENV_IMAGE=kernai/refinery-ac-exec-env:latest
       - LF_EXEC_ENV_IMAGE=kernai/refinery-lf-exec-env:latest
       - ML_EXEC_ENV_IMAGE=kernai/refinery-ml-exec-env:latest
       - RECORD_IDE_IMAGE=kernai/refinery-record-ide-env:latest
