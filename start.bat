@@ -1,6 +1,11 @@
 @echo off
 setlocal enabledelayedexpansion
 
+echo "We are currently experiencing some issues with refinery."
+echo "We are working on it. Sorry, for the inconvenience."
+echo "If you pull the repository and this message is still there, please try to pull it at a later time."
+exit 1
+
 set LOCAL_VOLUME_POSTGRES=".\postgres-data"
 set LOCAL_VOLUME_MINIO=".\minio-data"
 set LOCAL_VOLUME_QDRANT=".\qdrant-storage"

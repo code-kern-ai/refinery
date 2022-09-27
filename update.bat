@@ -1,6 +1,11 @@
 @echo off
 setlocal enabledelayedexpansion
 
+echo "We are currently experiencing some issues with refinery."
+echo "We are working on it. Sorry, for the inconvenience."
+echo "If you pull the repository and this message is still there, please try to pull it at a later time."
+exit 1
+
 echo Checking refinery installation...
 if exist "%~dp0\refinery\docker-compose.yml" (
     echo Refinery is installed.
