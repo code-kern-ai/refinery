@@ -1,0 +1,41 @@
+#!/bin/bash
+
+CONTAINER=$(docker ps -f name=graphql-postgres --format {{.Names}})
+if [ -z $CONTAINER ]; then
+    echo "Could not find a running container for the database."
+    exit 1
+fi
+
+
+TABLE_EXISTS=$(docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "SELECT COUNT(*) FROM  pg_tables WHERE schemaname = 'public' AND tablename  = 'alembic_version';" -qtAX)
+if [ $TABLE_EXISTS -eq 0 ]
+then
+    echo "Table alembic_version does not exist. Creating..."
+    docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "CREATE TABLE alembic_version (version_num VARCHAR(32) NOT NULL, PRIMARY KEY (version_num))" -qtAX
+    echo "Table created."
+else
+    return 0
+fi
+
+
+echo "Checking revision..."
+if [ $(docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "SELECT COUNT(*) FROM information_schema.columns WHERE table_name='attribute' and column_name='source_code';" -qtAX) -ne 0 ]
+then
+    echo "Set revision to 87f463aa5112"
+    docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "INSERT INTO alembic_version VALUES('87f463aa5112')" -qtAX
+elif [ $(docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "SELECT COUNT(*) FROM  pg_tables WHERE schemaname = 'public' AND tablename  = 'labeling_access_link';" -qtAX) -ne 0 ]
+then
+    echo "Set revision to 9618924f9679"
+    docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "INSERT INTO alembic_version VALUES('9618924f9679')" -qtAX
+elif [ $(docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "SELECT COUNT(*) FROM  pg_tables WHERE schemaname = 'public' AND tablename  = 'app_version';" -qtAX) -ne 0 ]
+then
+    echo "Set revision to 5b3a4deea1c4"
+    docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "INSERT INTO alembic_version VALUES('5b3a4deea1c4')" -qtAX
+elif [ $(docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "SELECT COUNT(*) FROM  pg_tables WHERE schemaname = 'public' AND tablename  = 'organization';" -qtAX) -ne 0 ]
+then
+    echo "Set revision to 992352f4c1f9"
+    docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "INSERT INTO alembic_version VALUES('992352f4c1f9')" -qtAX
+else
+    echo "Nothing found assuming inital db"
+    docker exec $CONTAINER psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "DROP TABLE alembic_version" -qtAX
+fi
