@@ -1,0 +1,19 @@
+#!/bin/bash
+echo "Starting db..."
+
+docker-compose -f refinery/docker-compose.yml up -d graphql-postgres
+
+CONTAINER=$(docker ps -f name=graphql-postgres --format {{.Names}})
+if [ -z $CONTAINER ]; then
+    echo "Could not find a running container for the database."
+    exit 1
+fi
+
+echo "Waiting for container to be ready..."
+docker exec $CONTAINER pg_isready > /dev/null 2>&1
+while [ $? -ne 0 ]
+do
+    docker exec $CONTAINER pg_isready > /dev/null 2>&1
+done
+
+echo "db ready"

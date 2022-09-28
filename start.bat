@@ -1,11 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
 
-echo "We are currently experiencing some issues with refinery."
-echo "We are working on it. Sorry, for the inconvenience."
-echo "If you pull the repository and this message is still there, please try to pull it at a later time."
-exit 1
-
 set LOCAL_VOLUME_POSTGRES=".\postgres-data"
 set LOCAL_VOLUME_MINIO=".\minio-data"
 set LOCAL_VOLUME_QDRANT=".\qdrant-storage"
@@ -68,6 +63,8 @@ IF NOT EXIST .\refinery\oathkeeper\jwks.json (
    docker run --rm docker.io/oryd/oathkeeper:v0.38 credentials generate --alg RS256 > refinery\oathkeeper\jwks.json
 )
 
+call wait_until_db_ready.bat
+call alembic_fix.bat
 
 docker-compose -f refinery\docker-compose.yml up -d
 
