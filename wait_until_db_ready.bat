@@ -12,6 +12,8 @@ IF "%name%" == "initial" (
 	goto :eof
 )
 
+echo waiting for pg_isready...
+
 :RECHECK
 docker exec %name% pg_isready > nul
 IF %ERRORLEVEL% NEQ 0 ( 
