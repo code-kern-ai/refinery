@@ -8,7 +8,6 @@ IF "%name%" == "initial" (
 	goto :eof
 )
 
-rem echo Checking table exists
 FOR /F "tokens=*" %%g IN ('docker exec %name% psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "SELECT COUNT(*) FROM  pg_tables WHERE schemaname = 'public' AND tablename  = 'alembic_version';" -qtAX') do (SET result=%%g)
 
 IF "%result%" == "0" (
@@ -16,7 +15,6 @@ IF "%result%" == "0" (
 	docker exec %name% psql -d postgresql://postgres:onetask@graphql-postgres:5432 -c "CREATE TABLE alembic_version (version_num VARCHAR(32) NOT NULL, PRIMARY KEY (version_num))" -qtAX
 	echo table created
 ) ELSE (
-	rem echo alembic seems to be up and running
 	goto :eof
 )
 
