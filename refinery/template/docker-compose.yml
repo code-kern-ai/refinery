@@ -50,7 +50,7 @@ services:
       - ./oathkeeper:/etc/config/oathkeeper:Z
 
   refinery-authorizer:
-    image: kernai/refinery-authorizer:latest
+    image: kernai/refinery-authorizer:v1.2.0
     restart: always
     expose:
       - 80
@@ -66,7 +66,7 @@ services:
       - default
 
   refinery-ui:
-    image: kernai/refinery-ui:latest
+    image: kernai/refinery-ui:v1.3.1
     restart: always
     ports:
       - 7050:80
@@ -76,7 +76,7 @@ services:
       - default
 
   refinery-entry:
-    image: kernai/refinery-entry:latest
+    image: kernai/refinery-entry:v1.3.0
     restart: always
     environment:    
       - IS_OS=1
@@ -88,7 +88,7 @@ services:
   postgres-migrate:
     depends_on:
       - graphql-postgres
-    image: kernai/refinery-gateway:latest
+    image: kernai/refinery-gateway:v1.3.2
     environment:
       - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
     command: alembic upgrade head
@@ -98,7 +98,7 @@ services:
   refinery-gateway:
     depends_on:
       - refinery-config
-    image: kernai/refinery-gateway:latest
+    image: kernai/refinery-gateway:v1.3.2
     restart: always
     ports:
       - 7051:80
@@ -108,10 +108,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:Z
       - graphql-sqlite:/sqlite
     environment:
-      - AC_EXEC_ENV_IMAGE=kernai/refinery-ac-exec-env:latest
-      - LF_EXEC_ENV_IMAGE=kernai/refinery-lf-exec-env:latest
-      - ML_EXEC_ENV_IMAGE=kernai/refinery-ml-exec-env:latest
-      - RECORD_IDE_IMAGE=kernai/refinery-record-ide-env:latest
+      - AC_EXEC_ENV_IMAGE=kernai/refinery-ac-exec-env:v1.3.0
+      - LF_EXEC_ENV_IMAGE=kernai/refinery-lf-exec-env:v1.2.0
+      - ML_EXEC_ENV_IMAGE=kernai/refinery-ml-exec-env:v1.3.0
+      - RECORD_IDE_IMAGE=kernai/refinery-record-ide-env:v1.2.0
       - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
       - LF_NETWORK=refinery_default
       - WEAK_SUPERVISION=http://refinery-weak-supervisor:80
@@ -163,7 +163,7 @@ services:
   refinery-gateway-proxy:
     depends_on:
       - graphql-postgres
-    image: kernai/refinery-gateway-proxy:latest
+    image: kernai/refinery-gateway-proxy:v1.3.0
     restart: always
     expose:
       - 80
@@ -197,7 +197,7 @@ services:
       - {LOCAL_VOLUME_MINIO}:/data
 
   refinery-weak-supervisor:
-    image: kernai/refinery-weak-supervisor:latest
+    image: kernai/refinery-weak-supervisor:v1.3.0
     restart: unless-stopped
     ports:
       - 7054:80
@@ -210,7 +210,7 @@ services:
       - default
 
   refinery-embedder:
-    image: kernai/refinery-embedder:latest
+    image: kernai/refinery-embedder:v1.3.0
     restart: unless-stopped
     ports:
       - 7058:80
@@ -228,7 +228,7 @@ services:
       - default
 
   refinery-config:
-    image: kernai/refinery-config:latest
+    image: kernai/refinery-config:v1.2.0
     restart: unless-stopped
     ports:
       - 7059:80
@@ -243,7 +243,7 @@ services:
   refinery-doc-ock:
     depends_on:
       - refinery-config
-    image: kernai/refinery-doc-ock:latest
+    image: kernai/refinery-doc-ock:v1.2.0
     restart: unless-stopped
     ports:
       - 7060:80
@@ -253,7 +253,7 @@ services:
       - TELEMETRY_URI=https://telemetry.kern.ai
 
   refinery-websocket:
-    image: kernai/refinery-websocket:latest
+    image: kernai/refinery-websocket:v1.2.0
     restart: unless-stopped
     environment:
       - DB_DSN=postgresql://postgres:onetask@graphql-postgres:5432?sslmode=disable
@@ -265,7 +265,7 @@ services:
   refinery-tokenizer:
     depends_on:
       - refinery-config
-    image: kernai/refinery-tokenizer:latest
+    image: kernai/refinery-tokenizer:v1.3.0
     restart: unless-stopped
     ports:
       - 7061:80
@@ -282,7 +282,7 @@ services:
       - default
 
   refinery-updater:
-    image: kernai/refinery-updater:latest
+    image: kernai/refinery-updater:v1.3.0
     restart: unless-stopped
     ports:
       - 7062:80
@@ -298,7 +298,7 @@ services:
       - default
 
   refinery-neural-search:
-    image: kernai/refinery-neural-search:latest
+    image: kernai/refinery-neural-search:v1.2.1
     restart: unless-stopped
     ports:
       - 7063:80
@@ -311,7 +311,7 @@ services:
       - default
 
   refinery-zero-shot:
-    image: kernai/refinery-zero-shot:latest
+    image: kernai/refinery-zero-shot:v1.2.0
     restart: unless-stopped
     ports:
       - 7064:80

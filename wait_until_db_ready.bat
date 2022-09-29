@@ -20,6 +20,6 @@ IF %ERRORLEVEL% NEQ 0 (
 	timeout 1 > nul
 	goto RECHECK
 )
-
+timeout 1 > nul
 echo db ready.
 

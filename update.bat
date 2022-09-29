@@ -73,16 +73,6 @@ if !ERRORLEVEL! == 0 (
     echo kern-refinery is not installed. Skipping update...
 )
 
-echo Pulling newest images of exec envs...
-docker pull kernai/refinery-ac-exec-env:latest
-docker pull kernai/refinery-lf-exec-env:latest
-docker pull kernai/refinery-ml-exec-env:latest
-docker pull kernai/refinery-record-ide-env:latest
-
-echo Pulling newest images of refinery...
-docker-compose -f refinery\docker-compose.yml pull
-
-
 echo Starting refinery containers...
 call start.bat update
 timeout /t 10 /nobreak > nul
