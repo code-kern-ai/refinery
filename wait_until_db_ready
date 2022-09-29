@@ -13,7 +13,8 @@ echo "Waiting for container to be ready..."
 docker exec $CONTAINER pg_isready > /dev/null 2>&1
 while [ $? -ne 0 ]
 do
+    sleep 1
     docker exec $CONTAINER pg_isready > /dev/null 2>&1
 done
-
+sleep 1
 echo "db ready"

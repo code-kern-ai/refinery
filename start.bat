@@ -42,21 +42,21 @@ powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_PO
 powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_MINIO}', '%LOCAL_VOLUME_MINIO%' | Out-File -encoding ASCII refinery\docker-compose.yml"
 powershell -Command "(gc refinery\docker-compose.yml) -replace '{LOCAL_VOLUME_QDRANT}', '%LOCAL_VOLUME_QDRANT%' | Out-File -encoding ASCII refinery\docker-compose.yml"
 
-for /f "tokens=1" %%i in ('docker images kernai/refinery-ac-exec-env:latest') do (set image=%%i)
+for /f "tokens=1" %%i in ('docker images kernai/refinery-ac-exec-env:v1.3.0') do (set image=%%i)
 if "%image%" neq "kernai/refinery-ac-exec-env" (
-   docker pull kernai/refinery-ac-exec-env:latest
+   docker pull kernai/refinery-ac-exec-env:v1.3.0
 )
-for /f "tokens=1" %%i in ('docker images kernai/refinery-lf-exec-env:latest') do (set image=%%i)
+for /f "tokens=1" %%i in ('docker images kernai/refinery-lf-exec-env:v1.2.0') do (set image=%%i)
 if "%image%" neq "kernai/refinery-lf-exec-env" (
-   docker pull kernai/refinery-lf-exec-env:latest
+   docker pull kernai/refinery-lf-exec-env:v1.2.0
 )
-for /f "tokens=1" %%i in ('docker images kernai/refinery-ml-exec-env:latest') do (set image=%%i)
+for /f "tokens=1" %%i in ('docker images kernai/refinery-ml-exec-env:v1.3.0') do (set image=%%i)
 if "%image%" neq "kernai/refinery-ml-exec-env" (
-   docker pull kernai/refinery-ml-exec-env:latest
+   docker pull kernai/refinery-ml-exec-env:v1.3.0
 )
-for /f "tokens=1" %%i in ('docker images kernai/refinery-record-ide-env:latest') do (set image=%%i)
+for /f "tokens=1" %%i in ('docker images kernai/refinery-record-ide-env:v1.2.0') do (set image=%%i)
 if "%image%" neq "kernai/refinery-record-ide-env" (
-   docker pull kernai/refinery-record-ide-env:latest
+   docker pull kernai/refinery-record-ide-env:v1.2.0
 )
 
 IF NOT EXIST .\refinery\oathkeeper\jwks.json (
@@ -68,6 +68,7 @@ call alembic_fix.bat
 
 docker-compose -f refinery\docker-compose.yml up -d
 
+timeout 5 > nul
 
 echo UI:           http://localhost:4455/app/
 echo Minio:        %MINIO_ENDPOINT%

@@ -27,17 +27,17 @@ sed -i.bak -e "s|{LOCAL_VOLUME_QDRANT}|$LOCAL_VOLUME_QDRANT|g" refinery/docker-c
 rm refinery/*.bak
 
 #pull exec envs if not existent
-if [[ "$(docker images -q kernai/refinery-ac-exec-env:latest 2> /dev/null)" == "" ]]; then
-    docker pull kernai/refinery-ac-exec-env:latest
+if [[ "$(docker images -q kernai/refinery-ac-exec-env:v1.3.0 2> /dev/null)" == "" ]]; then
+    docker pull kernai/refinery-ac-exec-env:v1.3.0
 fi
-if [[ "$(docker images -q kernai/refinery-lf-exec-env:latest 2> /dev/null)" == "" ]]; then
-    docker pull kernai/refinery-lf-exec-env:latest
+if [[ "$(docker images -q kernai/refinery-lf-exec-env:v1.2.0 2> /dev/null)" == "" ]]; then
+    docker pull kernai/refinery-lf-exec-env:v1.2.0
 fi
-if [[ "$(docker images -q kernai/refinery-ml-exec-env:latest 2> /dev/null)" == "" ]]; then
-    docker pull kernai/refinery-ml-exec-env:latest
+if [[ "$(docker images -q kernai/refinery-ml-exec-env:v1.3.0 2> /dev/null)" == "" ]]; then
+    docker pull kernai/refinery-ml-exec-env:v1.3.0
 fi
-if [[ "$(docker images -q kernai/refinery-record-ide-env:latest 2> /dev/null)" == "" ]]; then
-    docker pull kernai/refinery-record-ide-env:latest
+if [[ "$(docker images -q kernai/refinery-record-ide-env:v1.2.0 2> /dev/null)" == "" ]]; then
+    docker pull kernai/refinery-record-ide-env:v1.2.0
 fi
 
 if [ ! -f "./refinery/oathkeeper/jwks.json" ]; then
@@ -48,6 +48,8 @@ source wait_until_db_ready
 source alembic_fix
 
 docker-compose -f refinery/docker-compose.yml up -d 
+
+sleep 5
 
 echo "UI:           http://localhost:4455/app/"
 echo "Minio:        $MINIO_ENDPOINT"
