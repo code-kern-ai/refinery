@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  graphql-postgres:
+    image: docker.io/postgres:13
+    restart: always
+    ports:
+      - 7052:5432
+    environment:
+      - POSTGRES_PASSWORD=onetask
+      - POSTGRES_USER=postgres
+    expose:
+      - 5432
+    networks:
+      - default
+    volumes:
+      - ./refinery/postgres-data:/var/lib/postgresql/data
+
+  alfred:
+    image: kernai/alfred:latest
+    restart: always
+    ports:
+      - 7066:80
+    environment:
+      - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
+    expose:
+      - 80
+    networks:
+      - default
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:Z
+      - ./refinery:/refinery
+
+networks:
+  default:

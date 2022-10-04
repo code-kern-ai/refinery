@@ -1,0 +1,5 @@
+{
+    "LOCAL_VOLUME_MINIO": "./minio-data",
+    "LOCAL_VOLUME_POSTGRES": "./postgres-data",
+    "LOCAL_VOLUME_QDRANT": "./qdrant-storage"
+}
