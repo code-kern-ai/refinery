@@ -1,26 +1,11 @@
 #!/bin/bash
 
-docker-compose -f alfred-docker-compose.yml up -d
+# docker pull kernai/alfred:latest
 
-echo "Preparing refinery..."
+docker run -d --rm --name alfred \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v $PWD/refinery:/refinery \
+kernai/alfred:latest \
+python start.py $PWD/refinery > /dev/null 2>&1
 
-MINIO_ENDPOINT=$(curl -X GET -s 'http://localhost:7066/start')
-while [ $? -ne 0 ]
-do
-    MINIO_ENDPOINT=$(curl -X GET -s 'http://localhost:7066/start')
-done
-
-if [ $? -ne 0 ]; then
-    echo "Preparations failed."
-    exit 1
-fi
-
-echo "Preparations finsihed. Starting refinery..."
-
-docker-compose -f refinery/docker-compose.yml up -d 
-
-sleep 5
-
-echo "UI:           http://localhost:4455/app/"
-echo "Minio:        $MINIO_ENDPOINT"
-echo "MailHog:      http://localhost:4436/"
+docker logs -f alfred

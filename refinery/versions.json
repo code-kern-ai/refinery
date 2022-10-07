@@ -10,11 +10,12 @@
     "ML_EXEC_ENV": "v1.3.0",
     "LF_EXEC_ENV": "v1.2.0",
     "NEURAL_SEARCH": "v1.2.1",
+    "REFINERY": "v1.3.4",
     "RECORD_IDE_ENV": "v1.2.0",
     "TOKENIZER": "v1.3.0",
     "UI": "v1.3.1",
     "UPDATER": "v1.3.0",
-    "WEAK_SUPERVISIOR": "v1.3.0",
+    "WEAK_SUPERVISOR": "v1.3.0",
     "WEBSOCKET": "v1.2.0",
     "ZERO_SHOT": "v1.2.0"
 }
