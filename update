@@ -1,4 +1,8 @@
 #!/bin/bash
 
+source stop
+
 git checkout main
 git pull
+
+source start

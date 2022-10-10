@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# docker pull kernai/alfred:latest
-
 docker run -d --rm --name alfred \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v $PWD/refinery:/refinery \
-kernai/alfred:latest \
+kernai/alfred:v1.3.4 \
 python start.py $PWD/refinery > /dev/null 2>&1
 
 docker logs -f alfred
