@@ -1,7 +1,5 @@
 {
-    "LOCAL_VOLUME_GRAPHQL_SQLITE": "./graphql-sqlite",
     "LOCAL_VOLUME_KRATOS": "./kratos",
-    "LOCAL_VOLUME_KRATOS_SQLITE": "./kratos-sqlite",
     "LOCAL_VOLUME_MINIO": "./minio-data",
     "LOCAL_VOLUME_OATHKEEPER": "./oathkeeper",
     "LOCAL_VOLUME_POSTGRES": "./postgres-data",
