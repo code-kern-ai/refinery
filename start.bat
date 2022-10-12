@@ -1,21 +1,21 @@
 @echo off
 
-:: path of the working directory with slashes instead of backslashes
-:: removes the colon, and prepends a slash
+REM path of the working directory with slashes instead of backslashes
+REM removes the colon, and prepends a slash
 set "PWD=%cd%"
 set "PWD=%PWD:\=/%"
 set "PWD=%PWD::=%"
 set "PWD=/%PWD%"
 
-:: grab MINIO_ENDPOINT from ipconfig
+REM grab MINIO_ENDPOINT from ipconfig
 Call :setMinioEndpoint
 
-docker pull kernai/alfred:v1.3.7
+docker pull kernai/alfred:v1.4.0
 
 docker run -d --rm ^
 --name alfred ^
 -v /var/run/docker.sock:/var/run/docker.sock ^
--v %PWD%/refinery:/refinery kernai/alfred:v1.3.7 ^
+-v %PWD%/refinery:/refinery kernai/alfred:v1.4.0 ^
 python start.py %PWD%/refinery %MINIO_ENDPOINT% > nul
 
 docker logs -f alfred
@@ -25,7 +25,7 @@ goto :eof
 :setMinioEndpoint
 set ip_address_string="IPv4"
 for /f "usebackq tokens=2 delims=:" %%f in (`ipconfig ^| findstr /c:%ip_address_string%`) do (
-	set ip=%%f
+    set ip=%%f
 )
 set ip=%ip: =%
 set MINIO_ENDPOINT=http://%ip%:7053

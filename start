@@ -1,11 +1,19 @@
 #!/bin/bash
 
-docker pull kernai/alfred:v1.3.7
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     HOST_IP=$(ip a | grep "inet " | grep -v 127.0.0.1 | head -1 | grep -o -E "[0-9]+.[0-9]+.[0-9]+.[0-9]+" | head -1);;
+    Darwin*)    HOST_IP=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | head -1 | grep -o -E "[0-9]+.[0-9]+.[0-9]+.[0-9]+" | head -1);;
+esac
+
+MINIO_ENDPOINT="http://$HOST_IP:7053"
+
+docker pull kernai/alfred:v1.4.0
 
 docker run -d --rm --name alfred \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v $PWD/refinery:/refinery \
-kernai/alfred:v1.3.7 \
-python start.py $PWD/refinery > /dev/null 2>&1
+kernai/alfred:v1.4.0 \
+python start.py $PWD/refinery $MINIO_ENDPOINT > /dev/null 2>&1
 
 docker logs -f alfred
