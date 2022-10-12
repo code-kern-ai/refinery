@@ -1,8 +1,8 @@
 @echo off
 
-call start.bat
+call stop.bat
 
 git checkout main
 git pull
 
-call stop.bat
+call start.bat
