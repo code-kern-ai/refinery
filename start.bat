@@ -16,7 +16,7 @@ docker run -d --rm ^
 --name alfred ^
 -v /var/run/docker.sock:/var/run/docker.sock ^
 -v %PWD%/refinery:/refinery kernai/alfred:v1.3.7 ^
-python start.py %PWD%/refinery windows > nul
+python start.py %PWD%/refinery %MINIO_ENDPOINT% > nul
 
 docker logs -f alfred
 
@@ -29,7 +29,7 @@ for /f "usebackq tokens=2 delims=:" %%f in (`ipconfig ^| findstr /c:%ip_address_
 )
 set ip=%ip: =%
 set MINIO_ENDPOINT=http://%ip%:7053
-
+exit /B 0
 
 :findstr
 Set "basestr=%~1"
@@ -38,4 +38,5 @@ set /a pos=0
 Set "sst0=!basestr:*%sstr%=!"
 if "%sst0%"=="%basestr%" echo "%sstr%" not found in "%basestr%"&goto :eof
 Set "sst1=!basestr:%sstr%%sst0%=!"
-if "%sst1%" neq "" for /l %%i in (0,1,8189) do if "!sst1:~%%i,1!" neq "" set /a pos+=1^M
+if "%sst1%" neq "" for /l %%i in (0,1,8189) do if "!sst1:~%%i,1!" neq "" set /a pos+=1
+exit /B 0
