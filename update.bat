@@ -1,8 +1,10 @@
 @echo off
 
-call stop.bat
+call stop.bat update
 
 git checkout main
 git pull
 
-call start.bat
+call start.bat update
+
+pause

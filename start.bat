@@ -20,6 +20,8 @@ python start.py %PWD%/refinery %MINIO_ENDPOINT% > nul
 
 docker logs -f alfred
 
+if "%1" neq "update" pause
+
 goto :eof
 
 :setMinioEndpoint
