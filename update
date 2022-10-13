@@ -1,75 +1,8 @@
 #!/bin/bash
 
-echo "Checking refinery installation..."
-if test -f "./refinery/docker-compose.yml"; then
-    echo "Refinery is installed."
-else
-    echo "Refinery is not installed. Run start script to install the latest version."
-    exit 1
-fi
-
-echo "Checking for updates..."
-HAS_UPDATES=$(curl -X GET -s 'http://localhost:7062/has_updates?as_html_response=true')
-if [ "$HAS_UPDATES" == "True" ]; then
-    echo "Updates found, updating..."
-elif [ "$HAS_UPDATES" == "False" ]; then
-    echo "No updates available. You are up to date."
-    exit 0
-else 
-    echo "Refinery doesn't seem to run or in a version < 1.2.0. It cannot be checked if any updates are available."
-    echo "Do you want to try to update anyway? (y/n)"
-    read -r UPDATE_ANYWAY
-    if [ "$UPDATE_ANYWAY" == "y" ]; then
-        echo "Updating..."
-    else
-        echo "Exiting..."
-        exit 0
-    fi
-fi
-
-echo "Stopping running containers..."
 source stop
 
-echo "Checking current branch..."
-git branch | grep -q "\* release"
-if [ $? -eq 0 ]; then
-    echo "On release branch, pulling latest changes from github..."
-    git pull
-else
-    echo "The current branch is not the release branch."
-    echo "Do you want to checkout the release branch and continue updating? (y/n)"
-    read -r CHECKOUT_RELEASE
-    if [ "$CHECKOUT_RELEASE" == "y" ]; then
-        echo "Checking out release branch and pulling latest changes..."
-        git checkout release
-        git pull
-    else
-        echo "Do you want to continue with the local version? (y/n) "
-        read -r CONTINUE
-        if [ "$CONTINUE" == "y" ]; then
-            echo "Continuing update with the local version..."
-        else
-            echo "Stopping the update..."
-            echo "Exiting..."
-            exit 0
-        fi
-    fi
-fi
+git checkout main
+git pull
 
-echo "Checking if kern-refinery is installed..."
-pip3 freeze | grep -q "kern-refinery"
-if [ $? -eq 0 ]; then
-    echo "kern-refinery is installed. Updating..."
-    pip3 install --upgrade kern-refinery
-else
-    echo "kern-refinery is not installed. Skipping update..."
-fi
-
-echo "Starting refinery containers..."
 source start
-sleep 10
-
-echo "Triggering refinery-updater to update database..."
-curl -X POST http://localhost:7062/update_to_newest > /dev/null 2>&1
-
-echo "Refinery has been updated to the latest version!"

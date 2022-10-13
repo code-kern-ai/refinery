@@ -1,56 +1,19 @@
 #!/bin/bash
 
-LOCAL_VOLUME_POSTGRES=./postgres-data
-LOCAL_VOLUME_MINIO=./minio-data
-LOCAL_VOLUME_QDRANT=./qdrant-storage
-
-
 unameOut="$(uname -s)"
 case "${unameOut}" in
     Linux*)     HOST_IP=$(ip a | grep "inet " | grep -v 127.0.0.1 | head -1 | grep -o -E "[0-9]+.[0-9]+.[0-9]+.[0-9]+" | head -1);;
     Darwin*)    HOST_IP=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | head -1 | grep -o -E "[0-9]+.[0-9]+.[0-9]+.[0-9]+" | head -1);;
 esac
 
-CREDENTIAL_IP=$(docker network inspect bridge --format='{{json .IPAM.Config}}' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | tail -1)
-
 MINIO_ENDPOINT="http://$HOST_IP:7053"
-CRED_ENDPOINT="http://$CREDENTIAL_IP:7053"
 
-cp refinery/template/docker-compose.yml refinery/docker-compose.yml
+docker pull kernai/alfred:v1.4.0
 
-sed -i.bak -e "s|{MINIO_ENDPOINT}|$MINIO_ENDPOINT|g" refinery/docker-compose.yml
-sed -i.bak -e "s|{CRED_ENDPOINT}|$CRED_ENDPOINT|g" refinery/docker-compose.yml
-sed -i.bak -e "s|{LOCAL_VOLUME_POSTGRES}|$LOCAL_VOLUME_POSTGRES|g" refinery/docker-compose.yml
-sed -i.bak -e "s|{LOCAL_VOLUME_MINIO}|$LOCAL_VOLUME_MINIO|g" refinery/docker-compose.yml
-sed -i.bak -e "s|{LOCAL_VOLUME_QDRANT}|$LOCAL_VOLUME_QDRANT|g" refinery/docker-compose.yml
+docker run -d --rm --name alfred \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v $PWD/refinery:/refinery \
+kernai/alfred:v1.4.0 \
+python start.py $PWD/refinery $MINIO_ENDPOINT > /dev/null 2>&1
 
-rm refinery/*.bak
-
-#pull exec envs if not existent
-if [[ "$(docker images -q kernai/refinery-ac-exec-env:v1.3.0 2> /dev/null)" == "" ]]; then
-    docker pull kernai/refinery-ac-exec-env:v1.3.0
-fi
-if [[ "$(docker images -q kernai/refinery-lf-exec-env:v1.2.0 2> /dev/null)" == "" ]]; then
-    docker pull kernai/refinery-lf-exec-env:v1.2.0
-fi
-if [[ "$(docker images -q kernai/refinery-ml-exec-env:v1.3.0 2> /dev/null)" == "" ]]; then
-    docker pull kernai/refinery-ml-exec-env:v1.3.0
-fi
-if [[ "$(docker images -q kernai/refinery-record-ide-env:v1.2.0 2> /dev/null)" == "" ]]; then
-    docker pull kernai/refinery-record-ide-env:v1.2.0
-fi
-
-if [ ! -f "./refinery/oathkeeper/jwks.json" ]; then
-    docker run --rm docker.io/oryd/oathkeeper:v0.38 credentials generate --alg RS256 > refinery/oathkeeper/jwks.json
-fi
-
-source wait_until_db_ready
-source alembic_fix
-
-docker-compose -f refinery/docker-compose.yml up -d 
-
-sleep 5
-
-echo "UI:           http://localhost:4455/app/"
-echo "Minio:        $MINIO_ENDPOINT"
-echo "MailHog:      http://localhost:4436/"
+docker logs -f alfred

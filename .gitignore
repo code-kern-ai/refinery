@@ -8,7 +8,9 @@ refinery/postgres-data
 refinery/minio-data
 refinery/qdrant-data
 refinery/qdrant-storage
-
+refinery/graphql-sqlite
+refinery/kratos-sqlite
+refinery/backup
 
 .DS_Store
 
