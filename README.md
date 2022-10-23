@@ -89,6 +89,8 @@ Our goal is to make training data building feel more like a programmatic and enj
 If you like what we're working on, please leave a ⭐! 
 
 ## 🤓 Features
+For a detailed overview of features, please look into our [docs](https://docs.kern.ai).
+
 ### (Semi-)automated labeling workflow for NLP tasks
 - Both manual and programmatic for classifications and span-labeling
 - Integration with state-of-the-art libraries and frameworks
