@@ -1,7 +1,7 @@
 ![](https://uploads-ssl.webflow.com/61e47fafb12bd56b40022a49/62c2f30f935f4d37dc864eeb_Kern%20refinery.png)
 
 <p align="center">
-    <b>Open-source data-centric IDE for NLP. Combining (semi-)automated labeling, extensive data management and neural search capabilities.</b>
+    <b>The data scientist's open-source choice to scale, assess and maintain natural language data. Treat training data like a software artifact.</b>
 </p>
 
 <p align=center>
@@ -19,21 +19,22 @@
     <a href="https://www.kern.ai/"><img src="https://img.shields.io/badge/Web-white.svg" alt="Website"></a>
 </p>
 
-Kern AI refinery (abbr. _refinery_) is like the data-centric sibling of your favorite programming environment. It provides an easy-to-use interface for weak supervision as well as extensive data management, neural search, and monitoring to ensure that the quality of your training data is as good as possible.
+Kern AI refinery (abbr. _refinery_) helps you to build better NLP models in a data-centric approach. Semi-automate your labeling, find low-quality subsets in your training data, and monitor your data in one place.
 
-_refinery_ doesn't get rid of manual labeling, but it makes sure that your valuable time is spent well.
+_refinery_ doesn't get rid of manual labeling, but it makes sure that your valuable time is spent well. Also, the makers of _refinery_ currently work on integrations to other labeling tools, such that you can easily switch between different choices.
 
 ![Showcase GIF of _refinery_](refinery.gif)
 
 > **_DEMO:_**  You can interact with the application in a (mostly read-only) online playground. Check it out [here](https://demo.kern.ai)
 
-_refinery_ consists of multiple microservices to enable a scalable and optimized workload balance, so this is the central repository used to orchestrate the system. It builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks, as well as [qdrant](https://github.com/qdrant/qdrant) for neural search. Our microservices natively support GPU acceleration.
+_refinery_ is a multi-repository project, you can find all integrated services in the architecture below. The app builds on top of [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) to leverage pre-built language models for your NLP tasks, as well as [qdrant](https://github.com/qdrant/qdrant) for neural search.
 
 ## Table of contents
-- [🧑‍💻 Why _refinery_? Built for developers with collaboration in mind](#-why-refinery-built-for-developers-with-collaboration-in-mind)
-  - [Open-source and developer-oriented](#open-source-and-developer-oriented)
-  - [For automation or quality control](#for-automation-or-quality-control)
-  - [Improving collaboration with subject matter experts](#improving-collaboration-with-subject-matter-experts)
+- [🧑‍💻 Why _refinery_?](#-why-refinery)
+  - [Enabling ideas of one-person-armies](#enabling-ideas-of-one-person-armies)
+  - [Extending your existing labeling approach](#extending-your-existing-labeling-approach)
+  - [Pushing collaboration](#pushing-collaboration)
+  - [Open-source, and treating training data as a software artifact](#open-source-and-treating-training-data-as-a-software-artifact)
   - [Integrations](#integrations)
   - [Your benefits](#your-benefits)
 - [🤓 Features](#-features)
@@ -61,18 +62,20 @@ _refinery_ consists of multiple microservices to enable a scalable and optimized
 - [📃 License](#-license)
 
 
-## 🧑‍💻 Why _refinery_? Built for developers with collaboration in mind
-There are already many other labeling tools out there, so why did we decide to build *yet another one*? 
+## 🧑‍💻 Why _refinery_?
+There are already many other tools available to build training data. Why did we decide to build _yet another one_?
 
-### Open-source and developer-oriented
-We believe that there is a lack of *open-source, developer-oriented* tools for data-centric NLP. In other terms: developers and scientists should be able to participate in the refinement of raw data to training data, but with the programmatic approach they love. That's why we made sure that integrations to tools like [🤗 Hugging Face](https://www.huggingface.co) and [spaCy](https://spacy.io/) are as easy as possible.
+### Enabling ideas of one-person-armies
+We believe that developers can have crazy ideas, and we want to lower the barrier for them to go for that idea. _refinery_ is designed to build labeled training data much faster, so that it takes you very little time to prototype an idea. We've received much love for exactly that, so make sure to give it a try for your next project.
 
+### Extending your existing labeling approach
+Yeah, _refinery_ isn't primarily a labeling tool. It has a built-in labeling editor, that is true, but its main advantages come with automation and data management. You can integrate any kind of heuristic to label what is possible automatically, and to then focus on headache-causing subsets afterwards. If you do the labeling in _refinery_ or any other tool (even crowd labeled) doesn't matter!
 
-### For automation or quality control
-The labeling workflow in _refinery_ is designed to integrate heuristics like labeling functions or active learning modules, which are combined via weak supervision. This way, you can either prototype the training data for your model from scratch, or improve existing training data continuously. We designed our workflow and data management such that you can do exactly that, and find the spots in your data that need to be re-visited.
-
-### Improving collaboration with subject matter experts
+### Pushing collaboration
 While doing so, we aim to improve the collaboration between engineers and subject matter experts (SMEs). In the past, we've seen how our application was being used in meetings to discuss label patterns in form of labeling functions and distant supervisors. We believe that data-centric AI is the best way to leverage collaboration.
+
+## Open-source, and treating training data as a software artifact
+We hate the idea that there are still use cases in which the training data is just a plain CSV-file. That is okay if you _really_ just quickly want to prototype something at hand with a few records, but any serious software should be maintainable. We believe an open-source solution for training data management is what's needed here. _refinery_ is the tool helping you to document your data. That's how you treat training data as a software artifact.
 
 ### Integrations
 Lastly, _refinery_ supports [SDK actions](https://github.com/code-kern-ai/refinery-python) like pulling and pushing data. Data-centric AI redefines labeling to be more than a one-time job by giving it an iterative workflow, so we aim to give you more power every day by providing end-to-end capabilities, growing the large-scale availability of high-quality training data. Use our SDK to program integrations with your existing landscapes.
@@ -81,11 +84,13 @@ Lastly, _refinery_ supports [SDK actions](https://github.com/code-kern-ai/refine
 ### Your benefits
 You gain better insights into the data labeling workflow, receive an implicit documentation for your training data (which you can use to discuss findings), and can ultimately build better models in shorter time.
 
-Our goal is to make labeling feel more like a programmatic and enjoyable task, instead of something tedious and repetitive. _refinery_ is our contribution to this goal. And we're constantly aiming to improve this contribution.
+Our goal is to make training data building feel more like a programmatic and enjoyable task, instead of something tedious and repetitive. _refinery_ is our contribution to this goal. And we're constantly aiming to improve this contribution.
 
 If you like what we're working on, please leave a ⭐! 
 
 ## 🤓 Features
+For a detailed overview of features, please look into our [docs](https://docs.kern.ai).
+
 ### (Semi-)automated labeling workflow for NLP tasks
 - Both manual and programmatic for classifications and span-labeling
 - Integration with state-of-the-art libraries and frameworks
@@ -99,9 +104,11 @@ If you like what we're working on, please leave a ⭐!
 - JSON-based data model for up- and downloads
 - Overview of project metrics like label distributions and confusion matrix
 - Data accessible and extendable via our [Python SDK](https://github.com/code-kern-ai/refinery-python)
+- Attribute modifications to extend your attributes (e.g. with sentence complexity metrics) in-place
 
 ### Team workspaces in the [managed version](https://www.kern.ai/pricing/options)
-- Allow multiple users to label your data
+- Allow multiple users to label your data with role-based access and minimized labeling views
+- Integrate crowd labeling workflows
 - Automated calculation of inter-annotator agreements
 
 ## ☕ Installation
@@ -149,10 +156,10 @@ If you need help writing your first labeling functions, look into our [template 
 You can find our changelog [here](https://docs.kern.ai/changelog).
 
 ## 😵‍💫 Need help?
-No worries, we've got you. If you have questions, please [open a ticket](https://github.com/code-kern-ai/refinery/discussions/categories/q-a) in the "q&a" category of our forum.
+No worries, we've got you. If you have questions, reach out to us on [Discord](https://discord.gg/qf4rGCEphW), or [open a ticket](https://github.com/code-kern-ai/refinery/discussions/categories/q-a) in the "q&a" category of our forum.
 
 ## 🪢 Community and contact
-Feel free to join our [Discord](https://discord.gg/qf4rGCEphW), where we'll discuss about recent findings in data-centric AI:
+Feel free to join our [Discord](https://discord.gg/qf4rGCEphW), where we'll happily help you building your training data:
 
 We send out a (mostly) weekly newsletter about recent findings in data-centric AI, product highlights in development and more. You can subscribe to the newsletter [here](https://www.kern.ai/resources/newsletter). 
 
@@ -167,12 +174,9 @@ If you actively want to participate in extending the code base, [reach out to us
 
 ## 🗺️ Roadmap
 Our goal is to provide you with an easy-to-use, yet powerful open-source tool, which helps you to build the best training data for your model. We'll focus on the following high-level tasks:
-- [ ] Further labeling task options in the area of NLP
-- [ ] Extensive user-, label- and data-management capabilities
-- [ ] Improving the developer experience continuously
-- [ ] Continuously making the whole system more efficient to provide you with realtime insights
-- [ ] Providing you with great content to learn more about data-centric AI and how to implement it in _refinery_
-- [ ] Integrations to your favorite ML frameworks and applications
+- [ ] Improving the developer experience continuously. We're currently working on a content library which will offer you a search-like experience when building heuristics. How cool is that? :)
+- [ ] Growing into further fields of NLP like similarity learning
+- [ ] Integrations to your favorite labelingtools, ML frameworks and applications
 
 You can find our short- to midterm feature plans in the [public roadmap](https://github.com/code-kern-ai/refinery/projects/1)
 
@@ -195,13 +199,8 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 </details>
 
 <details>
-    <summary><b>If I can automate the labeling, why should I train a model at all?</b></summary>
-    Technically, you could use our _refinery_ for inference. However, best results are achieved if a supervised learning model is trained on the generated labels, as these models improve generalization. It’s just a best practice. If you want to use the model for inference, check out our open-source library <a href="https://github.com/code-kern-ai/weak-nlp">weak-nlp</a>.
-</details>
-
-<details>
     <summary><b>I have less than 1,000 records - Do I need this?</b></summary>
-    You can definitely use the system for smaller datasets, too! It now only shines via programmatic labeling, but also has a simple and beautiful UI. Go for it 😁
+    You can definitely use the system for smaller datasets, too! It not only shines via programmatic labeling, but also has a simple and beautiful UI. Go for it 😁
 </details>
 
 ### Technical questions
@@ -251,12 +250,12 @@ You can find our short- to midterm feature plans in the [public roadmap](https:/
 ### Service and hosting questions
 <details>
     <summary><b>Are there options for an enterprise on-prem solution?</b></summary>
-    If you're interested in running the multi-user version on your premises, please <a href="https://www.kern.ai/contact">reach out to us</a>. We can help you to set up the deployment and prepare your project(s) e.g. with workshops.
+    If you're interested in running the multi-user version on your premises, please <a href="https://www.kern.ai">reach out to us</a>. We can help you to set up the deployment and prepare your project(s) e.g. with workshops.
 </details>
 
 <details>
     <summary><b>I don't want to label myself. What are my options?</b></summary>
-    Do you want to outsource your labeling, and let your engineers use _refinery_ as a mission control for your training data? <a href="https://www.kern.ai/contact">Reach out to us</a>, so we can discuss how we can help you with your use case.
+    Do you want to outsource your labeling, and let your engineers use _refinery_ as a mission control for your training data? <a href="https://www.kern.ai">Reach out to us</a>, so we can discuss how we can help you with your use case.
 </details>
 
 <details>
@@ -286,23 +285,27 @@ The color of the edges have no implicit meaning, and are only used for better re
 | Service  	| Description  	|
 |---	|---	|
 | [ml-exec-env](https://github.com/code-kern-ai/refinery-ml-exec-env) 	| Execution environment for the active learning module. Containerized function as a service to build active learning models using scikit-learn and sequence-learn.  	|
-| [embedder](https://github.com/code-kern-ai/refinery-embedder)  	| Embedder for refinery. Manages the creation of document- and token-level embeddings using the embedders library.  	|
-| [weak-supervisor](https://github.com/code-kern-ai/refinery-weak-supervisor)  	| Weak supervision for refinery. Manages the integration of heuristics such as labeling functions, active learners or zero-shot classifiers. Uses the weak-nlp library for the actual integration logic and algorithms.  	|
+| [embedder](https://github.com/code-kern-ai/refinery-embedder)  	| Embedder for _refinery_. Manages the creation of document- and token-level embeddings using the embedders library.  	|
+| [weak-supervisor](https://github.com/code-kern-ai/refinery-weak-supervisor)  	| Weak supervision for _refinery_. Manages the integration of heuristics such as labeling functions, active learners or zero-shot classifiers. Uses the weak-nlp library for the actual integration logic and algorithms.  	|
 | [record-ide-env](https://github.com/code-kern-ai/refinery-record-ide-env)  	| Execution environment for the record IDE. Containerized function as a service to build record-specific "quick-and-dirty" code snippets for exploration and debugging. |
-| [config](https://github.com/code-kern-ai/refinery-config)  	| Configuration of refinery. Amongst others, this manages endpoints and available language models for spaCy.  	|
-| [tokenizer](https://github.com/code-kern-ai/refinery-tokenizer)  	| Tokenizer for refinery. Manages the creation and storage of spaCy tokens for text-based record attributes and supports multiple language models. 	|
-| [gateway](https://github.com/code-kern-ai/refinery-gateway)  	| Gateway for refinery. Manages incoming requests and holds the workflow logic. To interact with the gateway, the UI or Python SDK can be used.  	|
+| [config](https://github.com/code-kern-ai/refinery-config)  	| Configuration of _refinery_. Amongst others, this manages endpoints and available language models for spaCy.  	|
+| [tokenizer](https://github.com/code-kern-ai/refinery-tokenizer)  	| Tokenizer for _refinery_. Manages the creation and storage of spaCy tokens for text-based record attributes and supports multiple language models. 	|
+| [gateway](https://github.com/code-kern-ai/refinery-gateway)  	| Gateway for _refinery_. Manages incoming requests and holds the workflow logic. To interact with the gateway, the UI or Python SDK can be used.  	|
 | [authorizer](https://github.com/code-kern-ai/refinery-authorizer)  	| Evaluates whether a user has access to certain resources.  	|
 | [websocket](https://github.com/code-kern-ai/refinery-websocket)  	| Websocket module for refinery. Enables asynchronous notifications inside the application.  	|
 | [lf-exec-env](https://github.com/code-kern-ai/refinery-lf-exec-env)  	| Execution environment for labeling functions. Containerized function as a service to execute user-defined Python scripts.  	|
 | [ac-exec-env](https://github.com/code-kern-ai/refinery-ac-exec-env)  	| Execution environment for attribute calulaction. Containerized function as a service to generate new attributes using Python scripts.  	|
-| [updater](https://github.com/code-kern-ai/refinery-updater)  	| Updater for refinery. Manages migration logic to new versions if required.  	|
-| [neural-search](https://github.com/code-kern-ai/refinery-neural-search)  	| Neural search for refinery. Manages similarity search powered by Qdrant and outlier detection, both based on vector representations of the project records.  	|
-| [zero-shot](https://github.com/code-kern-ai/refinery-zero-shot)  	| Zero-shot module for refinery. Enables the integration of 🤗 Hugging Face zero-shot classifiers as an off-the-shelf no-code heuristic.  	|
+| [updater](https://github.com/code-kern-ai/refinery-updater)  	| Updater for _refinery_. Manages migration logic to new versions if required.  	|
+| [neural-search](https://github.com/code-kern-ai/refinery-neural-search)  	| Neural search for _refinery_. Manages similarity search powered by Qdrant and outlier detection, both based on vector representations of the project records.  	|
+| [zero-shot](https://github.com/code-kern-ai/refinery-zero-shot)  	| Zero-shot module for _refinery_. Enables the integration of 🤗 Hugging Face zero-shot classifiers as an off-the-shelf no-code heuristic.  	|
 | [entry](https://github.com/code-kern-ai/refinery-entry)  	| Login and registration screen for refinery. Implemented via Ory Kratos.  	|
-| [ui](https://github.com/code-kern-ai/refinery-ui)  	| UI for refinery. Used to interact with the whole system; to find out how to best work with the system, check out our docs.  	|
-| [doc-ock](https://github.com/code-kern-ai/refinery-doc-ock) 	| Usage statistics collection for refinery. If users allow it, this collects product insight data used to optimize the user experience.  	|
-| [gateway-proxy](https://github.com/code-kern-ai/refinery-gateway-proxy)  	| Gateway proxy for refinery. Manages incoming requests and forwards them to the gateway. Used by the Python SDK.  	|
+| [ui](https://github.com/code-kern-ai/refinery-ui)  	| UI for _refinery_. Used to interact with the whole system; to find out how to best work with the system, check out our docs.  	|
+| [doc-ock](https://github.com/code-kern-ai/refinery-doc-ock) 	| Usage statistics collection for _refinery_. If users allow it, this collects product insight data used to optimize the user experience.  	|
+| [gateway-proxy](https://github.com/code-kern-ai/refinery-gateway-proxy)  	| Gateway proxy for _refinery_. Manages incoming requests and forwards them to the gateway. Used by the Python SDK.  	|
+| [parent-images](https://github.com/code-kern-ai/refinery-parent-images/tree/parent-image)  	| Shared images used by _refinery_. Used to reduce the required space for _refinery_. _Not yet listed in architecture diagram_ 	|
+| [ac-exec-env](https://github.com/code-kern-ai/refinery-ac-exec-env)  	| Execution environment for attribute calculation in _refinery_. Containerized function as a service to build custom attributes derived from the original data. _Not yet listed in architecture diagram_	|
+| [alfred](https://github.com/code-kern-ai/alfred)  	| Controls the start process of the _refinery_ app. Named after Batman's butler Alfred.	_Not yet listed in architecture diagram_|
+
 
 **Service overview (open-source 3rd party)**
 | Service  	| Description  	|
@@ -471,6 +474,16 @@ Missing anything in the glossary? [Add the term](https://github.com/code-kern-ai
             <br />
             <sub>
                 <b>Shamanth Shetty</b>
+            </sub>
+        </a>
+        <br/>
+    </td>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/divyanshu-katiyar-45ba03131/">
+            <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCchIwJJ2X5g/profile-displayphoto-shrink_400_400/0/1630708281678?e=1672272000&v=beta&t=7EjKAJD0VgWpTzq9QYfTyYoeSpOn1KS4BHRXkfR873w" width="50px;" alt=""/>
+            <br />
+            <sub>
+                <b>Divyanshu Katiyar</b>
             </sub>
         </a>
         <br/>
