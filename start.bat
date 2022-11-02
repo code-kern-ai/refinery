@@ -10,12 +10,12 @@ set "PWD=/%PWD%"
 REM grab MINIO_ENDPOINT from ipconfig
 Call :setMinioEndpoint
 
-docker pull kernai/alfred:v1.4.0
+docker pull kernai/alfred:v1.5.0
 
 docker run -d --rm ^
 --name alfred ^
 -v /var/run/docker.sock:/var/run/docker.sock ^
--v %PWD%/refinery:/refinery kernai/alfred:v1.4.0 ^
+-v %PWD%/refinery:/refinery kernai/alfred:v1.5.0 ^
 python start.py %PWD%/refinery %MINIO_ENDPOINT% > nul
 
 docker logs -f alfred
