@@ -1,0 +1,330 @@
+version: "3.9"
+
+services:
+  kratos-migrate:
+    image: oryd/kratos:{KRATOS}
+    environment:
+      - DSN=sqlite:///var/lib/sqlite/db.sqlite?_fk=true&mode=rwc
+    volumes:
+      - type: volume
+        source: kratos-sqlite
+        target: /var/lib/sqlite
+        read_only: false
+      - {LOCAL_VOLUME_KRATOS}/kratos.yml:/home/.kratos.yaml
+    command: migrate sql -e --yes
+    restart: on-failure
+    networks:
+      - default
+
+  kratos:
+    depends_on:
+      - kratos-migrate
+    image: oryd/kratos:{KRATOS}
+    restart: unless-stopped
+    environment:
+      - DSN=sqlite:///var/lib/sqlite/db.sqlite?_fk=true
+      - LOG_LEVEL=trace
+      - SERVE_PUBLIC_BASE_URL=http://localhost:4455/.ory/kratos/public/
+    command: serve -c /etc/config/kratos/kratos.yml --dev --watch-courier
+    volumes:
+      - {LOCAL_VOLUME_KRATOS}:/etc/config/kratos:Z
+      - kratos-sqlite:/var/lib/sqlite
+    networks:
+      - default
+
+  oathkeeper:
+    image: oryd/oathkeeper:{OATHKEEPER}
+    depends_on:
+      - kratos
+    ports:
+      - 4455:4455
+    command: serve proxy -c "/etc/config/oathkeeper/oathkeeper.yml"
+    environment:
+      - LOG_LEVEL=debug
+    restart: on-failure
+    networks:
+      - default
+    volumes:
+      - {LOCAL_VOLUME_OATHKEEPER}:/etc/config/oathkeeper:Z
+
+  refinery-authorizer:
+    image: kernai/refinery-authorizer:{AUTHORIZER}
+    restart: always
+    expose:
+      - 80
+    networks:
+      - default
+
+  mailhog:
+    image: mailhog/mailhog:{MAILHOG}
+    ports:
+      - 1025:1025
+      - 4436:8025
+    networks:
+      - default
+
+  refinery-ui:
+    image: kernai/refinery-ui:{UI}
+    restart: always
+    ports:
+      - 7050:80
+    expose:
+      - 80
+    networks:
+      - default
+
+  refinery-entry:
+    image: kernai/refinery-entry:{ENTRY}
+    restart: always
+    environment:    
+      - IS_OS=1
+    expose:
+      - 80
+    networks:
+      - default
+
+  postgres-migrate:
+    depends_on:
+      - graphql-postgres
+    image: kernai/refinery-gateway:{GATEWAY}
+    environment:
+      - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
+    command: alembic upgrade head
+    networks:
+      - default
+
+  refinery-gateway:
+    depends_on:
+      - refinery-config
+    image: kernai/refinery-gateway:{GATEWAY}
+    restart: always
+    ports:
+      - 7051:80
+    expose:
+      - 80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:Z
+      - graphql-sqlite:/sqlite
+    environment:
+      - AC_EXEC_ENV_IMAGE=kernai/refinery-ac-exec-env:{AC_EXEC_ENV}
+      - LF_EXEC_ENV_IMAGE=kernai/refinery-lf-exec-env:{LF_EXEC_ENV}
+      - ML_EXEC_ENV_IMAGE=kernai/refinery-ml-exec-env:{ML_EXEC_ENV}
+      - RECORD_IDE_IMAGE=kernai/refinery-record-ide-env:{RECORD_IDE_ENV}
+      - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
+      - LF_NETWORK=refinery_default
+      - WEAK_SUPERVISION=http://refinery-weak-supervisor:80
+      - EMBEDDING_SERVICE=http://refinery-embedder:80
+      - DOC_OCK=http://refinery-doc-ock:80
+      - TOKENIZER=http://refinery-tokenizer:80
+      - ZERO_SHOT=http://refinery-zero-shot:80
+      - NEURAL_SEARCH=http://refinery-neural-search:80
+      - KRATOS_ADMIN_URL=http://kratos:4434
+      - WS_NOTIFY_ENDPOINT=http://refinery-websocket:8080
+      - UPDATER=http://refinery-updater:80
+      - S3_URI=object-storage:9000 # remove as soon as multipart upload is merged
+      - S3_ENDPOINT={CRED_ENDPOINT}
+      - S3_ENDPOINT_LOCAL=object-storage:9000
+      - S3_ACCESS_KEY=onetask
+      - S3_SECRET_KEY=JRZtI0SLsEDb3imTy03R
+      - SQLITE=/sqlite/db.sqlite
+      # - TYPESENSE_SEARCH=http://typesense-api:80
+    networks:
+      - default
+
+  graphql-postgres:
+    image: docker.io/postgres:{POSTGRES}
+    restart: always
+    ports:
+      - 7052:5432
+    environment:
+      - POSTGRES_PASSWORD=onetask
+      - POSTGRES_USER=postgres
+    expose:
+      - 5432
+    networks:
+      - default
+    volumes:
+      - {LOCAL_VOLUME_POSTGRES}:/var/lib/postgresql/data
+      
+  qdrant:
+  # hallo
+    image: qdrant/qdrant:{QDRANT}
+    restart: always
+    ports:
+      - 6333:6333
+    expose:
+      - 6333
+    networks:
+      - default
+    volumes:
+      - {LOCAL_VOLUME_QDRANT}:/qdrant/storage
+
+  refinery-gateway-proxy:
+    depends_on:
+      - graphql-postgres
+    image: kernai/refinery-gateway-proxy:{GATEWAY_PROXY}
+    restart: always
+    expose:
+      - 80
+    environment:
+      - POSTGRES=postgresql://postgres:onetask@postgres:5432
+      - GATEWAY=http://refinery-gateway:80
+      - KRATOS=http://kratos:4433
+      - CONFIG=http://refinery-config:80
+    links:
+      - "graphql-postgres:postgres"
+    networks:
+      - default
+
+  object-storage:
+    image: docker.io/minio/minio:{MINIO}
+    restart: always
+    ports:
+      - 7053:9000
+      - 9001:9001
+    expose:
+      - 9000
+    environment:
+      - MINIO_ROOT_USER=onetask
+      - MINIO_ROOT_PASSWORD=JRZtI0SLsEDb3imTy03R
+      - MINIO_NOTIFY_WEBHOOK_ENABLE=on
+      - MINIO_NOTIFY_WEBHOOK_ENDPOINT=http://refinery-gateway:80/notify
+    command: server /data --address :9000 --console-address ":9001"
+    networks:
+      - default
+    volumes:
+      - {LOCAL_VOLUME_MINIO}:/data
+
+  refinery-weak-supervisor:
+    image: kernai/refinery-weak-supervisor:{WEAK_SUPERVISOR}
+    restart: unless-stopped
+    ports:
+      - 7054:80
+    expose:
+      - 80
+    environment:
+      - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
+      - WS_NOTIFY_ENDPOINT=http://refinery-websocket:8080
+    networks:
+      - default
+
+  refinery-embedder:
+    image: kernai/refinery-embedder:{EMBEDDER}
+    restart: unless-stopped
+    ports:
+      - 7058:80
+    environment:
+      - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
+      - S3_ENDPOINT_LOCAL=object-storage:9000
+      - S3_ACCESS_KEY=onetask
+      - S3_SECRET_KEY=JRZtI0SLsEDb3imTy03R
+      - DOC_OCK=http://refinery-doc-ock:80
+      - WS_NOTIFY_ENDPOINT=http://refinery-websocket:8080
+      - NEURAL_SEARCH=http://refinery-neural-search:80
+    expose:
+      - 80
+    networks:
+      - default
+
+  refinery-config:
+    image: kernai/refinery-config:{CONFIG}
+    restart: unless-stopped
+    ports:
+      - 7059:80
+    environment:
+      - IS_MANAGED=0
+      - KERN_S3_ENDPOINT={MINIO_ENDPOINT}
+    expose:
+      - 80
+    networks:
+      - default
+
+  refinery-doc-ock:
+    depends_on:
+      - refinery-config
+    image: kernai/refinery-doc-ock:{DOC_OCK}
+    restart: unless-stopped
+    ports:
+      - 7060:80
+    expose:
+      - 80
+    environment:
+      - TELEMETRY_URI=https://telemetry.kern.ai
+
+  refinery-websocket:
+    image: kernai/refinery-websocket:{WEBSOCKET}
+    restart: unless-stopped
+    environment:
+      - DB_DSN=postgresql://postgres:onetask@graphql-postgres:5432?sslmode=disable
+    expose:
+      - 8080
+    networks:
+      - default
+
+  refinery-tokenizer:
+    depends_on:
+      - refinery-config
+    image: kernai/refinery-tokenizer:{TOKENIZER}
+    restart: unless-stopped
+    ports:
+      - 7061:80
+    environment:
+      - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
+      - S3_ENDPOINT_LOCAL=object-storage:9000
+      - S3_ACCESS_KEY=onetask
+      - S3_SECRET_KEY=JRZtI0SLsEDb3imTy03R
+      - DOC_OCK=http://refinery-doc-ock:80
+      - WS_NOTIFY_ENDPOINT=http://refinery-websocket:8080
+    expose:
+      - 80
+    networks:
+      - default
+
+  refinery-updater:
+    image: kernai/refinery-updater:{UPDATER}
+    restart: unless-stopped
+    ports:
+      - 7062:80
+    environment:
+      - NEURAL_SEARCH=http://refinery-neural-search:80
+      - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
+      - S3_ENDPOINT_LOCAL=object-storage:9000
+      - S3_ACCESS_KEY=onetask
+      - S3_SECRET_KEY=JRZtI0SLsEDb3imTy03R
+    expose:
+      - 80
+    networks:
+      - default
+
+  refinery-neural-search:
+    image: kernai/refinery-neural-search:{NEURAL_SEARCH}
+    restart: unless-stopped
+    ports:
+      - 7063:80
+    environment:
+      - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
+      - QDRANT_PORT=6333
+    expose:
+      - 80
+    networks:
+      - default
+
+  refinery-zero-shot:
+    image: kernai/refinery-zero-shot:{ZERO_SHOT}
+    restart: unless-stopped
+    ports:
+      - 7064:80
+    environment:
+      - POSTGRES=postgresql://postgres:onetask@graphql-postgres:5432
+      - WS_NOTIFY_ENDPOINT=http://refinery-websocket:8080
+    expose:
+      - 80
+    networks:
+      - default
+
+networks:
+  default:
+
+volumes:
+  kratos-sqlite:
+  graphql-sqlite:
