@@ -3,7 +3,6 @@ name: Documentation
 about: Help us improve the documentation of refinery
 title: "[DOC] - Your description"
 labels: documentation
-assignees: jhoetter
 
 ---
 

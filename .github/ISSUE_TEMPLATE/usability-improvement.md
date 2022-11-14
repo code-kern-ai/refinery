@@ -3,7 +3,6 @@ name: Usability improvement
 about: Help us improve our workflow
 title: "[UX] - Your title"
 labels: usability
-assignees: jhoetter
 
 ---
 
