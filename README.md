@@ -79,7 +79,7 @@ We believe that developers can have crazy ideas, and we want to lower the barrie
 
 ### Extending your existing labeling approach
 
-_refinery_ is more than a labeling tool. It has a built-in labeling editor, but its main advantages come with automation and data management. You can integrate any kind of heuristic to label what is possible automatically, and then focus on headache-causing subsets afterwards. If you do the labeling in _refinery_ or any other tool (even crowd labeled) doesn't matter!
+_refinery_ is more than a labeling tool. It has a built-in labeling editor, but its main advantages come with automation and data management. You can integrate any kind of heuristic to label what is possible automatically, and then focus on headache-causing subsets afterwards. Whether you do the labeling in _refinery_ or any other tool (even crowd labeled) doesn't matter!
 
 ### Put structure into unstructured data
 
