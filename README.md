@@ -127,6 +127,7 @@ For a detailed overview of features, please look into our [docs](https://docs.ke
 
 ### Extensive data management and monitoring
 
+- Best-in-class data management capabilities via our databrowser. Filter, sort and search your data e.g. by confidence, heuristic overlap, user, note, etc.
 - Integration with [🤗 Hugging Face](https://www.huggingface.co) to automatically create document- and token-level embeddings
 - JSON-based data model for up- and downloads
 - Overview of project metrics like confidence and label distributions and confusion matrix
