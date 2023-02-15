@@ -520,7 +520,7 @@ Missing anything in the glossary? [Add the term](https://github.com/code-kern-ai
     </td>
     <td align="center">
         <a href="https://www.linkedin.com/in/divyanshu-katiyar-45ba03131/">
-            <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCchIwJJ2X5g/profile-displayphoto-shrink_400_400/0/1630708281678?e=1672272000&v=beta&t=7EjKAJD0VgWpTzq9QYfTyYoeSpOn1KS4BHRXkfR873w" width="50px;" alt=""/>
+            <img src="https://media.licdn.com/dms/image/C5603AQGCchIwJJ2X5g/profile-displayphoto-shrink_100_100/0/1630708281678?e=1681948800&v=beta&t=v80garJleGF5M_FPLiLtpTPpWRha6n3HLD6IBzOwmyM" width="50px;" alt=""/>
             <br />
             <sub>
                 <b>Divyanshu Katiyar</b>
