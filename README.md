@@ -342,7 +342,7 @@ The color of the edges have no implicit meaning, and are only used for better re
 | [ui](https://github.com/code-kern-ai/refinery-ui) | UI for _refinery_. Used to interact with the whole system; to find out how to best work with the system, check out our docs. |
 | [doc-ock](https://github.com/code-kern-ai/refinery-doc-ock) | Usage statistics collection for _refinery_. If users allow it, this collects product insight data used to optimize the user experience. |
 | [gateway-proxy](https://github.com/code-kern-ai/refinery-gateway-proxy) | Gateway proxy for _refinery_. Manages incoming requests and forwards them to the gateway. Used by the Python SDK. |
-| [parent-images](https://github.com/code-kern-ai/refinery-parent-images/tree/parent-image) | Shared images used by _refinery_. Used to reduce the required space for _refinery_. _Not yet listed in architecture diagram_ |
+| [parent-images](https://github.com/code-kern-ai/refinery-exec-env-parent-image) | Shared images used by _refinery_. Used to reduce the required space for _refinery_. _Not yet listed in architecture diagram_ |
 | [ac-exec-env](https://github.com/code-kern-ai/refinery-ac-exec-env) | Execution environment for attribute calculation in _refinery_. Containerized function as a service to build custom attributes derived from the original data. _Not yet listed in architecture diagram_ |
 | [alfred](https://github.com/code-kern-ai/alfred) | Controls the start process of the _refinery_ app. Named after Batman's butler Alfred. _Not yet listed in architecture diagram_|
 
