@@ -107,7 +107,7 @@ If you like what we're working on, please leave a ⭐!
 
 ## How does Kern AI make money, if refinery is open-source?
 
-You won't believe how often we get that question - and it is a fair one :) Put short, the open-source version of _refinery_ is currently a single-user version, and you can get access to a multi-user version in our commercial version. Additionally, we have commercial products on top of _refinery_, e.g. to use the _refinery_ automations as an actual realtime prediction API.
+You won't believe how often we get that question - and it is a fair one 🙂 Put short, the open-source version of _refinery_ is currently a single-user version, and you can get access to a multi-user environment with our commercial options. Additionally, we have commercial products on top of _refinery_, e.g. to use the _refinery_ automations as an actual realtime prediction API.
 
 Generally, we are passionate about open-source and want to contribute as much as possible.
 
