@@ -6,6 +6,7 @@ serve:
   public:
     base_url: http://kratos:4433/
     cors:
+      enabled: true
   admin:
     base_url: http://kratos:4434/
 
