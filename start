@@ -8,12 +8,12 @@ esac
 
 MINIO_ENDPOINT="http://$HOST_IP:7053"
 
-docker pull kernai/alfred:v1.5.0
+docker pull kernai/alfred:v1.8.0
 
 docker run -d --rm --name alfred \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v $PWD/refinery:/refinery \
-kernai/alfred:v1.5.0 \
+kernai/alfred:v1.8.0 \
 python start.py $PWD/refinery $MINIO_ENDPOINT > /dev/null 2>&1
 
 docker logs -f alfred
