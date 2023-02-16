@@ -11,7 +11,7 @@ serve:
     base_url: http://kratos:4434/
 
 selfservice:
-  default_browser_return_url: http://localhost:4455/app/projects
+  default_browser_return_url: http://localhost:4455/refinery/projects
   whitelisted_return_urls:
     - http://localhost:4455/
 
