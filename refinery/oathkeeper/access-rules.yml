@@ -66,9 +66,9 @@
   upstream:
     preserve_host: true
     url: "http://refinery-ui:80"
-    strip_path: /app/
+    strip_path: /refinery/
   match:
-    url: "http://localhost:4455<{,/*,/app,/app/**,/sockjs-node/**}>"
+    url: "http://localhost:4455<{,/*,/refinery,/refinery/**,/sockjs-node/**}>"
     methods:
       - GET
   authenticators:
