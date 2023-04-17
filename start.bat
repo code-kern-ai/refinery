@@ -15,8 +15,8 @@ docker pull kernai/alfred:v1.8.0
 docker run -d --rm ^
 --name alfred ^
 -v /var/run/docker.sock:/var/run/docker.sock ^
--v %PWD%/refinery:/refinery kernai/alfred:v1.8.0 ^
-python start.py %PWD%/refinery %MINIO_ENDPOINT% > nul
+-v "%PWD%/refinery:/refinery" kernai/alfred:v1.8.0 ^
+python start.py "%PWD%/refinery" %MINIO_ENDPOINT% > nul
 
 docker logs -f alfred
 
