@@ -11,6 +11,7 @@ refinery/qdrant-storage
 refinery/graphql-sqlite
 refinery/kratos-sqlite
 refinery/backup
+refinery/config
 
 .DS_Store
 
