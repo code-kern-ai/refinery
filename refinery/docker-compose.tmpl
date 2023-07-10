@@ -76,10 +76,8 @@ services:
   refinery-entry:
     image: kernai/refinery-entry:{ENTRY}
     restart: always
-    environment:    
-      - IS_OS=1
     expose:
-      - 80
+      - 3000
     networks:
       - default
 
@@ -130,6 +128,7 @@ services:
       - S3_SECRET_KEY=JRZtI0SLsEDb3imTy03R
       - SQLITE=/sqlite/db.sqlite
       # - TYPESENSE_SEARCH=http://typesense-api:80
+      - SECRET_KEY=default
     networks:
       - default
 

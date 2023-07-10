@@ -46,10 +46,10 @@
   id: "kernai:refinery-entry:anonymous"
   upstream:
     preserve_host: true
-    url: "http://refinery-entry:80"
+    url: "http://refinery-entry:3000"
     strip_path: /auth/
   match:
-    url: "http://localhost:4455/auth/<{,**}>"
+    url: "http://localhost:4455<{/auth,/auth/**,/_next/**}>"
     methods:
       - GET
   authenticators:
@@ -68,7 +68,7 @@
     url: "http://refinery-ui:80"
     strip_path: /refinery/
   match:
-    url: "http://localhost:4455<{,/*,/refinery,/refinery/**,/sockjs-node/**}>"
+    url: "http://localhost:4455<{,/,/refinery,/refinery/**,/sockjs-node/**}>"
     methods:
       - GET
   authenticators:
@@ -105,6 +105,36 @@
     - handler: redirect
       config:
         to: http://localhost:4455/auth/login
+
+- id: "kernai:refinery-is-managed:public"
+  upstream:
+    preserve_host: true
+    url: "http://refinery-gateway:80"
+  match:
+    url: "http://localhost:4455/is_managed"
+    methods:
+      - GET
+  authenticators:
+    - handler: noop
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: noop
+
+- id: "kernai:refinery-is-demo:public"
+  upstream:
+    preserve_host: true
+    url: "http://refinery-gateway:80"
+  match:
+    url: "http://localhost:4455/is_demo"
+    methods:
+      - GET
+  authenticators:
+    - handler: noop
+  authorizer:
+    handler: allow
+  mutators:
+    - handler: noop
 
 -
   id: "kernai:object-storage:upload"
