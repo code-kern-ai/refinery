@@ -26,6 +26,6 @@
         "MINIO": "RELEASE.2022-10-24T18-35-07Z",
         "OATHKEEPER": "v0.38.15-beta.1",
         "POSTGRES": "13",
-        "QDRANT": "v0.9.1"
+        "QDRANT": "v1.4.0"
     }
 }
