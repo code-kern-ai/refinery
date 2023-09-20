@@ -8,6 +8,7 @@ refinery/postgres-data
 refinery/minio-data
 refinery/qdrant-data
 refinery/qdrant-storage
+refinery/qdrant-volume
 refinery/graphql-sqlite
 refinery/kratos-sqlite
 refinery/backup
