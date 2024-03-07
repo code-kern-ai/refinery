@@ -1,24 +1,24 @@
 {
     "REFINERY": {
-        "AC_EXEC_ENV": "v1.12.0",
-        "AUTHORIZER": "v1.12.0",
-        "CONFIG": "v1.12.0",
-        "DOC_OCK": "v1.12.0",
-        "EMBEDDER": "v1.12.0",
-        "ENTRY": "v1.12.0",
-        "GATEWAY": "v1.12.0",
-        "GATEWAY_PROXY": "v1.12.0",
-        "ML_EXEC_ENV": "v1.12.0",
-        "LF_EXEC_ENV": "v1.12.0",
-        "NEURAL_SEARCH": "v1.12.0",
-        "REFINERY": "v1.12.0",
-        "RECORD_IDE_ENV": "v1.12.0",
-        "TOKENIZER": "v1.12.0",
-        "UI": "v1.12.0",
-        "UPDATER": "v1.12.0",
-        "WEAK_SUPERVISOR": "v1.12.0",
+        "AC_EXEC_ENV": "v1.13.0",
+        "AUTHORIZER": "v1.13.0",
+        "CONFIG": "v1.13.0",
+        "DOC_OCK": "v1.13.0",
+        "EMBEDDER": "v1.13.0",
+        "ENTRY": "v1.13.0",
+        "GATEWAY": "v1.13.0",
+        "GATEWAY_PROXY": "v1.13.0",
+        "ML_EXEC_ENV": "v1.13.0",
+        "LF_EXEC_ENV": "v1.13.0",
+        "NEURAL_SEARCH": "v1.13.0",
+        "REFINERY": "v1.13.0",
+        "RECORD_IDE_ENV": "v1.13.0",
+        "TOKENIZER": "v1.13.0",
+        "UI": "v1.13.0",
+        "UPDATER": "v1.13.0",
+        "WEAK_SUPERVISOR": "v1.13.0",
         "WEBSOCKET": "v1.9.0",
-        "ZERO_SHOT": "v1.12.0"
+        "ZERO_SHOT": "v1.13.0"
     },
     "THIRD_PARTY": {
         "KRATOS": "v0.8.0-alpha.2-sqlite",
@@ -26,6 +26,6 @@
         "MINIO": "RELEASE.2022-10-24T18-35-07Z",
         "OATHKEEPER": "v0.38.15-beta.1",
         "POSTGRES": "13",
-        "QDRANT": "v1.4.1"
+        "QDRANT": "v1.5.1"
     }
 }

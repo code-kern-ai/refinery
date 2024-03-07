@@ -24,18 +24,19 @@ serve:
 
 errors:
   fallback:
-    - json
+    - redirect
 
   handlers:
     redirect:
       enabled: true
       config:
-        to: http://localhost:4455/auth/login
+        to: http://localhost:4455/refinery
         when:
           -
             error:
               - unauthorized
               - forbidden
+              - not_found
             request:
               header:
                 accept:
