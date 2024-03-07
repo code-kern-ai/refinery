@@ -67,7 +67,7 @@
     preserve_host: true
     url: "http://refinery-ui:3000"
   match:
-    url: "http://localhost:4455<{,/,/refinery,/refinery/**,/ws}>"
+    url: "http://localhost:4455<{/refinery,/refinery/**,/ws}>"
     methods:
       - GET
   authenticators:
