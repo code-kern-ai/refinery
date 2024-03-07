@@ -65,10 +65,9 @@
   id: "kernai:refinery-ui:protected"
   upstream:
     preserve_host: true
-    url: "http://refinery-ui:80"
-    strip_path: /refinery/
+    url: "http://refinery-ui:3000"
   match:
-    url: "http://localhost:4455<{,/,/refinery,/refinery/**,/sockjs-node/**}>"
+    url: "http://localhost:4455<{,/,/refinery,/refinery/**,/ws}>"
     methods:
       - GET
   authenticators:
