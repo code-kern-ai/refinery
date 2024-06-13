@@ -99,12 +99,6 @@ authorizers:
 mutators:
   noop:
     enabled: true
-  
-  header:
-    enabled: true
-    config:
-      headers:
-        X-Onetask: "X"
 
   id_token:
     enabled: true
