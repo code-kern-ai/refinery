@@ -83,28 +83,6 @@
         to: http://localhost:4455/auth/login
         return_to_query_param: 'return_to'
 
--
-  id: "kernai:refinery-gateway:protected"
-  upstream:
-    preserve_host: true
-    url: "http://refinery-gateway:80"
-  match:
-    url: "http://localhost:4455/<{graphql/,graphql/**}>"
-    methods:
-      - GET
-      - POST
-  authenticators:
-    -
-      handler: cookie_session
-  authorizer:
-    handler: allow
-  mutators:
-    - handler: id_token
-  errors:
-    - handler: redirect
-      config:
-        to: http://localhost:4455/auth/login
-
 - id: "kernai:refinery-gateway:fastapi"
   upstream:
     preserve_host: true
